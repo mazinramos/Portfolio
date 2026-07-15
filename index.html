@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Portfolio | Web & Mobile Developer</title>
     <meta name="description" content="Award-winning Web and Mobile Application Developer Portfolio.">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -94,7 +94,7 @@
             border: 1px solid rgba(0, 243, 255, 0.5);
             transition: width 0.2s, height 0.2s, border-color 0.2s;
         }
-        
+
         /* Cursor Hover States */
         body.hovering .cursor-dot {
             width: 4px; height: 4px; background: transparent;
@@ -150,7 +150,7 @@
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
-        
+
         /* Typing cursor */
         .typing-cursor::after {
             content: '|';
@@ -174,6 +174,86 @@
             pointer-events: none;
         }
 
+        .extra-project {
+            display: none;
+        }
+
+        /* Project Preview Modal */
+        #project-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 3, 5, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 80px 20px;
+            overflow-y: auto;
+        }
+        #project-modal-overlay.active { display: flex; }
+
+        #project-modal-box {
+            background: rgba(15, 15, 20, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 28px;
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+            animation: modalIn 0.4s ease forwards;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        #modal-close-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 2;
+        }
+        #modal-close-btn:hover { background: rgba(255,255,255,0.15); transform: rotate(90deg); }
+
+        .modal-gallery-item {
+            margin-top: 28px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .modal-gallery-item img {
+            width: 100%;
+            display: block;
+            max-height: 480px;
+            object-fit: cover;
+        }
+        .modal-gallery-caption {
+            padding: 18px 22px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .preview-btn {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.875rem; font-weight: 500;
+            color: #00f3ff;
+            cursor: pointer;
+            background: none; border: none;
+            padding: 0;
+        }
+        .preview-btn:hover { text-decoration: underline; }
+
+        body.modal-open { overflow: hidden; }
+
     </style>
 </head>
 <body class="antialiased selection:bg-primary/30 selection:text-white">
@@ -182,12 +262,12 @@
     <script>
         const CONFIG = {
             socials: {
-    github: "https://github.com/mazinflwo",
-    linkedin: "https://linkedin.com/in/mazinflwo",
-    whatsapp: "https://wa.me/201050758306",
-    twitter: "https://twitter.com/mazinflwo", // أو x.com حسب رابط حسابك الجديد
-    email: "mazinflwo.dev@gmail.com"
-},
+                github: "https://github.com/mazinflwo",
+                linkedin: "https://linkedin.com/in/mazinflwo",
+                whatsapp: "https://wa.me/201050758306",
+                twitter: "https://twitter.com/mazinflwo",
+                email: "mazinflwo.dev@gmail.com"
+            },
             skills: [
                 { name: "React / Next.js", level: 95 },
                 { name: "TypeScript", level: 90 },
@@ -230,37 +310,46 @@
             <a href="#contact" class="hidden md:inline-flex px-6 py-2 border border-white/10 rounded-full hover:bg-white/5 hover:border-primary/50 transition-all hover-target glass-panel">
                 Let's Talk
             </a>
-            
+
             <!-- Mobile Menu Btn -->
-            <button class="md:hidden text-white hover-target p-2">
+            <button id="mobile-menu-btn" class="md:hidden text-white hover-target p-2">
                 <i data-lucide="menu"></i>
             </button>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden flex-col gap-1 px-6 pb-6 glass-nav">
+            <a href="#about" class="block py-3 text-sm hover:text-primary transition-colors hover-target">About</a>
+            <a href="#skills" class="block py-3 text-sm hover:text-primary transition-colors hover-target">Expertise</a>
+            <a href="#projects" class="block py-3 text-sm hover:text-primary transition-colors hover-target">Work</a>
+            <a href="#services" class="block py-3 text-sm hover:text-primary transition-colors hover-target">Services</a>
+            <a href="#contact" class="block py-3 text-sm hover:text-primary transition-colors hover-target">Let's Talk</a>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main>
-        
+
         <!-- 1. Hero Section -->
         <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
-                
+
                 <div class="flex flex-col items-start gap-6 hero-content">
-                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel border-primary/30 text-sm">
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel border border-primary/30 text-sm">
                         <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                         Available for new projects
                     </div>
-                    
+
                     <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] tracking-tight">
                         Mazin <br>
                         <span class="text-gradient">ProMax</span> <br>
                         Developments.
                     </h1>
-                    
+
                     <p class="text-xl md:text-2xl text-gray-400 font-light h-8">
                         I am a <span id="typewriter" class="text-white font-medium typing-cursor"></span>
                     </p>
-                    
+
                     <div class="flex flex-wrap gap-4 mt-8">
                         <a href="#projects" class="px-8 py-4 bg-white text-dark font-semibold rounded-full hover:scale-105 transition-transform hover-target">
                             View Selected Work
@@ -274,7 +363,7 @@
                 <div class="relative hidden md:flex justify-center items-center hero-image">
                     <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 blur-3xl rounded-full"></div>
                     <div class="w-80 h-80 rounded-full border border-white/10 glass-panel p-2 relative z-10 overflow-hidden group">
-                        <img src="mazin.jpg" alt="Profile">
+                        <img src="mazin.jpg" alt="Profile" class="w-full h-full object-cover rounded-full">
                     </div>
                     <!-- Orbiting Element -->
                     <div class="absolute w-full h-full animate-[spin_10s_linear_infinite]">
@@ -282,7 +371,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Scroll Indicator -->
             <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hero-scroll">
                 <span class="text-xs tracking-widest uppercase font-display">Scroll</span>
@@ -300,9 +389,8 @@
                         <p class="text-gray-400 text-lg leading-relaxed mb-8">
                             With over a decade of experience, I specialize in building premium web applications, interactive 3D experiences, and robust mobile platforms. I don't just write code; I architect scalable solutions that prioritize user psychology, performance, and aesthetic perfection.
                         </p>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png" class="w-32 opacity-20 filter invert" alt="Signature">
                     </div>
-                    
+
                     <div class="lg:col-span-7 grid grid-cols-2 gap-6 reveal-right">
                         <!-- Stats Cards -->
                         <div class="glass-panel p-8 rounded-3xl tilt-card flex flex-col justify-center items-center text-center">
@@ -347,10 +435,9 @@
                     <div class="space-y-8" id="skills-container">
                         <!-- Populated by JS -->
                     </div>
-                    
+
                     <!-- Icon Grid -->
                     <div class="grid grid-cols-4 gap-4 reveal-right">
-                        <!-- Reusable SVG path mapping for icons to avoid huge HTML -->
                         <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="file-code-2" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
                         <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="layout" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
                         <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="cpu" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
@@ -372,7 +459,7 @@
                         <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Selected Work</h2>
                         <h3 class="text-4xl md:text-5xl font-display font-bold">Featured Projects</h3>
                     </div>
-                    
+
                     <!-- Filters -->
                     <div class="flex gap-4 mt-8 md:mt-0 glass-panel p-2 rounded-full">
                         <button class="px-6 py-2 rounded-full bg-white/10 text-sm hover-target filter-btn active" data-filter="all">All</button>
@@ -382,140 +469,153 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8" id="project-grid">
-                    
+
                     <!-- Project 1: AI Resum Pro -->
-<div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
-    <div class="relative h-80 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <!-- يمكنك وضع رابط صورة من مشروعك إذا كان لديك، أو الإبقاء على هذه الصورة -->
-        <img src="ai-resum.png" alt="AI Resum Pro" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-        
-        <div class="absolute top-6 left-6 z-20 flex gap-2">
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">AI</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">React</span>
-        </div>
-    </div>
-    <div class="p-8 tilt-content">
-        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">AI Resum Pro</h4>
-        <p class="text-gray-400 text-sm mb-6 line-clamp-2">An intelligent AI-powered resume builder designed to optimize professional profiles and streamline job applications.</p>
-        <div class="flex gap-4">
-            <!-- رابط المشروع المباشر -->
-            <a href="https://ai-resum-pro.vercel.app" target="_blank" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-            </a>
-            <!-- رابط جيت هب الخاص بك -->
-            <a href="https://github.com/mazinramos/Ai-Resum-Pro.git" target="_blank" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                <i data-lucide="github" class="w-4 h-4"></i> Source
-            </a>
-        </div>
-    </div>
-</div>
+                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
+                        <div class="relative h-80 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
+                            <img src="ai-resum.png" alt="AI Resum Pro" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+
+                            <div class="absolute top-6 left-6 z-20 flex gap-2">
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">AI</span>
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">React</span>
+                            </div>
+                        </div>
+                        <div class="p-8 tilt-content">
+                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">AI Resum Pro</h4>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">An intelligent AI-powered resume builder designed to optimize professional profiles and streamline job applications.</p>
+                            <div class="flex gap-4">
+                                <a href="https://ai-resum-pro.vercel.app" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/mazinramos/Ai-Resum-Pro.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
+                                    <i data-lucide="github" class="w-4 h-4"></i> Source
+                                </a>
+                                <button class="preview-btn hover-target" data-project="ai-resume">
+                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: GESS EDU -->
                     <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item md:translate-y-16" data-category="web">
-    <div class="relative h-80 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <img src="gess.jpeg" alt="GESS EDU" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-        
-        <div class="absolute top-6 left-6 z-20 flex gap-2">
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Three.js</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Firebase</span>
-        </div>
-    </div>
-    <div class="p-8 tilt-content">
-        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">GESS EDU</h4>
-        <p class="text-gray-400 text-sm mb-6 line-clamp-2">An interactive 3xl educational platform designed for university students, featuring immersive 3D web experiences.</p>
-        
-        <div class="flex gap-4">
-            <a href="https://gess-platform.vercel.app" target="_blank" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-            </a>
-            <a href="https://github.com/mazinflwo/GESS-Platform.git" target="_blank" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                <i data-lucide="github" class="w-4 h-4"></i> Source
-            </a>
-        </div>
-    </div>
-</div>
+                        <div class="relative h-80 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
+                            <img src="gess.jpeg" alt="GESS EDU" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
 
-                   <!-- Project 3: Clinic System -->
-<div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
-    <div class="relative h-80 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <!-- يمكنك استبدال الرابط بصورة واجهة نظام العيادة الخاص بك -->
-        <img src="clinic.png" alt="Clinic System" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-        
-        <div class="absolute top-6 left-6 z-20 flex gap-2">
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Full Stack</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Clinic Management</span>
-        </div>
-    </div>
-    <div class="p-8 tilt-content">
-        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Clinic System</h4>
-        <p class="text-gray-400 text-sm mb-6 line-clamp-2">A comprehensive clinic management system designed to streamline patient records, appointments, and administrative tasks.</p>
-        <div class="flex gap-4">
-            <!-- رابط النظام المباشر -->
-            <a href="https://clinic-system-flame.vercel.app/" target="_blank" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-            </a>
-            <!-- رابط جيت هب -->
-            <a href="https://github.com/mazinramos/Clinic-System.git" target="_blank" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                <i data-lucide="github" class="w-4 h-4"></i> Source
-            </a>
-        </div>
-    </div>
-</div>
+                            <div class="absolute top-6 left-6 z-20 flex gap-2">
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js</span>
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Three.js</span>
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Firebase</span>
+                            </div>
+                        </div>
+                        <div class="p-8 tilt-content">
+                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">GESS EDU</h4>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">An interactive educational platform designed for university students, featuring immersive 3D web experiences.</p>
 
-<!-- Project 4: Gizmo Store -->
-<div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
-    <div class="relative h-80 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <!-- صورة واجهة المتجر (يمكنك استبدال gizmo.png بأي صورة للموقع لاحقاً) -->
-        <img src="gizmo.png" alt="Gizmo Store" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-        
-        <div class="absolute top-6 left-6 z-20 flex gap-2">
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">E-Commerce</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Real-Time</span>
-        </div>
-    </div>
-    <div class="p-8 tilt-content">
-        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Gizmo Store</h4>
-        <p class="text-gray-400 text-sm mb-6 line-clamp-2">A modern tech e-commerce platform designed with high-performance UI, dynamic cart mechanics, and seamless product browsing.</p>
-        <div class="flex gap-4">
-            <!-- رابط النظام المباشر لمتجرك -->
-            <a href="https://gizmo-store.vercel.app/" target="_blank" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-            </a>
-            <!-- رابط جيت هب الخاص بمتجر جيزمو -->
-            <a href="https://github.com/mazinramos/Gizmo-Store.git" target="_blank" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                <i data-lucide="github" class="w-4 h-4"></i> Source
-            </a>
-        </div>
-    </div>
-</div>
+                            <div class="flex gap-4">
+                                <a href="https://gess-platform.vercel.app" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/mazinflwo/GESS-Platform.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
+                                    <i data-lucide="github" class="w-4 h-4"></i> Source
+                                </a>
+                                <button class="preview-btn hover-target" data-project="gess">
+                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Project 5 -->
-                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item md:translate-y-16" data-category="web">
-    <div class="relative h-80 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <img src="architectuer.png" alt="Interior Design Portfolio" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-        
-        <div class="absolute top-6 left-6 z-20 flex gap-2">
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Design</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Portfolio</span>
-        </div>
-    </div>
-    <div class="p-8 tilt-content">
-        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Interior Design Portfolio</h4>
-        <p class="text-gray-400 text-sm mb-6 line-clamp-2">A sophisticated digital portfolio showcasing architectural elegance, interior space planning, and creative design aesthetics.</p>
-        
-        <div class="flex gap-4">
-            <a href="https://fatah-magdi-designer.vercel.app/" target="_blank" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-            </a>
-            </div>
-    </div>
-</div>
+                    <!-- Project 3: Clinic System -->
+                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
+                        <div class="relative h-80 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
+                            <img src="clinic.png" alt="Clinic System" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
 
+                            <div class="absolute top-6 left-6 z-20 flex gap-2">
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Full Stack</span>
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Clinic Management</span>
+                            </div>
+                        </div>
+                        <div class="p-8 tilt-content">
+                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Clinic System</h4>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">A comprehensive clinic management system designed to streamline patient records, appointments, and administrative tasks.</p>
+                            <div class="flex gap-4">
+                                <a href="https://clinic-system-flame.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/mazinramos/Clinic-System.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
+                                    <i data-lucide="github" class="w-4 h-4"></i> Source
+                                </a>
+                                <button class="preview-btn hover-target" data-project="clinic">
+                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Gizmo Store -->
+                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
+                        <div class="relative h-80 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
+                            <img src="gizmo.png" alt="Gizmo Store" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+
+                            <div class="absolute top-6 left-6 z-20 flex gap-2">
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">E-Commerce</span>
+                            </div>
+                        </div>
+                        <div class="p-8 tilt-content">
+                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Gizmo Store</h4>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">A modern tech e-commerce platform designed with high-performance UI, dynamic cart mechanics, and seamless product browsing.</p>
+                            <div class="flex gap-4">
+                                <a href="https://gizmo-store.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/mazinramos/Gizmo-Store.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
+                                    <i data-lucide="github" class="w-4 h-4"></i> Source
+                                </a>
+                                <button class="preview-btn hover-target" data-project="gizmo">
+                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Interior Design Portfolio -->
+                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item extra-project md:translate-y-16" data-category="web">
+                        <div class="relative h-80 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
+                            <img src="architectuer.png" alt="Interior Design Portfolio" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+
+                            <div class="absolute top-6 left-6 z-20 flex gap-2">
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Design</span>
+                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Portfolio</span>
+                            </div>
+                        </div>
+                        <div class="p-8 tilt-content">
+                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Interior Design Portfolio</h4>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">A sophisticated digital portfolio showcasing architectural elegance, interior space planning, and creative design aesthetics.</p>
+
+                            <div class="flex gap-4">
+                                <a href="https://fatah-magdi-designer.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                                </a>
+                                <button class="preview-btn hover-target" data-project="interior">
+                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex justify-center mt-16">
+                    <button id="show-more-btn" class="px-8 py-3 rounded-full glass-panel hover-target text-sm font-medium hover:bg-white/10 transition-colors">
+                        <span id="show-more-text">Show More Projects</span>
+                    </button>
                 </div>
             </div>
         </section>
@@ -529,8 +629,8 @@
                 </div>
 
                 <div class="relative wrap overflow-hidden p-10 h-full">
-                    <div class="border-2-2 absolute border-white/10 border-solid h-full border" style="left: 50%; transform: translateX(-50%);"></div>
-                    
+                    <div class="absolute border-white/10 border-solid h-full border" style="left: 50%; transform: translateX(-50%);"></div>
+
                     <!-- Timeline Item 1 -->
                     <div class="mb-8 flex justify-between items-center w-full right-timeline reveal-right">
                         <div class="order-1 w-5/12"></div>
@@ -606,12 +706,12 @@
         <!-- 10. Contact Section -->
         <section id="contact" class="py-32 relative">
             <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-                
+
                 <div class="reveal-left">
                     <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Get In Touch</h2>
                     <h3 class="text-5xl md:text-6xl font-display font-bold mb-6">Let's build the <br><span class="text-gradient">future</span> together.</h3>
                     <p class="text-gray-400 text-lg mb-10">Whether you have a vision for a new startup, need to revamp an enterprise system, or just want to say hi, my inbox is always open.</p>
-                    
+
                     <div class="flex gap-4" id="social-container">
                         <!-- Populated by JS -->
                     </div>
@@ -661,6 +761,21 @@
 
     </main>
 
+    <!-- Project Preview Modal -->
+    <div id="project-modal-overlay">
+        <div id="project-modal-box">
+            <button id="modal-close-btn" class="hover-target">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex flex-wrap gap-2 mb-4" id="modal-tags"></div>
+            <h3 id="modal-title" class="text-3xl md:text-4xl font-display font-bold mb-4"></h3>
+            <p id="modal-description" class="text-gray-400 text-lg leading-relaxed"></p>
+
+            <div id="modal-gallery"></div>
+        </div>
+    </div>
+
     <!-- Dependencies -->
     <!-- GSAP for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -669,12 +784,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <!-- Application Logic -->
     <script>
         // 0. Initialize Icons & Basic DOM Setup
         lucide.createIcons();
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
 
         // Populate Skills from CONFIG
         const skillsContainer = document.getElementById('skills-container');
@@ -692,31 +815,27 @@
             `;
         });
 
-       // Populate Socials from CONFIG
-const socialContainer = document.getElementById('social-container');
+        // Populate Socials from CONFIG
+        const socialContainer = document.getElementById('social-container');
 
-// قاموس يحتوي على أكواد SVG الجاهزة لكل منصة بما فيها الواتساب
-const socialIcons = {
-    github: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>`,
-    linkedin: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
-    twitter: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>`,
-    whatsapp: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>`,
-    email: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>`
-};
+        const socialIcons = {
+            github: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>`,
+            linkedin: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
+            twitter: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>`,
+            whatsapp: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>`,
+            email: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>`
+        };
 
-Object.entries(CONFIG.socials).forEach(([platform, url]) => {
-    // تجهيز الرابط الصحيح حسب نوع المنصة
-    const hrefValue = platform === 'email' ? `mailto:${url}` : url;
-    
-    // جلب كود الـ SVG المقابل
-    const iconSvg = socialIcons[platform] || `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>`;
+        Object.entries(CONFIG.socials).forEach(([platform, url]) => {
+            const hrefValue = platform === 'email' ? `mailto:${url}` : url;
+            const iconSvg = socialIcons[platform] || `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>`;
 
-    socialContainer.innerHTML += `
-        <a href="${hrefValue}" target="_blank" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:text-dark transition-all hover-target">
-            ${iconSvg}
-        </a>
-    `;
-});
+            socialContainer.innerHTML += `
+                <a href="${hrefValue}" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:text-dark transition-all hover-target">
+                    ${iconSvg}
+                </a>
+            `;
+        });
         lucide.createIcons(); // Re-run for dynamic icons
 
         // 1. Loading Screen & Init
@@ -733,7 +852,6 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorTrail = document.querySelector('.cursor-trail');
         const mouseGlow = document.getElementById('mouseGlow');
-        const hoverTargets = document.querySelectorAll('.hover-target');
 
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
@@ -743,16 +861,13 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            
-            // Instant dot movement
+
             cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-            
-            // Mouse glow movement (viewport relative)
+
             mouseGlow.style.left = `${mouseX}px`;
             mouseGlow.style.top = `${mouseY}px`;
         });
 
-        // Trail interpolation for smooth follow
         function animateTrail() {
             trailX += (mouseX - trailX) * 0.15;
             trailY += (mouseY - trailY) * 0.15;
@@ -761,10 +876,12 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
         }
         animateTrail();
 
-        // Hover Effects
-        hoverTargets.forEach(target => {
-            target.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-            target.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        // Hover Effects (delegated, works for dynamically added elements too)
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('.hover-target')) document.body.classList.add('hovering');
+        });
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('.hover-target')) document.body.classList.remove('hovering');
         });
 
         // 3. Three.js Cinematic Background
@@ -785,12 +902,12 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
             const particlesCount = 2000;
             const posArray = new Float32Array(particlesCount * 3);
 
-            for(let i = 0; i < particlesCount * 3; i++) {
+            for (let i = 0; i < particlesCount * 3; i++) {
                 posArray[i] = (Math.random() - 0.5) * 100;
             }
 
             particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            
+
             const particlesMaterial = new THREE.PointsMaterial({
                 size: 0.1,
                 color: '#00f3ff',
@@ -804,11 +921,11 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
 
             // Abstract Icosahedron in background
             const geoGeom = new THREE.IcosahedronGeometry(15, 1);
-            const geoMat = new THREE.MeshBasicMaterial({ 
-                color: '#bc13fe', 
-                wireframe: true, 
-                transparent: true, 
-                opacity: 0.05 
+            const geoMat = new THREE.MeshBasicMaterial({
+                color: '#bc13fe',
+                wireframe: true,
+                transparent: true,
+                opacity: 0.05
             });
             const geoMesh = new THREE.Mesh(geoGeom, geoMat);
             geoMesh.position.set(10, 0, -10);
@@ -817,7 +934,7 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
             // Mouse interaction for parallax
             let targetX = 0;
             let targetY = 0;
-            
+
             document.addEventListener('mousemove', (event) => {
                 targetX = (event.clientX / window.innerWidth) - 0.5;
                 targetY = (event.clientY / window.innerHeight) - 0.5;
@@ -825,17 +942,15 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
 
             // Animation Loop
             const clock = new THREE.Clock();
-            
+
             const tick = () => {
                 const elapsedTime = clock.getElapsedTime();
 
-                // Rotate objects
                 particlesMesh.rotation.y = elapsedTime * 0.05;
                 particlesMesh.rotation.x = elapsedTime * 0.02;
                 geoMesh.rotation.x = elapsedTime * 0.1;
                 geoMesh.rotation.y = elapsedTime * 0.15;
 
-                // Parallax Camera (smooth easing)
                 camera.position.x += (targetX * 10 - camera.position.x) * 0.05;
                 camera.position.y += (-targetY * 10 - camera.position.y) * 0.05;
                 camera.lookAt(scene.position);
@@ -846,7 +961,6 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
 
             tick();
 
-            // Resize handler
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
@@ -864,8 +978,8 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
 
         function type() {
             const currentRole = roles[roleIndex];
-            
-            if(isDeleting) {
+
+            if (isDeleting) {
                 typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
                 charIndex--;
             } else {
@@ -875,23 +989,22 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
 
             let typeSpeed = isDeleting ? 50 : 100;
 
-            if(!isDeleting && charIndex === currentRole.length) {
-                typeSpeed = 2000; // Pause at end
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2000;
                 isDeleting = true;
-            } else if(isDeleting && charIndex === 0) {
+            } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 roleIndex = (roleIndex + 1) % roles.length;
-                typeSpeed = 500; // Pause before new word
+                typeSpeed = 500;
             }
 
             setTimeout(type, typeSpeed);
         }
-        setTimeout(type, 2000); // Start after loader
+        setTimeout(type, 2000);
 
         // 5. GSAP Scroll Animations
         gsap.registerPlugin(ScrollTrigger);
 
-        // General reveals
         gsap.utils.toArray('.reveal-up').forEach(elem => {
             gsap.fromTo(elem, { y: 50, opacity: 0 }, {
                 y: 0, opacity: 1, duration: 1, ease: "power3.out",
@@ -927,7 +1040,7 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
                         value: target,
                         duration: 2,
                         ease: "power2.out",
-                        onUpdate: function() {
+                        onUpdate: function () {
                             counter.innerText = Math.floor(val.value) + "+";
                         }
                     });
@@ -962,23 +1075,21 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
 
         // 6. 3D Tilt Cards Logic (Vanilla JS)
         const tiltCards = document.querySelectorAll('.tilt-card');
-        
+
         tiltCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
-                // Max rotation degree
-                const rotateX = ((y - centerY) / centerY) * -10; 
+
+                const rotateX = ((y - centerY) / centerY) * -10;
                 const rotateY = ((x - centerX) / centerX) * 10;
-                
+
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                
-                // Add a glowing sheen effect
+
                 const glowX = (x / rect.width) * 100;
                 const glowY = (y / rect.height) * 100;
                 card.style.background = `
@@ -986,7 +1097,7 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
                     rgba(25, 25, 30, 0.2)
                 `;
             });
-            
+
             card.addEventListener('mouseleave', () => {
                 card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
                 card.style.background = `rgba(25, 25, 30, 0.2)`;
@@ -999,7 +1110,6 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Active state
                 filterBtns.forEach(b => {
                     b.classList.remove('bg-white/10', 'active');
                     b.classList.add('hover:bg-white/5');
@@ -1016,129 +1126,214 @@ Object.entries(CONFIG.socials).forEach(([platform, url]) => {
                         gsap.to(item, { scale: 0.8, opacity: 0, display: 'none', duration: 0.4, ease: "power2.out" });
                     }
                 });
-                
-                // Refresh ScrollTrigger calculations after layout shift
+
                 setTimeout(() => ScrollTrigger.refresh(), 500);
             });
         });
 
-        // 8. Form Handling Simulation
-        const form = document.getElementById('contact-form');
-        const formStatus = document.getElementById('form-status');
+        // 8. Show More / Show Less Projects
+        const showMoreBtn = document.getElementById('show-more-btn');
+        const showMoreText = document.getElementById('show-more-text');
+        const extraProjects = document.querySelectorAll('.extra-project');
+        let expanded = false;
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = form.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            
-            btn.innerHTML = '<div class="w-5 h-5 border-2 border-dark border-t-transparent rounded-full animate-spin"></div>';
-            
-            // Simulate network request (Replace with actual EmailJS logic)
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                form.reset();
-                formStatus.textContent = "Message sent successfully. I'll be in touch soon!";
-                formStatus.classList.remove('hidden');
-                setTimeout(() => formStatus.classList.add('hidden'), 5000);
-            }, 1500);
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', function () {
+                expanded = !expanded;
+                extraProjects.forEach(el => {
+                    el.style.display = expanded ? 'block' : 'none';
+                });
+                showMoreText.textContent = expanded ? 'Show Less' : 'Show More Projects';
+
+                if (expanded && extraProjects.length > 0) {
+                    extraProjects[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }
+
+        // 9. Project Preview Modal
+        const PROJECT_DETAILS = {
+            "ai-resume": {
+                tags: ["AI", "React", "Resume Builder"],
+                title: "AI Resum Pro",
+                description: "منصة ذكية لبناء السيرة الذاتية باستخدام الذكاء الاصطناعي، بتساعد المستخدم يبني بروفايل احترافي في دقايق.",
+                gallery: [
+                    { img: "ai-resum.png", caption: "الصفحة الرئيسية: بتعرض للمستخدم خيارات إنشاء سيرة ذاتية جديدة أو تعديل واحدة موجودة." }
+                ]
+            },
+            "gess": {
+                tags: ["Next.js", "Three.js", "Firebase"],
+                title: "GESS EDU",
+                description: "منصة تعليمية تفاعلية لطلاب هندسة الجيوماتكس بجامعة الخرطوم، بتقدم تجربة ثلاثية الأبعاد غامرة للمحتوى الدراسي.",
+                gallery: [
+                    { img: "gess.jpeg", caption: "الواجهة الرئيسية للمنصة بتصميم Glassmorphism الداكن." }
+                ]
+            },
+            "clinic": {
+                tags: ["Full Stack", "Clinic Management"],
+                title: "Clinic System",
+                description: "نظام متكامل لإدارة العيادات، بيسهّل تسجيل بيانات المرضى، المواعيد، والمهام الإدارية.",
+                gallery: [
+                    { img: "clinic.png", caption: "لوحة التحكم الرئيسية لإدارة المواعيد والمرضى." }
+                ]
+            },
+            "gizmo": {
+                tags: ["Next.js / React", "E-Commerce"],
+                title: "Gizmo Store",
+                description: "متجر إلكتروني حديث للأجهزة التقنية، بواجهة عالية الأداء وسلة شراء ديناميكية.",
+                gallery: [
+                    { img: "gizmo.png", caption: "صفحة عرض المنتجات مع تصميم متجاوب." }
+                ]
+            },
+            "interior": {
+                tags: ["Design", "Portfolio"],
+                title: "Interior Design Portfolio",
+                description: "بورتفوليو رقمي أنيق لعرض أعمال التصميم الداخلي والمعماري.",
+                gallery: [
+                    { img: "architectuer.png", caption: "معرض الأعمال الرئيسي للمصمم." }
+                ]
+            }
+        };
+
+        const overlay = document.getElementById('project-modal-overlay');
+        const closeBtn = document.getElementById('modal-close-btn');
+        const modalTags = document.getElementById('modal-tags');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-description');
+        const modalGallery = document.getElementById('modal-gallery');
+
+        function openProjectModal(key) {
+            const data = PROJECT_DETAILS[key];
+            if (!data) return;
+
+            modalTags.innerHTML = data.tags.map(t =>
+                `<span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">${t}</span>`
+            ).join('');
+
+            modalTitle.textContent = data.title;
+            modalDesc.textContent = data.description;
+
+            modalGallery.innerHTML = data.gallery.map(item => `
+                <div class="modal-gallery-item">
+                    <img src="${item.img}" alt="${data.title}">
+                    <div class="modal-gallery-caption">
+                        <p class="text-gray-300 text-sm leading-relaxed">${item.caption}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            overlay.classList.add('active');
+            document.body.classList.add('modal-open');
+            lucide.createIcons();
+        }
+
+        function closeProjectModal() {
+            overlay.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+
+        document.querySelectorAll('.preview-btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                openProjectModal(btn.getAttribute('data-project'));
+            });
         });
 
+        closeBtn.addEventListener('click', closeProjectModal);
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) closeProjectModal();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeProjectModal();
+        });
 
-
+        // 10. Form Handling (Firebase + Telegram)
+        // NOTE: see security note below the code block.
     </script>
 
-<script type="module">
-  // 1. استيراد المكتبات والوظائف المطلوبة من إصدار الفايربيز الحديث
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-  // إعدادات الفايربيز الخاصة بمشروعك (mx-portfolio)
-  const firebaseConfig = {
-    apiKey: "AIzaSyAJKIlMy-EuitvZ2H_NeSri9XL9NiVYTY4",
-    authDomain: "mx-portfolio-8ef82.firebaseapp.com",
-    projectId: "mx-portfolio-8ef82",
-    storageBucket: "mx-portfolio-8ef82.firebasestorage.app",
-    messagingSenderId: "329551380477",
-    appId: "1:329551380477:web:1a7b532832ec24ce766394",
-    measurementId: "G-MVFHQWZKYR"
-  };
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJKIlMy-EuitvZ2H_NeSri9XL9NiVYTY4",
+            authDomain: "mx-portfolio-8ef82.firebaseapp.com",
+            projectId: "mx-portfolio-8ef82",
+            storageBucket: "mx-portfolio-8ef82.firebasestorage.app",
+            messagingSenderId: "329551380477",
+            appId: "1:329551380477:web:1a7b532832ec24ce766394",
+            measurementId: "G-MVFHQWZKYR"
+        };
 
-  // تهيئة الفايربيز وقاعدة البيانات بالطريقة الحديثة
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-  // 2. كود معالجة الفورم وإرسال البيانات لتليجرام والفايربيز معاً
-  document.getElementById('contact-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
+        document.getElementById('contact-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-    // بيانات التليجرام الشخصية الخاصة بك
-    const TELEGRAM_BOT_TOKEN = '8685981308:AAGeDo3Tqen0UQwjrzN9976-BVh6NAMMKiI';
-    const TELEGRAM_CHAT_ID = '5533843372';
+            const TELEGRAM_BOT_TOKEN = '8685981308:AAGeDo3Tqen0UQwjrzN9976-BVh6NAMMKiI';
+            const TELEGRAM_CHAT_ID = '5533843372';
 
-    // جلب قيم المدخلات من حقول الفورم
-    const name = this.querySelectorAll('input')[0].value;
-    const email = this.querySelectorAll('input')[1].value;
-    const subject = this.querySelectorAll('input')[2].value;
-    const message = this.querySelector('textarea').value;
-    
-    const formStatus = document.getElementById('form-status');
-    const submitBtn = this.querySelector('button[type="submit"]');
+            const name = this.querySelectorAll('input')[0].value;
+            const email = this.querySelectorAll('input')[1].value;
+            const subject = this.querySelectorAll('input')[2].value;
+            const message = this.querySelector('textarea').value;
 
-    // تحديث واجهة المستخدم لحين إتمام الإرسال
-    submitBtn.disabled = true;
-    formStatus.classList.remove('hidden');
-    formStatus.innerText = 'Sending your message...';
-    formStatus.style.color = '#FFFFFF';
+            const formStatus = document.getElementById('form-status');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnHTML = submitBtn.innerHTML;
 
-    try {
-        // أ) حفظ البيانات في قاعدة بيانات Firestore بالطريقة الحديثة (Modular v9+)
-        await addDoc(collection(db, "contacts"), {
-            name: name,
-            email: email,
-            subject: subject,
-            message: message,
-            timestamp: new Date()
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="w-5 h-5 border-2 border-dark border-t-transparent rounded-full animate-spin mx-auto"></div>';
+            formStatus.classList.remove('hidden');
+            formStatus.innerText = 'Sending your message...';
+            formStatus.style.color = '#FFFFFF';
+
+            try {
+                await addDoc(collection(db, "contacts"), {
+                    name: name,
+                    email: email,
+                    subject: subject,
+                    message: message,
+                    timestamp: new Date()
+                });
+
+                const telegramText = `
+🚀 New Message from Portfolio!
+👤 Name: ${name}
+📧 Email: ${email}
+📌 Subject: ${subject}
+📝 Message: ${message}
+                `.trim();
+
+                const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                await fetch(telegramUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: telegramText,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+                formStatus.innerText = 'Thank you! Your message has been sent successfully.';
+                formStatus.style.color = '#10B981';
+                this.reset();
+
+            } catch (error) {
+                console.error('Error handling form submission:', error);
+                formStatus.innerText = 'Oops! Something went wrong. Please try again.';
+                formStatus.style.color = '#EF4444';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHTML;
+                lucide.createIcons();
+                setTimeout(() => {
+                    formStatus.classList.add('hidden');
+                }, 5000);
+            }
         });
-
-        // ب) تنسيق رسالة التليجرام الموجهة إليك
-        const telegramText = `
-🚀 **New Message from Portfolio!**
-👤 **Name:** ${name}
-📧 **Email:** ${email}
-📌 **Subject:** ${subject}
-📝 **Message:** ${message}
-        `.trim();
-
-        // جـ) إرسال الطلب إلى التليجرام
-        const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-        await fetch(telegramUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: telegramText,
-                parse_mode: 'Markdown'
-            })
-        });
-
-        // رسالة نجاح العملية وتصفير الحقول
-        formStatus.innerText = 'Thank you! Your message has been sent successfully.';
-        formStatus.style.color = '#10B981'; // لون أخضر مريح للعين
-        this.reset();
-
-    } catch (error) {
-        console.error('Error handling form submission:', error);
-        formStatus.innerText = 'Oops! Something went wrong. Please try again.';
-        formStatus.style.color = '#EF4444'; // لون أحمر للتنبيه بالخطأ
-    } finally {
-        // إعادة تفعيل زر الإرسال وإخفاء الرسالة التنبيهية لاحقاً
-        submitBtn.disabled = false;
-        setTimeout(() => {
-            formStatus.classList.add('hidden');
-        }, 5000);
-    }
-  });
-</script>
-
+    </script>
 </body>
 </html>
