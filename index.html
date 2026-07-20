@@ -174,9 +174,9 @@
             pointer-events: none;
         }
 
-        .extra-project {
-            display: none;
-        }
+        /* Extra projects use Tailwind's `hidden` utility directly, combined
+           with the `.hidden-project` marker class so JS can find them.
+           See "Show More / Show Less Projects" script near the bottom. */
 
         /* Project Preview Modal */
         #project-modal-overlay {
@@ -451,7 +451,7 @@
             </div>
         </section>
 
-        <!-- 5. Projects Section -->
+     <!-- 5. Projects Section -->
         <section id="projects" class="py-32 relative">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal-up">
@@ -459,7 +459,7 @@
                         <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Selected Work</h2>
                         <h3 class="text-4xl md:text-5xl font-display font-bold">Featured Projects</h3>
                     </div>
-
+ 
                     <!-- Filters -->
                     <div class="flex gap-4 mt-8 md:mt-0 glass-panel p-2 rounded-full">
                         <button class="px-6 py-2 rounded-full bg-white/10 text-sm hover-target filter-btn active" data-filter="all">All</button>
@@ -467,15 +467,15 @@
                         <button class="px-6 py-2 rounded-full hover:bg-white/5 text-sm transition-colors hover-target filter-btn" data-filter="app">Mobile</button>
                     </div>
                 </div>
-
+ 
                 <div class="grid md:grid-cols-2 gap-8" id="project-grid">
-
+ 
                     <!-- Project 1: AI Resum Pro -->
                     <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
                             <img src="ai-resum.png" alt="AI Resum Pro" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-
+ 
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">AI</span>
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">React</span>
@@ -497,13 +497,13 @@
                             </div>
                         </div>
                     </div>
-
+ 
                     <!-- Project 2: GESS EDU -->
                     <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item md:translate-y-16" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
                             <img src="gess.jpeg" alt="GESS EDU" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-
+ 
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js</span>
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Three.js</span>
@@ -513,7 +513,7 @@
                         <div class="p-8 tilt-content">
                             <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">GESS EDU</h4>
                             <p class="text-gray-400 text-sm mb-6 line-clamp-2">An interactive educational platform designed for university students, featuring immersive 3D web experiences.</p>
-
+ 
                             <div class="flex gap-4">
                                 <a href="https://gess-platform.vercel.app" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
                                     <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
@@ -527,13 +527,13 @@
                             </div>
                         </div>
                     </div>
-
+ 
                     <!-- Project 3: Clinic System -->
                     <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
                             <img src="clinic.png" alt="Clinic System" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-
+ 
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Full Stack</span>
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Clinic Management</span>
@@ -555,13 +555,13 @@
                             </div>
                         </div>
                     </div>
-
+ 
                     <!-- Project 4: Gizmo Store -->
-                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
+                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item md:translate-y-16" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
                             <img src="gizmo.png" alt="Gizmo Store" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-
+ 
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">E-Commerce</span>
@@ -583,13 +583,50 @@
                             </div>
                         </div>
                     </div>
+ 
+                    <!-- Project 5: Wishly Store -->
+<div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden" data-category="web">
+    <div class="relative h-80 overflow-hidden">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
+        <img src="wishly.png" alt="Wishly Store" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
 
-                    <!-- Project 5: Interior Design Portfolio -->
-                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item extra-project md:translate-y-16" data-category="web">
+        <div class="absolute top-6 left-6 z-20 flex gap-2">
+            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
+            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Gift Store</span>
+        </div>
+    </div>
+
+    <div class="p-8 tilt-content">
+        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">
+            Wishly Store
+        </h4>
+
+        <p class="text-gray-400 text-sm mb-6 line-clamp-2">
+            A beautifully designed online gift store offering elegant presents, personalized gift boxes, flowers, and celebration collections with a smooth and modern shopping experience.
+        </p>
+
+        <div class="flex gap-4">
+            <a href="https://wishly-store.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
+                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+            </a>
+
+            <a href="#" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
+                <i data-lucide="github" class="w-4 h-4"></i> Source
+            </a>
+
+            <button class="preview-btn hover-target" data-project="wishly">
+                <i data-lucide="eye" class="w-4 h-4"></i> Preview
+            </button>
+        </div>
+    </div>
+</div>
+ 
+                    <!-- Project 6: Interior Design Portfolio -->
+                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden md:translate-y-16" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
                             <img src="architectuer.png" alt="Interior Design Portfolio" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-
+ 
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Design</span>
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Portfolio</span>
@@ -598,7 +635,7 @@
                         <div class="p-8 tilt-content">
                             <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Interior Design Portfolio</h4>
                             <p class="text-gray-400 text-sm mb-6 line-clamp-2">A sophisticated digital portfolio showcasing architectural elegance, interior space planning, and creative design aesthetics.</p>
-
+ 
                             <div class="flex gap-4">
                                 <a href="https://fatah-magdi-designer.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
                                     <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
@@ -609,41 +646,9 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Project 6: Wishly Store -->
-<div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden md:translate-y-16 animate-project" data-category="web">
-    <div class="relative h-80 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <img src="wishly.png" alt="Wishly Store" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-        
-        <div class="absolute top-6 left-6 z-20 flex gap-2">
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">E-Commerce</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Gifts Shop</span>
-        </div>
-    </div>
-    <div class="p-8 tilt-content">
-        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Wishly Store</h4>
-        <p class="text-gray-400 text-sm mb-6 line-clamp-2">A beautifully crafted e-commerce storefront specialized in boutique gifts, customizable presents, and curated fashion items.</p>
-        <div class="flex gap-4">
-            <!-- رابط المتجر المباشر -->
-            <a href="https://wishly-store.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-            </a>
-            <!-- رابط جيت هب الخاص بمتجر ويشلي -->
-            <a href="https://github.com/mazinramos/Wishly-Store.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                <i data-lucide="github" class="w-4 h-4"></i> Source
-            </a>
-            <!-- زر المعاينة السريعة -->
-            <button class="preview-btn hover-target flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors" data-project="wishly">
-                <i data-lucide="eye" class="w-4 h-4"></i> Preview
-            </button>
-        </div>
-    </div>
-</div>
-
-                </div>
-
+ 
+                </div>  <!-- /#project-grid -->
+ 
                 <div class="flex justify-center mt-16">
                     <button id="show-more-btn" class="px-8 py-3 rounded-full glass-panel hover-target text-sm font-medium hover:bg-white/10 transition-colors">
                         <span id="show-more-text">Show More Projects</span>
@@ -1166,20 +1171,30 @@
         // 8. Show More / Show Less Projects
         const showMoreBtn = document.getElementById('show-more-btn');
         const showMoreText = document.getElementById('show-more-text');
-        const extraProjects = document.querySelectorAll('.extra-project');
+        const hiddenProjects = document.querySelectorAll('.hidden-project');
         let expanded = false;
 
         if (showMoreBtn) {
             showMoreBtn.addEventListener('click', function () {
                 expanded = !expanded;
-                extraProjects.forEach(el => {
-                    el.style.display = expanded ? 'block' : 'none';
+                hiddenProjects.forEach(el => {
+                    el.classList.toggle('hidden', !expanded);
                 });
                 showMoreText.textContent = expanded ? 'Show Less' : 'Show More Projects';
 
-                if (expanded && extraProjects.length > 0) {
-                    extraProjects[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Re-apply the active filter so newly revealed cards respect it
+                const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
+                projectItems.forEach(item => {
+                    const matches = activeFilter === 'all' || item.getAttribute('data-category') === activeFilter;
+                    if (item.classList.contains('hidden-project') && !expanded) return; // stays hidden, handled above
+                    item.style.display = matches ? 'block' : 'none';
+                });
+
+                if (expanded && hiddenProjects.length > 0) {
+                    hiddenProjects[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
+
+                setTimeout(() => ScrollTrigger.refresh(), 500);
             });
         }
 
@@ -1215,6 +1230,14 @@
                 description: "متجر إلكتروني حديث للأجهزة التقنية، بواجهة عالية الأداء وسلة شراء ديناميكية.",
                 gallery: [
                     { img: "gizmo.png", caption: "صفحة عرض المنتجات مع تصميم متجاوب." }
+                ]
+            },
+            "wishly": {
+                tags: ["Next.js / React", "Gift Store"],
+                title: "Wishly Store",
+                description: "متجر إلكتروني متخصص في الهدايا، بيقدّم هدايا فاخرة، بوكسات هدايا مخصصة، ورد، ومجموعات احتفالات بتجربة تسوق سلسة وعصرية.",
+                gallery: [
+                    { img: "wishly.png", caption: "واجهة المتجر الرئيسية بتصميم عصري يبرز منتجات الهدايا." }
                 ]
             },
             "interior": {
