@@ -14,7 +14,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.mazinpromax.online/">
     <meta name="twitter:image" content="https://www.mazinpromax.online/mazin.jpg">
-    <meta name="google-site-verification" content="IH_dYUXH_BQW7TR7uUDlCoLQvJy0kQdNy503aXl8W8w" />
+
     <!-- Favicon / Site Icon (shows in browser tab, bookmarks, Google search results) -->
     <link rel="icon" type="image/jpeg" href="mazin.jpg">
     <link rel="apple-touch-icon" href="mazin.jpg">
@@ -268,6 +268,23 @@
         body.modal-open { overflow: hidden; }
 
     </style>
+    <!-- Structured Data (helps Google show rich results in search) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mazin",
+        "url": "https://www.mazinpromax.online/",
+        "image": "https://www.mazinpromax.online/mazin.jpg",
+        "jobTitle": "Web & Mobile Application Developer",
+        "description": "Freelance developer specializing in Firebase-based web applications, SaaS platforms, and e-commerce systems.",
+        "sameAs": [
+            "https://github.com/mazinflwo",
+            "https://linkedin.com/in/mazinflwo",
+            "https://twitter.com/mazinflwo"
+        ]
+    }
+    </script>
 </head>
 <body class="antialiased selection:bg-primary/30 selection:text-white">
 
@@ -369,6 +386,9 @@
                         </a>
                         <a href="#contact" class="px-8 py-4 glass-panel border border-white/10 rounded-full hover:border-primary/50 transition-colors hover-target">
                             Contact Me
+                        </a>
+                        <a href="mazin-cv.pdf" download class="px-8 py-4 glass-panel border border-white/10 rounded-full hover:border-primary/50 transition-colors hover-target flex items-center gap-2">
+                            <i data-lucide="download" class="w-4 h-4"></i> Download CV
                         </a>
                     </div>
                 </div>
@@ -487,7 +507,7 @@
                     <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="ai-resum.png" alt="AI Resum Pro" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="ai-resum.png" alt="AI Resum Pro" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
  
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">AI</span>
@@ -515,7 +535,7 @@
                     <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item md:translate-y-16" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="gess.jpeg" alt="GESS EDU" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="gess.jpeg" alt="GESS EDU" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
  
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js</span>
@@ -545,7 +565,7 @@
                     <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="clinic.png" alt="Clinic System" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="clinic.png" alt="Clinic System" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
  
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Full Stack</span>
@@ -573,7 +593,7 @@
                     <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item md:translate-y-16" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="gizmo.png" alt="Gizmo Store" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="gizmo.png" alt="Gizmo Store" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
  
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
@@ -601,7 +621,7 @@
 <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden" data-category="web">
     <div class="relative h-80 overflow-hidden">
         <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <img src="wishly.png" alt="Wishly Store" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+        <img src="wishly.png" alt="Wishly Store" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
 
         <div class="absolute top-6 left-6 z-20 flex gap-2">
             <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
@@ -638,7 +658,7 @@
 <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden" data-category="web">
     <div class="relative h-80 overflow-hidden">
         <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <img src="eduhub.png" alt="EduHub" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+        <img src="eduhub.png" alt="EduHub" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
 
         <div class="absolute top-6 left-6 z-20 flex gap-2">
             <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
@@ -675,7 +695,7 @@
 <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden" data-category="web">
     <div class="relative h-80 overflow-hidden">
         <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <img src="pharmacy.png" alt="Pharmacy System" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+        <img src="pharmacy.png" alt="Pharmacy System" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
 
         <div class="absolute top-6 left-6 z-20 flex gap-2">
             <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">React / Node.js</span>
@@ -713,7 +733,7 @@
                     <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden md:translate-y-16" data-category="web">
                         <div class="relative h-80 overflow-hidden">
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="architectuer.png" alt="Interior Design Portfolio" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="architectuer.png" alt="Interior Design Portfolio" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
  
                             <div class="absolute top-6 left-6 z-20 flex gap-2">
                                 <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Design</span>
@@ -828,6 +848,139 @@
             </div>
         </section>
 
+        <!-- 8. Testimonials Section -->
+        <!--
+            EDIT ME: Replace the 3 placeholder quotes below with real
+            feedback from real clients before publishing. Fake testimonials
+            can damage trust if a client ever asks about them.
+        -->
+        <section id="testimonials" class="py-32 relative border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-20 reveal-up">
+                    <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Client Feedback</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold">What Clients Say</h3>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="glass-panel p-8 rounded-3xl reveal-up">
+                        <div class="flex gap-1 mb-4 text-primary">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-6">"[ REPLACE WITH REAL QUOTE — e.g. what the client needed, how the project went, and the result. ]"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-primary">?</div>
+                            <div>
+                                <p class="font-medium text-sm">Client Name</p>
+                                <p class="text-gray-500 text-xs">Company / Project</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl reveal-up" style="transition-delay:100ms;">
+                        <div class="flex gap-1 mb-4 text-primary">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-6">"[ REPLACE WITH REAL QUOTE ]"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-primary">?</div>
+                            <div>
+                                <p class="font-medium text-sm">Client Name</p>
+                                <p class="text-gray-500 text-xs">Company / Project</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl reveal-up" style="transition-delay:200ms;">
+                        <div class="flex gap-1 mb-4 text-primary">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-6">"[ REPLACE WITH REAL QUOTE ]"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-primary">?</div>
+                            <div>
+                                <p class="font-medium text-sm">Client Name</p>
+                                <p class="text-gray-500 text-xs">Company / Project</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. FAQ Section -->
+        <section id="faq" class="py-32 relative border-t border-white/5">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-16 reveal-up">
+                    <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Got Questions?</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold">Frequently Asked Questions</h3>
+                </div>
+
+                <div class="space-y-4" id="faq-container">
+                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
+                            <span class="font-display font-bold text-lg">How long does a typical project take?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
+                            <p class="text-gray-400 leading-relaxed pb-6">It depends on scope — a simple landing page can take a few days, while a full platform (like an e-commerce or admin system) usually takes a few weeks. I'll give you a clear timeline before we start.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
+                            <span class="font-display font-bold text-lg">What technologies do you work with?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
+                            <p class="text-gray-400 leading-relaxed pb-6">Mainly React / Next.js, Tailwind CSS, and Firebase (Firestore, Auth, Cloud Functions) for full-stack web apps, plus Flutter / React Native for mobile when needed.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
+                            <span class="font-display font-bold text-lg">How does payment work?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
+                            <p class="text-gray-400 leading-relaxed pb-6">[ EDIT ME: describe your real payment terms — e.g. upfront deposit percentage, milestones, accepted payment methods. ]</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
+                            <span class="font-display font-bold text-lg">Do you offer support after delivery?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
+                            <p class="text-gray-400 leading-relaxed pb-6">[ EDIT ME: describe your real post-delivery support/maintenance policy. ]</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
+                            <span class="font-display font-bold text-lg">Can you work with an existing codebase?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
+                            <p class="text-gray-400 leading-relaxed pb-6">Yes — I regularly audit, debug, and extend existing React/Firebase projects, not just build from scratch.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- 10. Contact Section -->
         <section id="contact" class="py-32 relative">
             <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
@@ -877,14 +1030,15 @@
         <footer class="border-t border-white/5 py-8 mt-10">
             <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
                 <p>&copy; <span id="year"></span> Creative Portfolio. Designed & Built with Precision.</p>
-                <div class="flex gap-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition-colors hover-target">Privacy</a>
-                    <a href="#" class="hover:text-white transition-colors hover-target">Terms</a>
-                </div>
             </div>
         </footer>
 
     </main>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full glass-panel border border-white/10 flex items-center justify-center hover:bg-white hover:text-dark transition-all duration-300 opacity-0 pointer-events-none hover-target">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
 
     <!-- Project Preview Modal -->
     <div id="project-modal-overlay">
@@ -1501,6 +1655,45 @@
                 }, 5000);
             }
         });
+    </script>
+
+    <!-- FAQ Accordion + Back to Top -->
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-icon');
+                const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+                // Close all other open items
+                document.querySelectorAll('.faq-answer').forEach(a => { a.style.maxHeight = '0px'; });
+                document.querySelectorAll('.faq-icon').forEach(i => { i.style.transform = 'rotate(0deg)'; });
+
+                if (!isOpen) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 600) {
+                    backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                    backToTopBtn.classList.add('opacity-100');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                    backToTopBtn.classList.remove('opacity-100');
+                }
+            });
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
     </script>
 </body>
 </html>
