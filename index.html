@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Portfolio | Web & Mobile Developer</title>
     <meta name="description" content="Award-winning Web and Mobile Application Developer Portfolio.">
+    <link rel="canonical" href="https://www.mazinpromax.online/">
+    <meta property="og:url" content="https://www.mazinpromax.online/">
+    <meta property="og:title" content="Premium Portfolio | Web & Mobile Developer">
+    <meta property="og:description" content="Award-winning Web and Mobile Application Developer Portfolio.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.mazinpromax.online/mazin.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.mazinpromax.online/">
+    <meta name="twitter:image" content="https://www.mazinpromax.online/mazin.jpg">
+
+    <!-- Favicon / Site Icon (shows in browser tab, bookmarks, Google search results) -->
+    <link rel="icon" type="image/jpeg" href="mazin.jpg">
+    <link rel="apple-touch-icon" href="mazin.jpg">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1436,16 +1449,34 @@
 📝 Message: ${message}
                 `.trim();
 
+                // NOTE: parse_mode 'Markdown' was removed on purpose.
+                // Telegram's Markdown parser throws a 400 error whenever the
+                // text contains unescaped special characters (_, *, [, ], `,
+                // dots after numbers, etc.) which are extremely common in
+                // names, emails and free-text messages. When that happened,
+                // this fetch() call still "succeeded" from the browser's
+                // point of view (no network error), so the form showed
+                // "sent successfully" even though Telegram silently rejected
+                // the message and it never showed up in the chat.
                 const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-                await fetch(telegramUrl, {
+                const telegramResponse = await fetch(telegramUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: TELEGRAM_CHAT_ID,
-                        text: telegramText,
-                        parse_mode: 'Markdown'
+                        text: telegramText
                     })
                 });
+
+                const telegramResult = await telegramResponse.json();
+
+                if (!telegramResponse.ok || !telegramResult.ok) {
+                    // The message was saved to Firebase, but Telegram itself
+                    // rejected it. Log the real reason instead of pretending
+                    // it worked.
+                    console.error('Telegram API rejected the message:', telegramResult);
+                    throw new Error(telegramResult.description || 'Telegram delivery failed');
+                }
 
                 formStatus.innerText = 'Thank you! Your message has been sent successfully.';
                 formStatus.style.color = '#10B981';
@@ -1453,7 +1484,13 @@
 
             } catch (error) {
                 console.error('Error handling form submission:', error);
-                formStatus.innerText = 'Oops! Something went wrong. Please try again.';
+                // Show the real reason on-screen so the issue can be
+                // diagnosed without opening DevTools. Common causes:
+                // - Firestore permission-denied (security rules block writes)
+                // - Telegram "Unauthorized" (bad/revoked bot token)
+                // - Telegram "chat not found" (wrong chat_id, or the bot was
+                //   never started in a DM with that chat_id)
+                formStatus.innerText = 'Oops! ' + (error.message || 'Something went wrong. Please try again.');
                 formStatus.style.color = '#EF4444';
             } finally {
                 submitBtn.disabled = false;
