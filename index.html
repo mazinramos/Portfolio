@@ -141,6 +141,10 @@
             background: #111111; border: 1px solid #262626; max-width: 840px; width: 100%; padding: 40px; position: relative;
             animation: modalIn 0.2s ease forwards;
         }
+        @media (max-width: 640px) {
+            #project-modal-overlay { padding: 88px 12px 32px; }
+            #project-modal-box { padding: 24px; }
+        }
         @keyframes modalIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         #modal-close-btn {
             position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
@@ -185,11 +189,11 @@
         <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
             <a href="#" class="text-xl font-display font-extrabold tracking-tight">MAZIN.</a>
             <div class="hidden md:flex items-center gap-9 text-sm font-medium">
-                <a href="#about" class="hover:opacity-60 transition-opacity">About</a>
-                <a href="#services" class="hover:opacity-60 transition-opacity">Services</a>
-                <a href="#projects" class="hover:opacity-60 transition-opacity">Projects</a>
-                <a href="#skills" class="hover:opacity-60 transition-opacity">Skills</a>
-                <a href="#contact" class="hover:opacity-60 transition-opacity">Contact</a>
+                <a href="#about" class="navlink hover:opacity-90 transition-opacity">About</a>
+                <a href="#services" class="navlink hover:opacity-90 transition-opacity">Services</a>
+                <a href="#projects" class="navlink hover:opacity-90 transition-opacity">Projects</a>
+                <a href="#skills" class="navlink hover:opacity-90 transition-opacity">Skills</a>
+                <a href="#contact" class="navlink hover:opacity-90 transition-opacity">Contact</a>
             </div>
             <div class="hidden md:flex items-center gap-5">
                 <a href="mazin-cv.pdf" download class="text-sm text-mute hover:text-paper transition-colors">Resume</a>
@@ -279,30 +283,30 @@
                 </div>
 
                 <div class="border-t border-line reveal">
-                    <div class="service-row flex gap-6 md:gap-10 py-8 border-b border-line">
-                        <div class="service-mark"></div>
-                        <div class="w-40 md:w-56 flex-shrink-0">
+                    <div class="service-row flex flex-col sm:flex-row gap-3 sm:gap-6 md:gap-10 py-8 border-b border-line">
+                        <div class="service-mark hidden sm:block"></div>
+                        <div class="sm:w-40 md:w-56 flex-shrink-0">
                             <h3 class="font-display font-bold text-lg md:text-xl uppercase">Web Development</h3>
                         </div>
                         <p class="text-mute leading-relaxed flex-1">Modern, responsive websites built for businesses and brands — fast, clean, and easy to maintain.</p>
                     </div>
-                    <div class="service-row flex gap-6 md:gap-10 py-8 border-b border-line">
-                        <div class="service-mark"></div>
-                        <div class="w-40 md:w-56 flex-shrink-0">
+                    <div class="service-row flex flex-col sm:flex-row gap-3 sm:gap-6 md:gap-10 py-8 border-b border-line">
+                        <div class="service-mark hidden sm:block"></div>
+                        <div class="sm:w-40 md:w-56 flex-shrink-0">
                             <h3 class="font-display font-bold text-lg md:text-xl uppercase">Web Applications</h3>
                         </div>
                         <p class="text-mute leading-relaxed flex-1">Custom systems and platforms designed to solve real, specific problems — not generic templates.</p>
                     </div>
-                    <div class="service-row flex gap-6 md:gap-10 py-8 border-b border-line">
-                        <div class="service-mark"></div>
-                        <div class="w-40 md:w-56 flex-shrink-0">
+                    <div class="service-row flex flex-col sm:flex-row gap-3 sm:gap-6 md:gap-10 py-8 border-b border-line">
+                        <div class="service-mark hidden sm:block"></div>
+                        <div class="sm:w-40 md:w-56 flex-shrink-0">
                             <h3 class="font-display font-bold text-lg md:text-xl uppercase">Dashboards &amp; Systems</h3>
                         </div>
                         <p class="text-mute leading-relaxed flex-1">Admin dashboards, management systems, and internal tools that make running a business easier.</p>
                     </div>
-                    <div class="service-row flex gap-6 md:gap-10 py-8 border-b border-line">
-                        <div class="service-mark"></div>
-                        <div class="w-40 md:w-56 flex-shrink-0">
+                    <div class="service-row flex flex-col sm:flex-row gap-3 sm:gap-6 md:gap-10 py-8 border-b border-line">
+                        <div class="service-mark hidden sm:block"></div>
+                        <div class="sm:w-40 md:w-56 flex-shrink-0">
                             <h3 class="font-display font-bold text-lg md:text-xl uppercase">Data &amp; Digital Solutions</h3>
                         </div>
                         <p class="text-mute leading-relaxed flex-1">Turning business ideas and raw data into digital tools people actually want to use.</p>
@@ -321,10 +325,10 @@
 
                 <div class="border-t border-line" id="project-grid">
 
-                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item" data-category="web">
+                    <div class="project-row grid md:grid-cols-12 gap-4 md:gap-6 items-center py-5 md:py-6 border-b border-line project-item" data-category="web">
                         <div class="md:col-span-1 font-display font-bold text-mute text-lg">01</div>
                         <div class="md:col-span-3">
-                            <div class="border border-line overflow-hidden"><img src="ai-resum.png" alt="AI Resum Pro" loading="lazy" class="w-full h-32 object-cover"></div>
+                            <div class="border border-line overflow-hidden"><img src="ai-resum.png" alt="AI Resum Pro" loading="lazy" class="w-full h-28 sm:h-32 object-cover"></div>
                         </div>
                         <div class="md:col-span-5">
                             <h3 class="font-display font-bold text-xl mb-1">AI Resum Pro</h3>
@@ -337,10 +341,10 @@
                         </div>
                     </div>
 
-                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item" data-category="web">
+                    <div class="project-row grid md:grid-cols-12 gap-4 md:gap-6 items-center py-5 md:py-6 border-b border-line project-item" data-category="web">
                         <div class="md:col-span-1 font-display font-bold text-mute text-lg">02</div>
                         <div class="md:col-span-3">
-                            <div class="border border-line overflow-hidden"><img src="gess.jpeg" alt="GESS EDU" loading="lazy" class="w-full h-32 object-cover"></div>
+                            <div class="border border-line overflow-hidden"><img src="gess.jpeg" alt="GESS EDU" loading="lazy" class="w-full h-28 sm:h-32 object-cover"></div>
                         </div>
                         <div class="md:col-span-5">
                             <h3 class="font-display font-bold text-xl mb-1">GESS EDU</h3>
@@ -353,10 +357,10 @@
                         </div>
                     </div>
 
-                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item" data-category="web">
+                    <div class="project-row grid md:grid-cols-12 gap-4 md:gap-6 items-center py-5 md:py-6 border-b border-line project-item" data-category="web">
                         <div class="md:col-span-1 font-display font-bold text-mute text-lg">03</div>
                         <div class="md:col-span-3">
-                            <div class="border border-line overflow-hidden"><img src="clinic.png" alt="Clinic System" loading="lazy" class="w-full h-32 object-cover"></div>
+                            <div class="border border-line overflow-hidden"><img src="clinic.png" alt="Clinic System" loading="lazy" class="w-full h-28 sm:h-32 object-cover"></div>
                         </div>
                         <div class="md:col-span-5">
                             <h3 class="font-display font-bold text-xl mb-1">Clinic System</h3>
@@ -369,10 +373,10 @@
                         </div>
                     </div>
 
-                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item" data-category="web">
+                    <div class="project-row grid md:grid-cols-12 gap-4 md:gap-6 items-center py-5 md:py-6 border-b border-line project-item" data-category="web">
                         <div class="md:col-span-1 font-display font-bold text-mute text-lg">04</div>
                         <div class="md:col-span-3">
-                            <div class="border border-line overflow-hidden"><img src="gizmo.png" alt="Gizmo Store" loading="lazy" class="w-full h-32 object-cover"></div>
+                            <div class="border border-line overflow-hidden"><img src="gizmo.png" alt="Gizmo Store" loading="lazy" class="w-full h-28 sm:h-32 object-cover"></div>
                         </div>
                         <div class="md:col-span-5">
                             <h3 class="font-display font-bold text-xl mb-1">Gizmo Store</h3>
@@ -385,10 +389,10 @@
                         </div>
                     </div>
 
-                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item hidden-project hidden" data-category="web">
+                    <div class="project-row grid md:grid-cols-12 gap-4 md:gap-6 items-center py-5 md:py-6 border-b border-line project-item hidden-project hidden" data-category="web">
                         <div class="md:col-span-1 font-display font-bold text-mute text-lg">05</div>
                         <div class="md:col-span-3">
-                            <div class="border border-line overflow-hidden"><img src="wishly.png" alt="Wishly Store" loading="lazy" class="w-full h-32 object-cover"></div>
+                            <div class="border border-line overflow-hidden"><img src="wishly.png" alt="Wishly Store" loading="lazy" class="w-full h-28 sm:h-32 object-cover"></div>
                         </div>
                         <div class="md:col-span-5">
                             <h3 class="font-display font-bold text-xl mb-1">Wishly Store</h3>
@@ -400,10 +404,10 @@
                         </div>
                     </div>
 
-                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item hidden-project hidden" data-category="web">
+                    <div class="project-row grid md:grid-cols-12 gap-4 md:gap-6 items-center py-5 md:py-6 border-b border-line project-item hidden-project hidden" data-category="web">
                         <div class="md:col-span-1 font-display font-bold text-mute text-lg">06</div>
                         <div class="md:col-span-3">
-                            <div class="border border-line overflow-hidden"><img src="eduhub.png" alt="EduHub" loading="lazy" class="w-full h-32 object-cover"></div>
+                            <div class="border border-line overflow-hidden"><img src="eduhub.png" alt="EduHub" loading="lazy" class="w-full h-28 sm:h-32 object-cover"></div>
                         </div>
                         <div class="md:col-span-5">
                             <h3 class="font-display font-bold text-xl mb-1">EduHub Platform</h3>
@@ -414,10 +418,10 @@
                         </div>
                     </div>
 
-                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item hidden-project hidden" data-category="web">
+                    <div class="project-row grid md:grid-cols-12 gap-4 md:gap-6 items-center py-5 md:py-6 border-b border-line project-item hidden-project hidden" data-category="web">
                         <div class="md:col-span-1 font-display font-bold text-mute text-lg">07</div>
                         <div class="md:col-span-3">
-                            <div class="border border-line overflow-hidden"><img src="pharmacy.png" alt="Pharmacy System" loading="lazy" class="w-full h-32 object-cover"></div>
+                            <div class="border border-line overflow-hidden"><img src="pharmacy.png" alt="Pharmacy System" loading="lazy" class="w-full h-28 sm:h-32 object-cover"></div>
                         </div>
                         <div class="md:col-span-5">
                             <h3 class="font-display font-bold text-xl mb-1">Pharmacy System</h3>
@@ -428,10 +432,10 @@
                         </div>
                     </div>
 
-                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item hidden-project hidden" data-category="web">
+                    <div class="project-row grid md:grid-cols-12 gap-4 md:gap-6 items-center py-5 md:py-6 border-b border-line project-item hidden-project hidden" data-category="web">
                         <div class="md:col-span-1 font-display font-bold text-mute text-lg">08</div>
                         <div class="md:col-span-3">
-                            <div class="border border-line overflow-hidden"><img src="architectuer.png" alt="Interior Design Portfolio" loading="lazy" class="w-full h-32 object-cover"></div>
+                            <div class="border border-line overflow-hidden"><img src="architectuer.png" alt="Interior Design Portfolio" loading="lazy" class="w-full h-28 sm:h-32 object-cover"></div>
                         </div>
                         <div class="md:col-span-5">
                             <h3 class="font-display font-bold text-xl mb-1">Interior Design Portfolio</h3>
@@ -471,11 +475,11 @@
                     </div>
                     <div class="lg:col-span-5 flex flex-col justify-end gap-8 border-t border-line pt-8 lg:border-t-0 lg:pt-0">
                         <div class="border-t border-line pt-6">
-                            <span class="font-display font-black text-5xl block mb-1">08</span>
+                            <span class="font-display font-black text-5xl block mb-1 count-up" data-target="8" data-suffix="">00</span>
                             <span class="text-mute text-sm">Projects Built</span>
                         </div>
                         <div class="border-t border-line pt-6">
-                            <span class="font-display font-black text-5xl block mb-1">06+</span>
+                            <span class="font-display font-black text-5xl block mb-1 count-up" data-target="6" data-suffix="+">00</span>
                             <span class="text-mute text-sm">Core Technologies</span>
                         </div>
                         <div class="border-t border-line pt-6">
@@ -596,7 +600,7 @@
 
                 <div class="border-t border-lightLine pt-8">
                     <form id="contact-form" class="space-y-8">
-                        <div class="grid grid-cols-2 gap-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                             <div>
                                 <label class="text-xs text-lightMute uppercase tracking-wide">Name</label>
                                 <input type="text" required class="underline-field w-full">
@@ -633,7 +637,7 @@
 
     </main>
 
-    <button id="back-to-top" class="fixed bottom-8 right-8 z-40 w-11 h-11 border border-line bg-ink flex items-center justify-center hover:bg-paper hover:text-ink transition-colors opacity-0 pointer-events-none">
+    <button id="back-to-top" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-40 w-11 h-11 border border-line bg-ink flex items-center justify-center hover:bg-paper hover:text-ink hover:-translate-y-1 transition-all opacity-0 pointer-events-none">
         <i data-lucide="arrow-up" class="w-4 h-4"></i>
     </button>
 
