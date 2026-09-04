@@ -49,6 +49,7 @@
     </script>
 
     <style>
+        html, body { max-width: 100%; overflow-x: hidden; }
         body { background-color: #0B0B0B; color: #F5F5F3; -webkit-font-smoothing: antialiased; }
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #0B0B0B; }
@@ -71,19 +72,48 @@
             display: inline-flex; align-items: center; gap: 0.5rem;
             background: #F5F5F3; color: #0B0B0B;
             padding: 1rem 1.75rem; font-weight: 600; font-size: 0.9375rem;
-            transition: background 0.2s ease, color 0.2s ease;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
             border: 1px solid #F5F5F3;
         }
-        .invert-btn:hover { background: transparent; color: #F5F5F3; }
+        .invert-btn:hover { background: transparent; color: #F5F5F3; transform: translateY(-3px); }
+        .invert-btn:active { transform: translateY(-1px); }
+        .invert-btn .arrow-ico { transition: transform 0.25s ease; }
+        .invert-btn:hover .arrow-ico { transform: translateX(4px); }
 
         .outline-btn {
             display: inline-flex; align-items: center; gap: 0.5rem;
             background: transparent; color: #F5F5F3;
             padding: 1rem 1.75rem; font-weight: 600; font-size: 0.9375rem;
             border: 1px solid #3D3D3D;
-            transition: border-color 0.2s ease, background 0.2s ease;
+            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
         }
-        .outline-btn:hover { border-color: #F5F5F3; background: #F5F5F3; color: #0B0B0B; }
+        .outline-btn:hover { border-color: #F5F5F3; background: #F5F5F3; color: #0B0B0B; transform: translateY(-3px); }
+        .outline-btn:active { transform: translateY(-1px); }
+        .outline-btn .arrow-ico { transition: transform 0.25s ease; }
+        .outline-btn:hover .arrow-ico { transform: translateX(4px); }
+
+        .navlink { position: relative; padding-bottom: 3px; }
+        .navlink::after {
+            content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: #F5F5F3;
+            transition: right 0.25s ease;
+        }
+        .navlink:hover::after { right: 0; }
+
+        /* Marquee ticker — continuous, respects reduced-motion */
+        .marquee-track { display: flex; width: max-content; animation: marquee 26s linear infinite; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+        .marquee-item { display: flex; align-items: center; flex-shrink: 0; }
+
+        /* Staggered fine-grained reveal for list rows */
+        .reveal-row { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .reveal-row.is-visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .reveal-row { opacity: 1; transform: none; transition: none; } }
+
+        .hero-line { display: block; overflow: hidden; }
+        .hero-line span { display: block; transform: translateY(110%); transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .hero-line.is-visible span { transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .hero-line span { transform: none; transition: none; } }
 
         .project-row { transition: background 0.25s ease; }
         .project-row:hover { background: #111111; }
@@ -182,32 +212,59 @@
     <main>
 
         <!-- Hero -->
-        <section id="hero" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+        <section id="hero" class="relative min-h-screen flex flex-col justify-center pt-28 pb-10 overflow-hidden">
             <div class="max-w-6xl mx-auto px-6 w-full">
-                <div class="grid md:grid-cols-12 gap-8 items-end">
+                <div class="grid md:grid-cols-12 gap-8 md:items-end">
                     <div class="md:col-span-8" id="hero-content">
-                        <p class="text-sm font-medium text-mute mb-6 flex items-center gap-2.5">
-                            <span class="w-1.5 h-1.5 bg-paper"></span>
+                        <p class="text-sm font-medium text-mute mb-5 md:mb-6 flex items-center gap-2.5 reveal">
+                            <span class="w-1.5 h-1.5 bg-paper flex-shrink-0"></span>
                             Mazin Mohamed — Available for new projects
                         </p>
-                        <h1 class="font-display font-black uppercase leading-[0.95] tracking-tight text-6xl sm:text-7xl md:text-8xl">
-                            Web Developer<br>&amp; Digital<br>Solutions Builder
+                        <h1 class="font-display font-black uppercase leading-[0.98] tracking-tight text-[13vw] sm:text-6xl md:text-7xl lg:text-8xl break-words">
+                            <span class="hero-line"><span>Web Developer</span></span>
+                            <span class="hero-line"><span>&amp; Digital</span></span>
+                            <span class="hero-line"><span>Solutions Builder</span></span>
                         </h1>
                     </div>
-                    <div class="md:col-span-4 relative" id="hero-image">
-                        <div class="border border-line">
+                    <div class="md:col-span-4 relative mt-8 md:mt-0" id="hero-image">
+                        <div class="border border-line max-w-[220px] sm:max-w-none mx-auto md:mx-0">
                             <img src="mazin.jpg" alt="Mazin Mohamed" class="w-full aspect-[3/4] object-cover grayscale">
                         </div>
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-12 gap-8 mt-10">
-                    <p class="md:col-span-6 md:col-start-1 text-lg text-mute leading-relaxed">
+                <div class="grid md:grid-cols-12 gap-6 md:gap-8 mt-10">
+                    <p class="md:col-span-6 md:col-start-1 text-base sm:text-lg text-mute leading-relaxed reveal">
                         I build modern websites, web applications, dashboards, and custom digital solutions for businesses and ambitious ideas — turning what you need into something people can actually use.
                     </p>
-                    <div class="md:col-span-6 flex flex-wrap gap-4 md:justify-end items-start">
-                        <a href="#projects" class="invert-btn">View My Work</a>
-                        <a href="#contact" class="outline-btn">Let's Work Together</a>
+                    <div class="md:col-span-6 flex flex-wrap gap-4 md:justify-end items-start reveal">
+                        <a href="#projects" class="invert-btn">View My Work <i data-lucide="arrow-right" class="w-4 h-4 arrow-ico"></i></a>
+                        <a href="#contact" class="outline-btn">Let's Work Together <i data-lucide="arrow-right" class="w-4 h-4 arrow-ico"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-14 md:mt-16 border-y border-line py-4 overflow-hidden">
+                <div class="marquee-track">
+                    <div class="marquee-item">
+                        <span class="font-display font-bold uppercase text-sm sm:text-base tracking-wide px-4">Web Development</span>
+                        <span class="text-mute px-2">/</span>
+                        <span class="font-display font-bold uppercase text-sm sm:text-base tracking-wide px-4">Web Applications</span>
+                        <span class="text-mute px-2">/</span>
+                        <span class="font-display font-bold uppercase text-sm sm:text-base tracking-wide px-4">Dashboards &amp; Systems</span>
+                        <span class="text-mute px-2">/</span>
+                        <span class="font-display font-bold uppercase text-sm sm:text-base tracking-wide px-4">Digital Solutions</span>
+                        <span class="text-mute px-2">/</span>
+                    </div>
+                    <div class="marquee-item" aria-hidden="true">
+                        <span class="font-display font-bold uppercase text-sm sm:text-base tracking-wide px-4">Web Development</span>
+                        <span class="text-mute px-2">/</span>
+                        <span class="font-display font-bold uppercase text-sm sm:text-base tracking-wide px-4">Web Applications</span>
+                        <span class="text-mute px-2">/</span>
+                        <span class="font-display font-bold uppercase text-sm sm:text-base tracking-wide px-4">Dashboards &amp; Systems</span>
+                        <span class="text-mute px-2">/</span>
+                        <span class="font-display font-bold uppercase text-sm sm:text-base tracking-wide px-4">Digital Solutions</span>
+                        <span class="text-mute px-2">/</span>
                     </div>
                 </div>
             </div>
@@ -644,16 +701,53 @@
         }, { threshold: 0.15 });
         revealEls.forEach(el => io.observe(el));
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const hero = document.getElementById('hero-content');
-            const heroImg = document.getElementById('hero-image');
-            [hero, heroImg].forEach((el, i) => {
-                if (!el) return;
-                el.style.opacity = '0'; el.style.transform = 'translateY(16px)';
-                el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-                setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 100 + i * 120);
+        // Staggered row reveals — project rows, service rows, faq items
+        const staggerGroups = [
+            document.querySelectorAll('#project-grid .project-item'),
+            document.querySelectorAll('#services .service-row'),
+        ];
+        const rowIo = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('is-visible'); rowIo.unobserve(entry.target); }
+            });
+        }, { threshold: 0.1 });
+        staggerGroups.forEach(group => {
+            group.forEach((el, i) => {
+                el.classList.add('reveal-row');
+                el.style.transitionDelay = Math.min(i, 6) * 70 + 'ms';
+                rowIo.observe(el);
             });
         });
+
+        // Hero: line-by-line slide-up entrance on load (not scroll-triggered — it's above the fold)
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.hero-line').forEach((el, i) => {
+                setTimeout(() => el.classList.add('is-visible'), 150 + i * 130);
+            });
+        });
+
+        // Count-up for numeric stats when scrolled into view
+        const countEls = document.querySelectorAll('.count-up');
+        const countIo = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const target = parseInt(el.getAttribute('data-target'), 10);
+                const suffix = el.getAttribute('data-suffix') || '';
+                const duration = 900;
+                const start = performance.now();
+                function tick(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const value = Math.round(target * eased);
+                    el.textContent = String(value).padStart(String(target).length, '0') + suffix;
+                    if (progress < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+                countIo.unobserve(el);
+            });
+        }, { threshold: 0.4 });
+        countEls.forEach(el => countIo.observe(el));
 
         const backToTopBtn = document.getElementById('back-to-top');
         window.addEventListener('scroll', () => {
