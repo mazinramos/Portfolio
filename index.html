@@ -3,291 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Portfolio | Web & Mobile Developer</title>
-    <meta name="description" content="Award-winning Web and Mobile Application Developer Portfolio.">
+    <title>Mazin Mohamed — Web Developer & Digital Solutions Builder</title>
+    <meta name="description" content="I design and build modern websites, web applications, dashboards, and digital solutions that help businesses turn ideas into real products.">
     <link rel="canonical" href="https://www.mazinpromax.online/">
     <meta property="og:url" content="https://www.mazinpromax.online/">
-    <meta property="og:title" content="Premium Portfolio | Web & Mobile Developer">
-    <meta property="og:description" content="Award-winning Web and Mobile Application Developer Portfolio.">
+    <meta property="og:title" content="Mazin Mohamed — Web Developer & Digital Solutions Builder">
+    <meta property="og:description" content="I design and build modern websites, web applications, dashboards, and digital solutions that help businesses turn ideas into real products.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.mazinpromax.online/og-logo.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.mazinpromax.online/">
     <meta name="twitter:image" content="https://www.mazinpromax.online/og-logo.jpg">
 
-    <!-- Favicon / Site Icon (shows in browser tab, bookmarks, Google search results) -->
     <link rel="icon" type="image/jpeg" href="mazin.jpg">
     <link rel="apple-touch-icon" href="mazin.jpg">
 
-    <!-- Fonts -->
+    <!-- Fonts: Archivo (heavy display weight, real graphic presence) + Inter (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Archivo', 'sans-serif'],
                     },
                     colors: {
-                        dark: '#030305',
-                        primary: '#00f3ff',
-                        secondary: '#bc13fe',
-                        glass: 'rgba(255, 255, 255, 0.03)',
-                        glassBorder: 'rgba(255, 255, 255, 0.08)',
+                        ink: '#0B0B0B',
+                        panel: '#111111',
+                        line: '#262626',
+                        lineLight: '#3D3D3D',
+                        paper: '#F5F5F3',
+                        mute: '#8C8C88',
+                        light: '#F5F5F3',
+                        lightMute: '#5C5C58',
+                        lightLine: '#D9D9D4',
                     },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                    }
                 }
             }
         }
     </script>
 
-    <!-- Core Styles -->
     <style>
-        :root {
-            --cursor-size: 8px;
-            --cursor-trail-size: 32px;
+        body { background-color: #0B0B0B; color: #F5F5F3; -webkit-font-smoothing: antialiased; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0B0B0B; }
+        ::-webkit-scrollbar-thumb { background: #3D3D3D; }
+        ::-webkit-scrollbar-thumb:hover { background: #F5F5F3; }
+        ::selection { background: #F5F5F3; color: #0B0B0B; }
+
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 2px solid #F5F5F3; outline-offset: 3px;
+        }
+        #contact a:focus-visible, #contact button:focus-visible, #contact input:focus-visible, #contact textarea:focus-visible {
+            outline-color: #0B0B0B;
         }
 
-        body {
-            background-color: #030305;
-            color: #ffffff;
-            cursor: none; /* Custom cursor */
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
-        /* Hide Scrollbar but keep functionality */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #030305; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+        .invert-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #F5F5F3; color: #0B0B0B;
+            padding: 1rem 1.75rem; font-weight: 600; font-size: 0.9375rem;
+            transition: background 0.2s ease, color 0.2s ease;
+            border: 1px solid #F5F5F3;
+        }
+        .invert-btn:hover { background: transparent; color: #F5F5F3; }
 
-        /* Glassmorphism */
-        .glass-panel {
-            background: rgba(25, 25, 30, 0.2);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        .outline-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: transparent; color: #F5F5F3;
+            padding: 1rem 1.75rem; font-weight: 600; font-size: 0.9375rem;
+            border: 1px solid #3D3D3D;
+            transition: border-color 0.2s ease, background 0.2s ease;
         }
+        .outline-btn:hover { border-color: #F5F5F3; background: #F5F5F3; color: #0B0B0B; }
 
-        .glass-nav {
-            background: rgba(3, 3, 5, 0.6);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        .project-row { transition: background 0.25s ease; }
+        .project-row:hover { background: #111111; }
+        .project-row img { filter: grayscale(0.4) contrast(1.05); transition: filter 0.5s ease, transform 0.6s ease; }
+        .project-row:hover img { filter: grayscale(0); transform: scale(1.04); }
 
-        /* Custom Cursor */
-        .cursor-dot, .cursor-trail {
-            position: fixed;
-            top: 0; left: 0;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-        .cursor-dot {
-            width: var(--cursor-size);
-            height: var(--cursor-size);
-            background: #00f3ff;
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-        .cursor-trail {
-            width: var(--cursor-trail-size);
-            height: var(--cursor-trail-size);
-            border: 1px solid rgba(0, 243, 255, 0.5);
-            transition: width 0.2s, height 0.2s, border-color 0.2s;
-        }
+        .service-row:hover .service-mark { background: #F5F5F3; }
+        .service-mark { width: 3px; align-self: stretch; background: #262626; transition: background 0.25s ease; }
 
-        /* Cursor Hover States */
-        body.hovering .cursor-dot {
-            width: 4px; height: 4px; background: transparent;
+        input.underline-field, textarea.underline-field {
+            background: transparent; border: none; border-bottom: 1px solid #D9D9D4;
+            padding: 0.75rem 0.25rem; color: #0B0B0B;
         }
-        body.hovering .cursor-trail {
-            width: 48px; height: 48px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(2px);
-            border-color: #ffffff;
-        }
+        input.underline-field:focus, textarea.underline-field:focus { outline: none; border-bottom-color: #0B0B0B; }
+        input.underline-field::placeholder, textarea.underline-field::placeholder { color: #8C8C88; }
 
-        /* Mouse Glow Background */
-        .mouse-glow {
-            position: fixed;
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(0,243,255,0.08) 0%, rgba(188,19,254,0.03) 40%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.5s;
-        }
+        .faq-answer { transition: max-height 0.3s ease; }
 
-        /* Text Gradients */
-        .text-gradient {
-            background: linear-gradient(135deg, #00f3ff 0%, #bc13fe 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* 3D Tilt Card */
-        .tilt-card {
-            transform-style: preserve-3d;
-            will-change: transform;
-        }
-        .tilt-content {
-            transform: translateZ(30px);
-        }
-
-        /* Loader */
-        #loader {
-            position: fixed; inset: 0;
-            background: #030305; z-index: 10000;
-            display: flex; justify-content: center; align-items: center;
-        }
-        .loader-ring {
-            width: 80px; height: 80px;
-            border: 2px solid rgba(255,255,255,0.1);
-            border-top-color: #00f3ff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Typing cursor */
-        .typing-cursor::after {
-            content: '|';
-            animation: blink 1s step-start infinite;
-            color: #00f3ff;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* Progress Bar Animation */
-        .progress-bar-fill {
-            transform-origin: left;
-            transform: scaleX(0);
-        }
-
-        /* Canvas Background */
-        #webgl-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        /* Extra projects use Tailwind's `hidden` utility directly, combined
-           with the `.hidden-project` marker class so JS can find them.
-           See "Show More / Show Less Projects" script near the bottom. */
-
-        /* Project Preview Modal */
         #project-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(3, 3, 5, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 10000;
-            display: none;
-            align-items: flex-start;
-            justify-content: center;
-            padding: 80px 20px;
-            overflow-y: auto;
+            position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000;
+            display: none; align-items: flex-start; justify-content: center; padding: 64px 20px; overflow-y: auto;
         }
         #project-modal-overlay.active { display: flex; }
-
         #project-modal-box {
-            background: rgba(15, 15, 20, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 28px;
-            max-width: 900px;
-            width: 100%;
-            padding: 40px;
-            position: relative;
-            animation: modalIn 0.4s ease forwards;
+            background: #111111; border: 1px solid #262626; max-width: 840px; width: 100%; padding: 40px; position: relative;
+            animation: modalIn 0.2s ease forwards;
         }
-        @keyframes modalIn {
-            from { opacity: 0; transform: translateY(30px) scale(0.97); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
+        @keyframes modalIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         #modal-close-btn {
-            position: absolute;
-            top: 20px; right: 20px;
-            width: 44px; height: 44px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            z-index: 2;
+            position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
+            background: #0B0B0B; border: 1px solid #262626; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: border-color 0.2s;
         }
-        #modal-close-btn:hover { background: rgba(255,255,255,0.15); transform: rotate(90deg); }
-
-        .modal-gallery-item {
-            margin-top: 28px;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-        .modal-gallery-item img {
-            width: 100%;
-            display: block;
-            max-height: 480px;
-            object-fit: cover;
-        }
-        .modal-gallery-caption {
-            padding: 18px 22px;
-            background: rgba(255,255,255,0.02);
-        }
-
-        .preview-btn {
-            display: flex; align-items: center; gap: 8px;
-            font-size: 0.875rem; font-weight: 500;
-            color: #00f3ff;
-            cursor: pointer;
-            background: none; border: none;
-            padding: 0;
-        }
-        .preview-btn:hover { text-decoration: underline; }
-
+        #modal-close-btn:hover { border-color: #F5F5F3; }
+        .modal-gallery-item { margin-top: 24px; border: 1px solid #262626; }
+        .modal-gallery-item img { width: 100%; display: block; max-height: 440px; object-fit: cover; }
+        .modal-gallery-caption { padding: 16px 20px; background: #0B0B0B; }
         body.modal-open { overflow: hidden; }
-
     </style>
-    <!-- Structured Data (helps Google show rich results in search) -->
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Mazin",
+        "name": "Mazin Mohamed",
         "url": "https://www.mazinpromax.online/",
-        "jobTitle": "Web & Mobile Application Developer",
-        "description": "Freelance developer specializing in Firebase-based web applications, SaaS platforms, and e-commerce systems.",
-        "sameAs": [
-            "https://github.com/mazinflwo",
-            "https://linkedin.com/in/mazinflwo",
-            "https://twitter.com/mazinflwo"
-        ]
+        "jobTitle": "Web Developer & Digital Solutions Builder",
+        "description": "Web developer building modern websites, web applications, dashboards, and digital solutions for businesses and ambitious ideas.",
+        "sameAs": ["https://github.com/mazinflwo", "https://linkedin.com/in/mazinflwo", "https://twitter.com/mazinflwo"]
     }
     </script>
 </head>
-<body class="antialiased selection:bg-primary/30 selection:text-white">
+<body class="antialiased font-sans">
 
-    <!-- Config Data Layer (Edit this to customize) -->
     <script>
         const CONFIG = {
             socials: {
@@ -296,1199 +146,545 @@
                 whatsapp: "https://wa.me/201050758306",
                 twitter: "https://twitter.com/mazinflwo",
                 email: "mazinflwo.dev@gmail.com"
-            },
-            skills: [
-                { name: "React / Next.js", level: 95 },
-                { name: "TypeScript", level: 90 },
-                { name: "Three.js / WebGL", level: 85 },
-                { name: "Node.js / Express", level: 88 },
-                { name: "Tailwind CSS / GSAP", level: 98 },
-                { name: "Mobile App (Flutter/RN)", level: 80 }
-            ]
+            }
         };
     </script>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot hidden md:block"></div>
-    <div class="cursor-trail hidden md:block"></div>
-    <div class="mouse-glow hidden md:block" id="mouseGlow"></div>
-
-    <!-- Loading Screen -->
-    <div id="loader">
-        <div class="flex flex-col items-center gap-6">
-            <div class="loader-ring"></div>
-            <div class="font-display tracking-[0.3em] text-sm text-gray-400 uppercase loader-text">Initializing Experience</div>
-        </div>
-    </div>
-
-    <!-- 3D Canvas Background -->
-    <canvas id="webgl-canvas"></canvas>
-
     <!-- Navigation -->
-    <nav class="fixed w-full top-0 z-50 glass-nav transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-display font-bold tracking-tighter hover-target">
-                MX<span class="text-primary">.</span>
-            </a>
-            <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
-                <a href="#about" class="hover:text-primary transition-colors hover-target">About</a>
-                <a href="#skills" class="hover:text-primary transition-colors hover-target">Expertise</a>
-                <a href="#projects" class="hover:text-primary transition-colors hover-target">Work</a>
-                <a href="#services" class="hover:text-primary transition-colors hover-target">Services</a>
+    <nav class="fixed w-full top-0 z-50 transition-colors duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#" class="text-xl font-display font-extrabold tracking-tight">MAZIN.</a>
+            <div class="hidden md:flex items-center gap-9 text-sm font-medium">
+                <a href="#about" class="hover:opacity-60 transition-opacity">About</a>
+                <a href="#services" class="hover:opacity-60 transition-opacity">Services</a>
+                <a href="#projects" class="hover:opacity-60 transition-opacity">Projects</a>
+                <a href="#skills" class="hover:opacity-60 transition-opacity">Skills</a>
+                <a href="#contact" class="hover:opacity-60 transition-opacity">Contact</a>
             </div>
-            <a href="#contact" class="hidden md:inline-flex px-6 py-2 border border-white/10 rounded-full hover:bg-white/5 hover:border-primary/50 transition-all hover-target glass-panel">
-                Let's Talk
-            </a>
-
-            <!-- Mobile Menu Btn -->
-            <button id="mobile-menu-btn" class="md:hidden text-white hover-target p-2">
+            <div class="hidden md:flex items-center gap-5">
+                <a href="mazin-cv.pdf" download class="text-sm text-mute hover:text-paper transition-colors">Resume</a>
+                <a href="#contact" class="invert-btn text-sm !py-2.5 !px-5">Let's Work Together</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-paper p-2" aria-label="Open menu">
                 <i data-lucide="menu"></i>
             </button>
         </div>
-
-        <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden flex-col gap-1 px-6 pb-6 glass-nav">
-            <a href="#about" class="block py-3 text-sm hover:text-primary transition-colors hover-target">About</a>
-            <a href="#skills" class="block py-3 text-sm hover:text-primary transition-colors hover-target">Expertise</a>
-            <a href="#projects" class="block py-3 text-sm hover:text-primary transition-colors hover-target">Work</a>
-            <a href="#services" class="block py-3 text-sm hover:text-primary transition-colors hover-target">Services</a>
-            <a href="#contact" class="block py-3 text-sm hover:text-primary transition-colors hover-target">Let's Talk</a>
+        <div id="mobile-menu" class="hidden md:hidden flex-col px-6 pb-6 bg-ink border-b border-line">
+            <a href="#about" class="block py-3 text-sm">About</a>
+            <a href="#services" class="block py-3 text-sm">Services</a>
+            <a href="#projects" class="block py-3 text-sm">Projects</a>
+            <a href="#skills" class="block py-3 text-sm">Skills</a>
+            <a href="#contact" class="block py-3 text-sm">Contact</a>
+            <a href="mazin-cv.pdf" download class="block py-3 text-sm text-mute">Download Resume</a>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main>
 
-        <!-- 1. Hero Section -->
-        <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
-
-                <div class="flex flex-col items-start gap-6 hero-content">
-                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel border border-primary/30 text-sm">
-                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                        Available for new projects
-                    </div>
-
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] tracking-tight">
-                        Mazin <br>
-                        <span class="text-gradient">ProMax</span> <br>
-                        Developments.
-                    </h1>
-
-                    <p class="text-xl md:text-2xl text-gray-400 font-light h-8">
-                        I am a <span id="typewriter" class="text-white font-medium typing-cursor"></span>
-                    </p>
-
-                    <div class="flex flex-wrap gap-4 mt-8">
-                        <a href="#projects" class="px-8 py-4 bg-white text-dark font-semibold rounded-full hover:scale-105 transition-transform hover-target">
-                            View Selected Work
-                        </a>
-                        <a href="#contact" class="px-8 py-4 glass-panel border border-white/10 rounded-full hover:border-primary/50 transition-colors hover-target">
-                            Contact Me
-                        </a>
-                        <a href="mazin-cv.pdf" download class="px-8 py-4 glass-panel border border-white/10 rounded-full hover:border-primary/50 transition-colors hover-target flex items-center gap-2">
-                            <i data-lucide="download" class="w-4 h-4"></i> Download CV
-                        </a>
-                    </div>
-                </div>
-
-                <div class="relative hidden md:flex justify-center items-center hero-image">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 blur-3xl rounded-full"></div>
-                    <div class="w-80 h-80 rounded-full border border-white/10 glass-panel p-2 relative z-10 overflow-hidden group">
-                        <img src="mazin.jpg" alt="Profile" class="w-full h-full object-cover rounded-full">
-                    </div>
-                    <!-- Orbiting Element -->
-                    <div class="absolute w-full h-full animate-[spin_10s_linear_infinite]">
-                        <div class="absolute top-0 left-1/2 w-4 h-4 bg-primary rounded-full blur-[2px] shadow-[0_0_20px_#00f3ff]"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hero-scroll">
-                <span class="text-xs tracking-widest uppercase font-display">Scroll</span>
-                <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
-            </div>
-        </section>
-
-        <!-- 3. About Section -->
-        <section id="about" class="py-32 relative">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid lg:grid-cols-12 gap-16 items-center">
-                    <div class="lg:col-span-5 reveal-left">
-                        <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">About Me</h2>
-                        <h3 class="text-4xl md:text-5xl font-display font-bold mb-6">Bridging the gap between design and engineering.</h3>
-                        <p class="text-gray-400 text-lg leading-relaxed mb-8">
-                            With over a decade of experience, I specialize in building premium web applications, interactive 3D experiences, and robust mobile platforms. I don't just write code; I architect scalable solutions that prioritize user psychology, performance, and aesthetic perfection.
+        <!-- Hero -->
+        <section id="hero" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+            <div class="max-w-6xl mx-auto px-6 w-full">
+                <div class="grid md:grid-cols-12 gap-8 items-end">
+                    <div class="md:col-span-8" id="hero-content">
+                        <p class="text-sm font-medium text-mute mb-6 flex items-center gap-2.5">
+                            <span class="w-1.5 h-1.5 bg-paper"></span>
+                            Mazin Mohamed — Available for new projects
                         </p>
+                        <h1 class="font-display font-black uppercase leading-[0.95] tracking-tight text-6xl sm:text-7xl md:text-8xl">
+                            Web Developer<br>&amp; Digital<br>Solutions Builder
+                        </h1>
                     </div>
+                    <div class="md:col-span-4 relative" id="hero-image">
+                        <div class="border border-line">
+                            <img src="mazin.jpg" alt="Mazin Mohamed" class="w-full aspect-[3/4] object-cover grayscale">
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="lg:col-span-7 grid grid-cols-2 gap-6 reveal-right">
-                        <!-- Stats Cards -->
-                        <div class="glass-panel p-8 rounded-3xl tilt-card flex flex-col justify-center items-center text-center">
-                            <div class="tilt-content">
-                                <h4 class="text-5xl font-display font-bold text-gradient mb-2 counter" data-target="150">0</h4>
-                                <p class="text-gray-400 text-sm tracking-wide uppercase">Projects Delivered</p>
-                            </div>
-                        </div>
-                        <div class="glass-panel p-8 rounded-3xl tilt-card flex flex-col justify-center items-center text-center translate-y-8">
-                            <div class="tilt-content">
-                                <h4 class="text-5xl font-display font-bold text-gradient mb-2 counter" data-target="45">0</h4>
-                                <p class="text-gray-400 text-sm tracking-wide uppercase">Happy Clients</p>
-                            </div>
-                        </div>
-                        <div class="glass-panel p-8 rounded-3xl tilt-card flex flex-col justify-center items-center text-center">
-                            <div class="tilt-content">
-                                <h4 class="text-5xl font-display font-bold text-gradient mb-2 counter" data-target="25">0</h4>
-                                <p class="text-gray-400 text-sm tracking-wide uppercase">Tech Stack</p>
-                            </div>
-                        </div>
-                        <div class="glass-panel p-8 rounded-3xl tilt-card flex flex-col justify-center items-center text-center translate-y-8">
-                            <div class="tilt-content">
-                                <h4 class="text-5xl font-display font-bold text-gradient mb-2 counter" data-target="10">0</h4>
-                                <p class="text-gray-400 text-sm tracking-wide uppercase">Years Experience</p>
-                            </div>
-                        </div>
+                <div class="grid md:grid-cols-12 gap-8 mt-10">
+                    <p class="md:col-span-6 md:col-start-1 text-lg text-mute leading-relaxed">
+                        I build modern websites, web applications, dashboards, and custom digital solutions for businesses and ambitious ideas — turning what you need into something people can actually use.
+                    </p>
+                    <div class="md:col-span-6 flex flex-wrap gap-4 md:justify-end items-start">
+                        <a href="#projects" class="invert-btn">View My Work</a>
+                        <a href="#contact" class="outline-btn">Let's Work Together</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. Skills Section -->
-        <section id="skills" class="py-32 relative border-t border-white/5">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-2xl mx-auto mb-20 reveal-up">
-                    <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Expertise</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold">Technologies & Tools</h3>
+        <!-- What I Do -->
+        <section id="services" class="py-24 border-t border-line">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex items-end justify-between mb-14 reveal">
+                    <h2 class="font-display font-extrabold uppercase text-4xl md:text-5xl tracking-tight">What I Do</h2>
+                    <span class="text-mute text-sm hidden md:block">4 areas of work</span>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-16">
-                    <!-- Progress Bars -->
-                    <div class="space-y-8" id="skills-container">
-                        <!-- Populated by JS -->
+                <div class="border-t border-line reveal">
+                    <div class="service-row flex gap-6 md:gap-10 py-8 border-b border-line">
+                        <div class="service-mark"></div>
+                        <div class="w-40 md:w-56 flex-shrink-0">
+                            <h3 class="font-display font-bold text-lg md:text-xl uppercase">Web Development</h3>
+                        </div>
+                        <p class="text-mute leading-relaxed flex-1">Modern, responsive websites built for businesses and brands — fast, clean, and easy to maintain.</p>
                     </div>
-
-                    <!-- Icon Grid -->
-                    <div class="grid grid-cols-4 gap-4 reveal-right">
-                        <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="file-code-2" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
-                        <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="layout" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
-                        <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="cpu" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
-                        <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="database" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
-                        <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="server" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
-                        <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="smartphone" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
-                        <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="git-branch" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
-                        <div class="glass-panel aspect-square rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors hover-target group"><i data-lucide="figma" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i></div>
+                    <div class="service-row flex gap-6 md:gap-10 py-8 border-b border-line">
+                        <div class="service-mark"></div>
+                        <div class="w-40 md:w-56 flex-shrink-0">
+                            <h3 class="font-display font-bold text-lg md:text-xl uppercase">Web Applications</h3>
+                        </div>
+                        <p class="text-mute leading-relaxed flex-1">Custom systems and platforms designed to solve real, specific problems — not generic templates.</p>
+                    </div>
+                    <div class="service-row flex gap-6 md:gap-10 py-8 border-b border-line">
+                        <div class="service-mark"></div>
+                        <div class="w-40 md:w-56 flex-shrink-0">
+                            <h3 class="font-display font-bold text-lg md:text-xl uppercase">Dashboards &amp; Systems</h3>
+                        </div>
+                        <p class="text-mute leading-relaxed flex-1">Admin dashboards, management systems, and internal tools that make running a business easier.</p>
+                    </div>
+                    <div class="service-row flex gap-6 md:gap-10 py-8 border-b border-line">
+                        <div class="service-mark"></div>
+                        <div class="w-40 md:w-56 flex-shrink-0">
+                            <h3 class="font-display font-bold text-lg md:text-xl uppercase">Data &amp; Digital Solutions</h3>
+                        </div>
+                        <p class="text-mute leading-relaxed flex-1">Turning business ideas and raw data into digital tools people actually want to use.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-     <!-- 5. Projects Section -->
-        <section id="projects" class="py-32 relative">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal-up">
-                    <div>
-                        <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Selected Work</h2>
-                        <h3 class="text-4xl md:text-5xl font-display font-bold">Featured Projects</h3>
-                    </div>
- 
-                    <!-- Filters -->
-                    <div class="flex gap-4 mt-8 md:mt-0 glass-panel p-2 rounded-full">
-                        <button class="px-6 py-2 rounded-full bg-white/10 text-sm hover-target filter-btn active" data-filter="all">All</button>
-                        <button class="px-6 py-2 rounded-full hover:bg-white/5 text-sm transition-colors hover-target filter-btn" data-filter="web">Web</button>
-                        <button class="px-6 py-2 rounded-full hover:bg-white/5 text-sm transition-colors hover-target filter-btn" data-filter="app">Mobile</button>
-                    </div>
+        <!-- Featured Projects -->
+        <section id="projects" class="py-24 border-t border-line">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex items-end justify-between mb-14 reveal">
+                    <h2 class="font-display font-extrabold uppercase text-4xl md:text-5xl tracking-tight">Projects I've Built</h2>
+                    <span class="text-mute text-sm hidden md:block">Selected work</span>
                 </div>
- 
-                <div class="grid md:grid-cols-2 gap-8" id="project-grid">
- 
-                    <!-- Project 1: AI Resum Pro -->
-                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
-                        <div class="relative h-80 overflow-hidden">
-                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="ai-resum.png" alt="AI Resum Pro" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
- 
-                            <div class="absolute top-6 left-6 z-20 flex gap-2">
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">AI</span>
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">React</span>
-                            </div>
+
+                <div class="border-t border-line" id="project-grid">
+
+                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item" data-category="web">
+                        <div class="md:col-span-1 font-display font-bold text-mute text-lg">01</div>
+                        <div class="md:col-span-3">
+                            <div class="border border-line overflow-hidden"><img src="ai-resum.png" alt="AI Resum Pro" loading="lazy" class="w-full h-32 object-cover"></div>
                         </div>
-                        <div class="p-8 tilt-content">
-                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">AI Resum Pro</h4>
-                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">An intelligent AI-powered resume builder designed to optimize professional profiles and streamline job applications.</p>
-                            <div class="flex gap-4">
-                                <a href="https://ai-resum-pro.vercel.app" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-                                </a>
-                                <a href="https://github.com/mazinramos/Ai-Resum-Pro.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                                    <i data-lucide="github" class="w-4 h-4"></i> Source
-                                </a>
-                                <button class="preview-btn hover-target" data-project="ai-resume">
-                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
-                                </button>
-                            </div>
+                        <div class="md:col-span-5">
+                            <h3 class="font-display font-bold text-xl mb-1">AI Resum Pro</h3>
+                            <p class="text-mute text-sm leading-relaxed">An AI-powered resume builder that helps people put together a professional profile in minutes. <span class="text-mute/70">AI / React</span></p>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap gap-4 text-sm md:justify-end">
+                            <a href="https://ai-resum-pro.vercel.app" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:opacity-60 transition-opacity"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>Demo</a>
+                            <a href="https://github.com/mazinramos/Ai-Resum-Pro.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-mute hover:text-paper transition-colors"><i data-lucide="github" class="w-3.5 h-3.5"></i>Source</a>
+                            <button class="preview-btn flex items-center gap-1.5 text-mute hover:text-paper transition-colors" data-project="ai-resume"><i data-lucide="eye" class="w-3.5 h-3.5"></i>Case Study</button>
                         </div>
                     </div>
- 
-                    <!-- Project 2: GESS EDU -->
-                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item md:translate-y-16" data-category="web">
-                        <div class="relative h-80 overflow-hidden">
-                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="gess.jpeg" alt="GESS EDU" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
- 
-                            <div class="absolute top-6 left-6 z-20 flex gap-2">
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js</span>
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Three.js</span>
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Firebase</span>
-                            </div>
+
+                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item" data-category="web">
+                        <div class="md:col-span-1 font-display font-bold text-mute text-lg">02</div>
+                        <div class="md:col-span-3">
+                            <div class="border border-line overflow-hidden"><img src="gess.jpeg" alt="GESS EDU" loading="lazy" class="w-full h-32 object-cover"></div>
                         </div>
-                        <div class="p-8 tilt-content">
-                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">GESS EDU</h4>
-                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">An interactive educational platform designed for university students, featuring immersive 3D web experiences.</p>
- 
-                            <div class="flex gap-4">
-                                <a href="https://gess-platform.vercel.app" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-                                </a>
-                                <a href="https://github.com/mazinflwo/GESS-Platform.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                                    <i data-lucide="github" class="w-4 h-4"></i> Source
-                                </a>
-                                <button class="preview-btn hover-target" data-project="gess">
-                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
-                                </button>
-                            </div>
+                        <div class="md:col-span-5">
+                            <h3 class="font-display font-bold text-xl mb-1">GESS EDU</h3>
+                            <p class="text-mute text-sm leading-relaxed">An interactive learning platform for university students, with an immersive 3D take on course content. <span class="text-mute/70">Next.js / Three.js / Firebase</span></p>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap gap-4 text-sm md:justify-end">
+                            <a href="https://gess-platform.vercel.app" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:opacity-60 transition-opacity"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>Demo</a>
+                            <a href="https://github.com/mazinflwo/GESS-Platform.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-mute hover:text-paper transition-colors"><i data-lucide="github" class="w-3.5 h-3.5"></i>Source</a>
+                            <button class="preview-btn flex items-center gap-1.5 text-mute hover:text-paper transition-colors" data-project="gess"><i data-lucide="eye" class="w-3.5 h-3.5"></i>Case Study</button>
                         </div>
                     </div>
- 
-                    <!-- Project 3: Clinic System -->
-                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item" data-category="web">
-                        <div class="relative h-80 overflow-hidden">
-                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="clinic.png" alt="Clinic System" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
- 
-                            <div class="absolute top-6 left-6 z-20 flex gap-2">
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Full Stack</span>
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Clinic Management</span>
-                            </div>
+
+                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item" data-category="web">
+                        <div class="md:col-span-1 font-display font-bold text-mute text-lg">03</div>
+                        <div class="md:col-span-3">
+                            <div class="border border-line overflow-hidden"><img src="clinic.png" alt="Clinic System" loading="lazy" class="w-full h-32 object-cover"></div>
                         </div>
-                        <div class="p-8 tilt-content">
-                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Clinic System</h4>
-                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">A comprehensive clinic management system designed to streamline patient records, appointments, and administrative tasks.</p>
-                            <div class="flex gap-4">
-                                <a href="https://clinic-system-flame.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-                                </a>
-                                <a href="https://github.com/mazinramos/Clinic-System.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                                    <i data-lucide="github" class="w-4 h-4"></i> Source
-                                </a>
-                                <button class="preview-btn hover-target" data-project="clinic">
-                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
-                                </button>
-                            </div>
+                        <div class="md:col-span-5">
+                            <h3 class="font-display font-bold text-xl mb-1">Clinic System</h3>
+                            <p class="text-mute text-sm leading-relaxed">A clinic management system that streamlines patient records, appointments, and admin work. <span class="text-mute/70">Full Stack</span></p>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap gap-4 text-sm md:justify-end">
+                            <a href="https://clinic-system-flame.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:opacity-60 transition-opacity"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>Demo</a>
+                            <a href="https://github.com/mazinramos/Clinic-System.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-mute hover:text-paper transition-colors"><i data-lucide="github" class="w-3.5 h-3.5"></i>Source</a>
+                            <button class="preview-btn flex items-center gap-1.5 text-mute hover:text-paper transition-colors" data-project="clinic"><i data-lucide="eye" class="w-3.5 h-3.5"></i>Case Study</button>
                         </div>
                     </div>
- 
-                    <!-- Project 4: Gizmo Store -->
-                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item md:translate-y-16" data-category="web">
-                        <div class="relative h-80 overflow-hidden">
-                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="gizmo.png" alt="Gizmo Store" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
- 
-                            <div class="absolute top-6 left-6 z-20 flex gap-2">
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">E-Commerce</span>
-                            </div>
+
+                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item" data-category="web">
+                        <div class="md:col-span-1 font-display font-bold text-mute text-lg">04</div>
+                        <div class="md:col-span-3">
+                            <div class="border border-line overflow-hidden"><img src="gizmo.png" alt="Gizmo Store" loading="lazy" class="w-full h-32 object-cover"></div>
                         </div>
-                        <div class="p-8 tilt-content">
-                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Gizmo Store</h4>
-                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">A modern tech e-commerce platform designed with high-performance UI, dynamic cart mechanics, and seamless product browsing.</p>
-                            <div class="flex gap-4">
-                                <a href="https://gizmo-store.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-                                </a>
-                                <a href="https://github.com/mazinramos/Gizmo-Store.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                                    <i data-lucide="github" class="w-4 h-4"></i> Source
-                                </a>
-                                <button class="preview-btn hover-target" data-project="gizmo">
-                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
-                                </button>
-                            </div>
+                        <div class="md:col-span-5">
+                            <h3 class="font-display font-bold text-xl mb-1">Gizmo Store</h3>
+                            <p class="text-mute text-sm leading-relaxed">A modern tech e-commerce storefront with a fast, high-performance UI and a dynamic cart. <span class="text-mute/70">Next.js / React</span></p>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap gap-4 text-sm md:justify-end">
+                            <a href="https://gizmo-store.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:opacity-60 transition-opacity"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>Demo</a>
+                            <a href="https://github.com/mazinramos/Gizmo-Store.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-mute hover:text-paper transition-colors"><i data-lucide="github" class="w-3.5 h-3.5"></i>Source</a>
+                            <button class="preview-btn flex items-center gap-1.5 text-mute hover:text-paper transition-colors" data-project="gizmo"><i data-lucide="eye" class="w-3.5 h-3.5"></i>Case Study</button>
                         </div>
                     </div>
- 
-                    <!-- Project 5: Wishly Store -->
-<div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden" data-category="web">
-    <div class="relative h-80 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <img src="wishly.png" alt="Wishly Store" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
 
-        <div class="absolute top-6 left-6 z-20 flex gap-2">
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Gift Store</span>
-        </div>
-    </div>
-
-    <div class="p-8 tilt-content">
-        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">
-            Wishly Store
-        </h4>
-
-        <p class="text-gray-400 text-sm mb-6 line-clamp-2">
-            A beautifully designed online gift store offering elegant presents, personalized gift boxes, flowers, and celebration collections with a smooth and modern shopping experience.
-        </p>
-
-        <div class="flex gap-4">
-            <a href="https://wishly-store.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-            </a>
-
-            <a href="#" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                <i data-lucide="github" class="w-4 h-4"></i> Source
-            </a>
-
-            <button class="preview-btn hover-target" data-project="wishly">
-                <i data-lucide="eye" class="w-4 h-4"></i> Preview
-            </button>
-        </div>
-    </div>
-</div>
- 
-    <!-- Project 7: EduHub -->
-<div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden" data-category="web">
-    <div class="relative h-80 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <img src="eduhub.png" alt="EduHub" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-
-        <div class="absolute top-6 left-6 z-20 flex gap-2">
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Next.js / React</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">E-Learning Platform</span>
-        </div>
-    </div>
-
-    <div class="p-8 tilt-content">
-        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">
-            EduHub Platform
-        </h4>
-
-        <p class="text-gray-400 text-sm mb-6 line-clamp-2">
-            An advanced interactive educational platform offering seamless access to learning paths, course resources, live sessions, and comprehensive academic tools for students and tutors.
-        </p>
-
-        <div class="flex gap-4">
-            <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-            </a>
-
-            <a href="#" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                <i data-lucide="github" class="w-4 h-4"></i> Source
-            </a>
-
-            <button class="preview-btn hover-target" data-project="eduhub">
-                <i data-lucide="eye" class="w-4 h-4"></i> Preview
-            </button>
-        </div>
-    </div>
-</div>
-
-    <!-- Project 8: Pharmacy System -->
-<div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden" data-category="web">
-    <div class="relative h-80 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-        <img src="pharmacy.png" alt="Pharmacy System" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-
-        <div class="absolute top-6 left-6 z-20 flex gap-2">
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">React / Node.js</span>
-            <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Management System</span>
-        </div>
-    </div>
-
-    <div class="p-8 tilt-content">
-        <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">
-            Pharmacy System
-        </h4>
-
-        <p class="text-gray-400 text-sm mb-6 line-clamp-2">
-            A comprehensive management system tailored for pharmacies to streamline inventory tracking, prescription processing, billing, sales analytics, and stock management efficiently.
-        </p>
-
-        <div class="flex gap-4">
-            <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-            </a>
-
-            <a href="#" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-white transition-colors hover-target">
-                <i data-lucide="github" class="w-4 h-4"></i> Source
-            </a>
-
-            <button class="preview-btn hover-target" data-project="pharmacy">
-                <i data-lucide="eye" class="w-4 h-4"></i> Preview
-            </button>
-        </div>
-    </div>
-</div>
-
-
-                    <!-- Project 9: Interior Design Portfolio -->
-                    <div class="glass-panel rounded-3xl overflow-hidden group tilt-card project-item hidden-project hidden md:translate-y-16" data-category="web">
-                        <div class="relative h-80 overflow-hidden">
-                            <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="architectuer.png" alt="Interior Design Portfolio" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
- 
-                            <div class="absolute top-6 left-6 z-20 flex gap-2">
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Design</span>
-                                <span class="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs border border-white/10">Portfolio</span>
-                            </div>
+                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item hidden-project hidden" data-category="web">
+                        <div class="md:col-span-1 font-display font-bold text-mute text-lg">05</div>
+                        <div class="md:col-span-3">
+                            <div class="border border-line overflow-hidden"><img src="wishly.png" alt="Wishly Store" loading="lazy" class="w-full h-32 object-cover"></div>
                         </div>
-                        <div class="p-8 tilt-content">
-                            <h4 class="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Interior Design Portfolio</h4>
-                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">A sophisticated digital portfolio showcasing architectural elegance, interior space planning, and creative design aesthetics.</p>
- 
-                            <div class="flex gap-4">
-                                <a href="https://fatah-magdi-designer.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors hover-target">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
-                                </a>
-                                <button class="preview-btn hover-target" data-project="interior">
-                                    <i data-lucide="eye" class="w-4 h-4"></i> Preview
-                                </button>
-                            </div>
+                        <div class="md:col-span-5">
+                            <h3 class="font-display font-bold text-xl mb-1">Wishly Store</h3>
+                            <p class="text-mute text-sm leading-relaxed">An online gift store — personalized gift boxes, flowers, and celebration collections. <span class="text-mute/70">Next.js / React</span></p>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap gap-4 text-sm md:justify-end">
+                            <a href="https://wishly-store.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:opacity-60 transition-opacity"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>Demo</a>
+                            <button class="preview-btn flex items-center gap-1.5 text-mute hover:text-paper transition-colors" data-project="wishly"><i data-lucide="eye" class="w-3.5 h-3.5"></i>Case Study</button>
                         </div>
                     </div>
- 
-                </div>  <!-- /#project-grid -->
- 
-                <div class="flex justify-center mt-16">
-                    <button id="show-more-btn" class="px-8 py-3 rounded-full glass-panel hover-target text-sm font-medium hover:bg-white/10 transition-colors">
+
+                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item hidden-project hidden" data-category="web">
+                        <div class="md:col-span-1 font-display font-bold text-mute text-lg">06</div>
+                        <div class="md:col-span-3">
+                            <div class="border border-line overflow-hidden"><img src="eduhub.png" alt="EduHub" loading="lazy" class="w-full h-32 object-cover"></div>
+                        </div>
+                        <div class="md:col-span-5">
+                            <h3 class="font-display font-bold text-xl mb-1">EduHub Platform</h3>
+                            <p class="text-mute text-sm leading-relaxed">Learning paths, course resources, live sessions, and academic tools for students and tutors. <span class="text-mute/70">Next.js / React</span></p>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap gap-4 text-sm md:justify-end">
+                            <button class="preview-btn flex items-center gap-1.5 text-mute hover:text-paper transition-colors" data-project="eduhub"><i data-lucide="eye" class="w-3.5 h-3.5"></i>Case Study</button>
+                        </div>
+                    </div>
+
+                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item hidden-project hidden" data-category="web">
+                        <div class="md:col-span-1 font-display font-bold text-mute text-lg">07</div>
+                        <div class="md:col-span-3">
+                            <div class="border border-line overflow-hidden"><img src="pharmacy.png" alt="Pharmacy System" loading="lazy" class="w-full h-32 object-cover"></div>
+                        </div>
+                        <div class="md:col-span-5">
+                            <h3 class="font-display font-bold text-xl mb-1">Pharmacy System</h3>
+                            <p class="text-mute text-sm leading-relaxed">Inventory, prescriptions, billing, and sales analytics for pharmacies. <span class="text-mute/70">React / Node.js</span></p>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap gap-4 text-sm md:justify-end">
+                            <button class="preview-btn flex items-center gap-1.5 text-mute hover:text-paper transition-colors" data-project="pharmacy"><i data-lucide="eye" class="w-3.5 h-3.5"></i>Case Study</button>
+                        </div>
+                    </div>
+
+                    <div class="project-row grid md:grid-cols-12 gap-6 items-center py-6 border-b border-line project-item hidden-project hidden" data-category="web">
+                        <div class="md:col-span-1 font-display font-bold text-mute text-lg">08</div>
+                        <div class="md:col-span-3">
+                            <div class="border border-line overflow-hidden"><img src="architectuer.png" alt="Interior Design Portfolio" loading="lazy" class="w-full h-32 object-cover"></div>
+                        </div>
+                        <div class="md:col-span-5">
+                            <h3 class="font-display font-bold text-xl mb-1">Interior Design Portfolio</h3>
+                            <p class="text-mute text-sm leading-relaxed">A digital portfolio showcasing architectural and interior design work. <span class="text-mute/70">Design</span></p>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap gap-4 text-sm md:justify-end">
+                            <a href="https://fatah-magdi-designer.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:opacity-60 transition-opacity"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>Demo</a>
+                            <button class="preview-btn flex items-center gap-1.5 text-mute hover:text-paper transition-colors" data-project="interior"><i data-lucide="eye" class="w-3.5 h-3.5"></i>Case Study</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex justify-center mt-12">
+                    <button id="show-more-btn" class="outline-btn text-sm">
                         <span id="show-more-text">Show More Projects</span>
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Experience Timeline -->
-        <section id="experience" class="py-32 relative border-t border-white/5 mt-16 md:mt-0">
+        <!-- About -->
+        <section id="about" class="py-24 border-t border-line bg-panel">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid lg:grid-cols-12 gap-16">
+                    <div class="lg:col-span-7 reveal">
+                        <h2 class="font-display font-extrabold uppercase text-4xl md:text-5xl tracking-tight mb-8">About Me</h2>
+                        <p class="text-2xl md:text-3xl font-display font-medium leading-snug mb-8">
+                            I'm a Computer Science student and web developer who spends most of his time building.
+                        </p>
+                        <p class="text-mute leading-relaxed mb-4">
+                            I turn coursework and side ideas into real, working products — from small business sites to full systems with dashboards and databases behind them.
+                        </p>
+                        <p class="text-mute leading-relaxed">
+                            I like problems that have a clear before-and-after: a clinic that was tracking patients on paper, a store that needed an actual checkout flow, a student who needed a resume in ten minutes instead of two hours. My approach is simple — understand what you actually need, build it properly, and keep it easy for you to maintain afterward.
+                        </p>
+                    </div>
+                    <div class="lg:col-span-5 flex flex-col justify-end gap-8 border-t border-line pt-8 lg:border-t-0 lg:pt-0">
+                        <div class="border-t border-line pt-6">
+                            <span class="font-display font-black text-5xl block mb-1">08</span>
+                            <span class="text-mute text-sm">Projects Built</span>
+                        </div>
+                        <div class="border-t border-line pt-6">
+                            <span class="font-display font-black text-5xl block mb-1">06+</span>
+                            <span class="text-mute text-sm">Core Technologies</span>
+                        </div>
+                        <div class="border-t border-line pt-6">
+                            <span class="font-display font-black text-5xl block mb-1">CS</span>
+                            <span class="text-mute text-sm">Student &amp; Builder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="py-24 border-t border-line">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex items-end justify-between mb-14 reveal">
+                    <h2 class="font-display font-extrabold uppercase text-4xl md:text-5xl tracking-tight">Skills &amp; Technologies</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 border-t border-l border-line">
+                    <div class="border-r border-b border-line p-8">
+                        <h3 class="font-display font-bold uppercase text-sm mb-6">Frontend Development</h3>
+                        <ul class="space-y-3 text-mute">
+                            <li>React &amp; Next.js</li>
+                            <li>TypeScript &amp; JavaScript</li>
+                            <li>Tailwind CSS</li>
+                            <li>HTML &amp; CSS</li>
+                        </ul>
+                    </div>
+                    <div class="border-r border-b border-line p-8">
+                        <h3 class="font-display font-bold uppercase text-sm mb-6">Backend &amp; Data</h3>
+                        <ul class="space-y-3 text-mute">
+                            <li>Node.js &amp; Express</li>
+                            <li>Firebase (Auth, Firestore)</li>
+                            <li>REST APIs</li>
+                        </ul>
+                    </div>
+                    <div class="border-r border-b border-line p-8">
+                        <h3 class="font-display font-bold uppercase text-sm mb-6">Tools &amp; Mobile</h3>
+                        <ul class="space-y-3 text-mute">
+                            <li>Git &amp; GitHub</li>
+                            <li>Figma</li>
+                            <li>Flutter / React Native</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="py-24 border-t border-line">
             <div class="max-w-4xl mx-auto px-6">
-                <div class="text-center mb-20 reveal-up">
-                    <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Journey</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold">Experience Timeline</h3>
-                </div>
+                <h2 class="font-display font-extrabold uppercase text-4xl md:text-5xl tracking-tight mb-14 reveal">FAQ</h2>
 
-                <div class="relative wrap overflow-hidden p-10 h-full">
-                    <div class="absolute border-white/10 border-solid h-full border" style="left: 50%; transform: translateX(-50%);"></div>
-
-                    <!-- Timeline Item 1 -->
-                    <div class="mb-8 flex justify-between items-center w-full right-timeline reveal-right">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-primary shadow-[0_0_20px_#00f3ff] w-4 h-4 rounded-full"></div>
-                        <div class="order-1 glass-panel rounded-2xl w-5/12 px-6 py-6 text-left">
-                            <p class="mb-1 text-sm text-primary font-bold tracking-wide">2025 - Present</p>
-                            <h4 class="mb-2 font-display font-bold text-xl">Senior Frontend Architect</h4>
-                            <p class="text-sm leading-snug text-gray-400">Leading the core architecture team for a major global SaaS platform, improving rendering performance by 40% using Next.js and advanced WebGL optimization.</p>
+                <div class="border-t border-line" id="faq-container">
+                    <div class="faq-item border-b border-line">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left py-6">
+                            <span class="font-display font-bold text-lg pr-6">How long does a typical project take?</span>
+                            <i data-lucide="plus" class="w-5 h-5 faq-icon transition-transform flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-answer overflow-hidden" style="max-height:0;">
+                            <p class="text-mute leading-relaxed pb-6">It depends on scope — a simple landing page can take a few days, while a full platform (like an e-commerce or admin system) usually takes a few weeks. I'll give you a clear timeline before we start.</p>
                         </div>
                     </div>
-
-                    <!-- Timeline Item 2 -->
-                    <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline reveal-left">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-white/30 border border-white w-4 h-4 rounded-full"></div>
-                        <div class="order-1 glass-panel rounded-2xl w-5/12 px-6 py-6 text-right">
-                            <p class="mb-1 text-sm text-primary font-bold tracking-wide">2021 - 2025</p>
-                            <h4 class="mb-2 font-display font-bold text-xl">Full Stack Developer</h4>
-                            <p class="text-sm leading-snug text-gray-400">Developed enterprise e-commerce solutions and cross-platform mobile applications. Directed technical strategy for 10+ successful product launches.</p>
+                    <div class="faq-item border-b border-line">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left py-6">
+                            <span class="font-display font-bold text-lg pr-6">What technologies do you work with?</span>
+                            <i data-lucide="plus" class="w-5 h-5 faq-icon transition-transform flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-answer overflow-hidden" style="max-height:0;">
+                            <p class="text-mute leading-relaxed pb-6">Mainly React / Next.js, Tailwind CSS, and Firebase (Firestore, Auth, Cloud Functions) for full-stack web apps, plus Flutter / React Native for mobile when needed.</p>
                         </div>
                     </div>
-
-                    <!-- Timeline Item 3 -->
-                    <div class="mb-8 flex justify-between items-center w-full right-timeline reveal-right">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-white/30 border border-white w-4 h-4 rounded-full"></div>
-                        <div class="order-1 glass-panel rounded-2xl w-5/12 px-6 py-6 text-left">
-                            <p class="mb-1 text-sm text-primary font-bold tracking-wide">2018 - 2020</p>
-                            <h4 class="mb-2 font-display font-bold text-xl">UI/UX & Web Developer</h4>
-                            <p class="text-sm leading-snug text-gray-400">Award-winning freelance designer and developer creating highly interactive, Awwwards-recognized promotional websites.</p>
+                    <div class="faq-item border-b border-line">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left py-6">
+                            <span class="font-display font-bold text-lg pr-6">How does payment work?</span>
+                            <i data-lucide="plus" class="w-5 h-5 faq-icon transition-transform flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-answer overflow-hidden" style="max-height:0;">
+                            <!-- EDIT ME: describe your real payment terms — e.g. upfront deposit percentage, milestones, accepted payment methods. -->
+                        </div>
+                    </div>
+                    <div class="faq-item border-b border-line">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left py-6">
+                            <span class="font-display font-bold text-lg pr-6">Do you offer support after delivery?</span>
+                            <i data-lucide="plus" class="w-5 h-5 faq-icon transition-transform flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-answer overflow-hidden" style="max-height:0;">
+                            <!-- EDIT ME: describe your real post-delivery support/maintenance policy. -->
+                        </div>
+                    </div>
+                    <div class="faq-item border-b border-line">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left py-6">
+                            <span class="font-display font-bold text-lg pr-6">Can you work with an existing codebase?</span>
+                            <i data-lucide="plus" class="w-5 h-5 faq-icon transition-transform flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-answer overflow-hidden" style="max-height:0;">
+                            <p class="text-mute leading-relaxed pb-6">Yes — I regularly audit, debug, and extend existing React/Firebase projects, not just build from scratch.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 7. Services Section -->
-        <section id="services" class="py-32 relative bg-gradient-to-b from-transparent to-white/[0.02]">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-20 reveal-up">
-                    <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">What I Do</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold">Premium Services</h3>
+        <!-- Contact — the one inverted, bold section -->
+        <section id="contact" class="py-24 bg-light text-ink">
+            <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
+
+                <div class="reveal">
+                    <h2 class="font-display font-black uppercase text-5xl md:text-6xl leading-[0.95] tracking-tight mb-6">Have a project in mind?</h2>
+                    <p class="text-lightMute text-lg mb-10 leading-relaxed">Let's turn your idea into something real. Whether it's a new website, a business system, or something in between — my inbox is open.</p>
+
+                    <div class="flex gap-4" id="social-container"></div>
+
+                    <p class="text-lightMute text-sm mt-10">Prefer email? Reach me directly at
+                        <a href="mailto:mazinflwo.dev@gmail.com" class="text-ink underline hover:no-underline">mazinflwo.dev@gmail.com</a>
+                    </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="glass-panel p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group reveal-up">
-                        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:border-primary/50 transition-colors">
-                            <i data-lucide="monitor-smartphone" class="w-6 h-6 text-primary"></i>
-                        </div>
-                        <h4 class="text-2xl font-display font-bold mb-4">Web & Mobile Apps</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">Full-cycle development of scalable, high-performance web applications and cross-platform mobile apps using modern stacks (React, Next.js, Flutter).</p>
-                    </div>
-
-                    <div class="glass-panel p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group reveal-up" style="transition-delay: 100ms;">
-                        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:border-primary/50 transition-colors">
-                            <i data-lucide="layers" class="w-6 h-6 text-secondary"></i>
-                        </div>
-                        <h4 class="text-2xl font-display font-bold mb-4">UI/UX & Motion Design</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">Crafting deeply psychological, aesthetic interfaces with cinematic GSAP and Three.js animations to ensure maximum user retention and "wow" factor.</p>
-                    </div>
-
-                    <div class="glass-panel p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group reveal-up" style="transition-delay: 200ms;">
-                        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:border-primary/50 transition-colors">
-                            <i data-lucide="server-cog" class="w-6 h-6 text-primary"></i>
-                        </div>
-                        <h4 class="text-2xl font-display font-bold mb-4">Systems Architecture</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">Designing robust backend structures, REST/GraphQL API integrations, cloud deployment strategies, and secure database optimization.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 8. Testimonials Section -->
-        <!--
-            EDIT ME: Replace the 3 placeholder quotes below with real
-            feedback from real clients before publishing. Fake testimonials
-            can damage trust if a client ever asks about them.
-        -->
-        <!-- <section id="testimonials" class="py-32 relative border-t border-white/5">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-20 reveal-up">
-                    <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Client Feedback</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold">What Clients Say</h3>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="glass-panel p-8 rounded-3xl reveal-up">
-                        <div class="flex gap-1 mb-4 text-primary">
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        </div>
-                        <p class="text-gray-300 leading-relaxed mb-6">"[ REPLACE WITH REAL QUOTE — e.g. what the client needed, how the project went, and the result. ]"</p>
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-primary">?</div>
+                <div class="border-t border-lightLine pt-8">
+                    <form id="contact-form" class="space-y-8">
+                        <div class="grid grid-cols-2 gap-8">
                             <div>
-                                <p class="font-medium text-sm">Client Name</p>
-                                <p class="text-gray-500 text-xs">Company / Project</p>
+                                <label class="text-xs text-lightMute uppercase tracking-wide">Name</label>
+                                <input type="text" required class="underline-field w-full">
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel p-8 rounded-3xl reveal-up" style="transition-delay:100ms;">
-                        <div class="flex gap-1 mb-4 text-primary">
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        </div>
-                        <p class="text-gray-300 leading-relaxed mb-6">"[ REPLACE WITH REAL QUOTE ]"</p>
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-primary">?</div>
                             <div>
-                                <p class="font-medium text-sm">Client Name</p>
-                                <p class="text-gray-500 text-xs">Company / Project</p>
+                                <label class="text-xs text-lightMute uppercase tracking-wide">Email</label>
+                                <input type="email" required class="underline-field w-full">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="glass-panel p-8 rounded-3xl reveal-up" style="transition-delay:200ms;">
-                        <div class="flex gap-1 mb-4 text-primary">
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <div>
+                            <label class="text-xs text-lightMute uppercase tracking-wide">Subject</label>
+                            <input type="text" required class="underline-field w-full">
                         </div>
-                        <p class="text-gray-300 leading-relaxed mb-6">"[ REPLACE WITH REAL QUOTE ]"</p>
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-primary">?</div>
-                            <div>
-                                <p class="font-medium text-sm">Client Name</p>
-                                <p class="text-gray-500 text-xs">Company / Project</p>
-                            </div>
+                        <div>
+                            <label class="text-xs text-lightMute uppercase tracking-wide">Message</label>
+                            <textarea rows="4" required class="underline-field w-full resize-none"></textarea>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- 9. FAQ Section -->
-        <section id="faq" class="py-32 relative border-t border-white/5">
-            <div class="max-w-4xl mx-auto px-6">
-                <div class="text-center mb-16 reveal-up">
-                    <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Got Questions?</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold">Frequently Asked Questions</h3>
-                </div>
-
-                <div class="space-y-4" id="faq-container">
-                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
-                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
-                            <span class="font-display font-bold text-lg">How long does a typical project take?</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
-                        </button>
-                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
-                            <p class="text-gray-400 leading-relaxed pb-6">It depends on scope — a simple landing page can take a few days, while a full platform (like an e-commerce or admin system) usually takes a few weeks. I'll give you a clear timeline before we start.</p>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
-                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
-                            <span class="font-display font-bold text-lg">What technologies do you work with?</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
-                        </button>
-                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
-                            <p class="text-gray-400 leading-relaxed pb-6">Mainly React / Next.js, Tailwind CSS, and Firebase (Firestore, Auth, Cloud Functions) for full-stack web apps, plus Flutter / React Native for mobile when needed.</p>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
-                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
-                            <span class="font-display font-bold text-lg">How does payment work?</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
-                        </button>
-                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
-                            <!-- <p class="text-gray-400 leading-relaxed pb-6">[ EDIT ME: describe your real payment terms — e.g. upfront deposit percentage, milestones, accepted payment methods. ]</p> -->
-                        </div>
-                    </div>
-
-                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
-                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
-                            <span class="font-display font-bold text-lg">Do you offer support after delivery?</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
-                        </button>
-                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
-                            <!-- <p class="text-gray-400 leading-relaxed pb-6">[ EDIT ME: describe your real post-delivery support/maintenance policy. ]</p> -->
-                        </div>
-                    </div>
-
-                    <div class="glass-panel rounded-2xl overflow-hidden faq-item reveal-up">
-                        <button class="faq-toggle w-full flex justify-between items-center text-left p-6 hover-target">
-                            <span class="font-display font-bold text-lg">Can you work with an existing codebase?</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-primary faq-icon transition-transform"></i>
-                        </button>
-                        <div class="faq-answer px-6 overflow-hidden" style="max-height:0;">
-                            <p class="text-gray-400 leading-relaxed pb-6">Yes — I regularly audit, debug, and extend existing React/Firebase projects, not just build from scratch.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 10. Contact Section -->
-        <section id="contact" class="py-32 relative">
-            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-
-                <div class="reveal-left">
-                    <h2 class="text-sm font-display tracking-widest text-primary uppercase mb-4">Get In Touch</h2>
-                    <h3 class="text-5xl md:text-6xl font-display font-bold mb-6">Let's build the <br><span class="text-gradient">future</span> together.</h3>
-                    <p class="text-gray-400 text-lg mb-10">Whether you have a vision for a new startup, need to revamp an enterprise system, or just want to say hi, my inbox is always open.</p>
-
-                    <div class="flex gap-4" id="social-container">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <div class="glass-panel p-8 md:p-10 rounded-3xl reveal-right">
-                    <form id="contact-form" class="space-y-6">
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-xs tracking-widest uppercase text-gray-500 font-medium">Name</label>
-                                <input type="text" required class="w-full bg-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary/50 transition-colors hover-target">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs tracking-widest uppercase text-gray-500 font-medium">Email</label>
-                                <input type="email" required class="w-full bg-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary/50 transition-colors hover-target">
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs tracking-widest uppercase text-gray-500 font-medium">Subject</label>
-                            <input type="text" required class="w-full bg-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary/50 transition-colors hover-target">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs tracking-widest uppercase text-gray-500 font-medium">Message</label>
-                            <textarea rows="4" required class="w-full bg-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary/50 transition-colors resize-none hover-target"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-white text-dark font-bold py-4 rounded-xl hover:bg-primary transition-colors flex justify-center items-center gap-2 hover-target group">
+                        <button type="submit" class="w-full bg-ink text-light font-semibold py-4 flex justify-center items-center gap-2 hover:bg-lightMute transition-colors">
                             Send Message
-                            <i data-lucide="send" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            <i data-lucide="send" class="w-4 h-4"></i>
                         </button>
-                        <p id="form-status" class="text-center text-sm hidden mt-4 text-primary"></p>
+                        <p id="form-status" class="text-center text-sm hidden"></p>
                     </form>
                 </div>
 
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="border-t border-white/5 py-8 mt-10">
-            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-                <p>&copy; <span id="year"></span> Creative Portfolio. Designed & Built with Precision.</p>
+        <footer class="bg-light text-lightMute py-8">
+            <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-2 text-sm">
+                <p>&copy; <span id="year"></span> Mazin Mohamed. Designed &amp; built by hand.</p>
             </div>
         </footer>
 
     </main>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full glass-panel border border-white/10 flex items-center justify-center hover:bg-white hover:text-dark transition-all duration-300 opacity-0 pointer-events-none hover-target">
-        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    <button id="back-to-top" class="fixed bottom-8 right-8 z-40 w-11 h-11 border border-line bg-ink flex items-center justify-center hover:bg-paper hover:text-ink transition-colors opacity-0 pointer-events-none">
+        <i data-lucide="arrow-up" class="w-4 h-4"></i>
     </button>
 
-    <!-- Project Preview Modal -->
+    <!-- Project Case Study Modal -->
     <div id="project-modal-overlay">
         <div id="project-modal-box">
-            <button id="modal-close-btn" class="hover-target">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-
+            <button id="modal-close-btn" aria-label="Close"><i data-lucide="x" class="w-4 h-4"></i></button>
             <div class="flex flex-wrap gap-2 mb-4" id="modal-tags"></div>
-            <h3 id="modal-title" class="text-3xl md:text-4xl font-display font-bold mb-4"></h3>
-            <p id="modal-description" class="text-gray-400 text-lg leading-relaxed"></p>
-
+            <h3 id="modal-title" class="text-3xl font-display font-bold mb-4"></h3>
+            <p id="modal-description" class="text-mute text-lg leading-relaxed"></p>
             <div id="modal-gallery"></div>
         </div>
     </div>
 
-    <!-- Dependencies -->
-    <!-- GSAP for Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Three.js for 3D Background -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Application Logic -->
     <script>
-        // 0. Initialize Icons & Basic DOM Setup
         lucide.createIcons();
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
             mobileMenu.classList.toggle('flex');
         });
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex');
+        }));
 
-        // Populate Skills from CONFIG
-        const skillsContainer = document.getElementById('skills-container');
-        CONFIG.skills.forEach(skill => {
-            skillsContainer.innerHTML += `
-                <div class="space-y-2 reveal-up">
-                    <div class="flex justify-between text-sm">
-                        <span class="font-medium">${skill.name}</span>
-                        <span class="text-gray-500">${skill.level}%</span>
-                    </div>
-                    <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                        <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full progress-bar-fill" data-width="${skill.level}%"></div>
-                    </div>
-                </div>
-            `;
-        });
-
-        // Populate Socials from CONFIG
         const socialContainer = document.getElementById('social-container');
-
         const socialIcons = {
-            github: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>`,
-            linkedin: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
-            twitter: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>`,
-            whatsapp: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>`,
-            email: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>`
+            github: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>`,
+            linkedin: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
+            whatsapp: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4a8.94 8.94 0 0 0-7.75 13.4L3 21l3.7-1.28a8.9 8.9 0 0 0 4.35 1.12h.01a8.94 8.94 0 0 0 8.94-8.94 8.9 8.9 0 0 0-2.4-5.58zM12.06 19.4h-.01a7.4 7.4 0 0 1-3.78-1.04l-.27-.16-2.8.97.94-2.73-.18-.28a7.43 7.43 0 0 1 11.55-9.2 7.36 7.36 0 0 1 2.19 5.26 7.44 7.44 0 0 1-7.44 7.18zm4.08-5.56c-.22-.11-1.32-.65-1.53-.73-.2-.08-.36-.11-.51.11-.15.22-.58.73-.72.88-.13.15-.26.16-.48.06-.22-.11-.94-.35-1.79-1.11-.66-.6-1.11-1.33-1.24-1.55-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.51-1.24-.7-1.7-.19-.45-.37-.39-.51-.4h-.44c-.15 0-.39.06-.6.28-.2.22-.79.77-.79 1.88 0 1.11.81 2.18.92 2.33.11.15 1.6 2.44 3.87 3.42.54.23.96.37 1.29.48.54.17 1.03.15 1.42.09.43-.06 1.32-.54 1.51-1.06.19-.52.19-.96.13-1.06-.06-.1-.2-.15-.42-.26z"/></svg>`,
+            twitter: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2H21l-6.5 7.43L22 22h-6.19l-4.84-6.32L5.4 22H2.62l6.96-7.95L2 2h6.35l4.38 5.79L18.24 2zm-1.08 18h1.7L7.9 3.9H6.08L17.16 20z"/></svg>`,
+            email: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 7L2 7"></path></svg>`
         };
-
-        Object.entries(CONFIG.socials).forEach(([platform, url]) => {
-            const hrefValue = platform === 'email' ? `mailto:${url}` : url;
-            const iconSvg = socialIcons[platform] || `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>`;
-
+        Object.keys(CONFIG.socials).forEach(key => {
+            const url = key === 'email' ? `mailto:${CONFIG.socials[key]}` : CONFIG.socials[key];
             socialContainer.innerHTML += `
-                <a href="${hrefValue}" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:text-dark transition-all hover-target">
-                    ${iconSvg}
-                </a>
-            `;
-        });
-        lucide.createIcons(); // Re-run for dynamic icons
-
-        // 1. Loading Screen & Init
-        window.addEventListener('load', () => {
-            const tl = gsap.timeline();
-            tl.to('.loader-text', { opacity: 0, duration: 0.5 })
-              .to('.loader-ring', { scale: 0, opacity: 0, duration: 0.5 }, "-=0.2")
-              .to('#loader', { yPercent: -100, duration: 0.8, ease: "power4.inOut" })
-              .from('.hero-content > *', { y: 50, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=0.3")
-              .from('.hero-image', { scale: 0.8, opacity: 0, duration: 1.5, ease: "power3.out" }, "-=1");
+                <a href="${url}" target="_blank" rel="noopener noreferrer" class="w-11 h-11 border border-lightLine flex items-center justify-center text-ink hover:bg-ink hover:text-light transition-colors">
+                    ${socialIcons[key] || ''}
+                </a>`;
         });
 
-        // 2. Custom Cursor & Glow Logic
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorTrail = document.querySelector('.cursor-trail');
-        const mouseGlow = document.getElementById('mouseGlow');
-
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let trailX = window.innerWidth / 2;
-        let trailY = window.innerHeight / 2;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-            cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-
-            mouseGlow.style.left = `${mouseX}px`;
-            mouseGlow.style.top = `${mouseY}px`;
-        });
-
-        function animateTrail() {
-            trailX += (mouseX - trailX) * 0.15;
-            trailY += (mouseY - trailY) * 0.15;
-            cursorTrail.style.transform = `translate(${trailX}px, ${trailY}px)`;
-            requestAnimationFrame(animateTrail);
-        }
-        animateTrail();
-
-        // Hover Effects (delegated, works for dynamically added elements too)
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.closest('.hover-target')) document.body.classList.add('hovering');
-        });
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.closest('.hover-target')) document.body.classList.remove('hovering');
-        });
-
-        // 3. Three.js Cinematic Background
-        const initThreeJS = () => {
-            const canvas = document.getElementById('webgl-canvas');
-            const scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2('#030305', 0.001);
-
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 30;
-
-            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            // Particles
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 2000;
-            const posArray = new Float32Array(particlesCount * 3);
-
-            for (let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 100;
-            }
-
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.1,
-                color: '#00f3ff',
-                transparent: true,
-                opacity: 0.6,
-                blending: THREE.AdditiveBlending
-            });
-
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particlesMesh);
-
-            // Abstract Icosahedron in background
-            const geoGeom = new THREE.IcosahedronGeometry(15, 1);
-            const geoMat = new THREE.MeshBasicMaterial({
-                color: '#bc13fe',
-                wireframe: true,
-                transparent: true,
-                opacity: 0.05
-            });
-            const geoMesh = new THREE.Mesh(geoGeom, geoMat);
-            geoMesh.position.set(10, 0, -10);
-            scene.add(geoMesh);
-
-            // Mouse interaction for parallax
-            let targetX = 0;
-            let targetY = 0;
-
-            document.addEventListener('mousemove', (event) => {
-                targetX = (event.clientX / window.innerWidth) - 0.5;
-                targetY = (event.clientY / window.innerHeight) - 0.5;
-            });
-
-            // Animation Loop
-            const clock = new THREE.Clock();
-
-            const tick = () => {
-                const elapsedTime = clock.getElapsedTime();
-
-                particlesMesh.rotation.y = elapsedTime * 0.05;
-                particlesMesh.rotation.x = elapsedTime * 0.02;
-                geoMesh.rotation.x = elapsedTime * 0.1;
-                geoMesh.rotation.y = elapsedTime * 0.15;
-
-                camera.position.x += (targetX * 10 - camera.position.x) * 0.05;
-                camera.position.y += (-targetY * 10 - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-
-                renderer.render(scene, camera);
-                requestAnimationFrame(tick);
-            };
-
-            tick();
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        };
-        initThreeJS();
-
-        // 4. Typing Effect
-        const roles = ["Web Developer", "Frontend Architect", "UI/UX Designer", "Creative Coder"];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typewriterElement = document.getElementById('typewriter');
-
-        function type() {
-            const currentRole = roles[roleIndex];
-
-            if (isDeleting) {
-                typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typewriterElement.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentRole.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(type, typeSpeed);
-        }
-        setTimeout(type, 2000);
-
-        // 5. GSAP Scroll Animations
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.utils.toArray('.reveal-up').forEach(elem => {
-            gsap.fromTo(elem, { y: 50, opacity: 0 }, {
-                y: 0, opacity: 1, duration: 1, ease: "power3.out",
-                scrollTrigger: { trigger: elem, start: "top 85%" }
-            });
-        });
-
-        gsap.utils.toArray('.reveal-left').forEach(elem => {
-            gsap.fromTo(elem, { x: -50, opacity: 0 }, {
-                x: 0, opacity: 1, duration: 1, ease: "power3.out",
-                scrollTrigger: { trigger: elem, start: "top 85%" }
-            });
-        });
-
-        gsap.utils.toArray('.reveal-right').forEach(elem => {
-            gsap.fromTo(elem, { x: 50, opacity: 0 }, {
-                x: 0, opacity: 1, duration: 1, ease: "power3.out",
-                scrollTrigger: { trigger: elem, start: "top 85%" }
-            });
-        });
-
-        // Counters Animation
-        const counters = document.querySelectorAll('.counter');
-        counters.forEach(counter => {
-            const target = +counter.getAttribute('data-target');
-            ScrollTrigger.create({
-                trigger: counter,
-                start: "top 90%",
-                once: true,
-                onEnter: () => {
-                    let val = { value: 0 };
-                    gsap.to(val, {
-                        value: target,
-                        duration: 2,
-                        ease: "power2.out",
-                        onUpdate: function () {
-                            counter.innerText = Math.floor(val.value) + "+";
-                        }
-                    });
-                }
-            });
-        });
-
-        // Progress Bars Animation
-        const progressBars = document.querySelectorAll('.progress-bar-fill');
-        progressBars.forEach(bar => {
-            const width = bar.getAttribute('data-width');
-            ScrollTrigger.create({
-                trigger: bar,
-                start: "top 90%",
-                onEnter: () => {
-                    gsap.to(bar, { scaleX: 1, width: width, duration: 1.5, ease: "power4.out" });
-                }
-            });
-        });
-
-        // Navbar Glass effect on scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-lg');
-                navbar.style.background = 'rgba(3, 3, 5, 0.8)';
+            if (window.scrollY > 40) {
+                navbar.style.background = 'rgba(11,11,11,0.92)';
+                navbar.style.borderBottom = '1px solid #262626';
+                navbar.style.backdropFilter = 'blur(8px)';
             } else {
-                navbar.classList.remove('shadow-lg');
-                navbar.style.background = 'rgba(3, 3, 5, 0.6)';
+                navbar.style.background = 'transparent';
+                navbar.style.borderBottom = '1px solid transparent';
+                navbar.style.backdropFilter = 'none';
             }
         });
 
-        // 6. 3D Tilt Cards Logic (Vanilla JS)
-        const tiltCards = document.querySelectorAll('.tilt-card');
-
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = ((y - centerY) / centerY) * -10;
-                const rotateY = ((x - centerX) / centerX) * 10;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-
-                const glowX = (x / rect.width) * 100;
-                const glowY = (y / rect.height) * 100;
-                card.style.background = `
-                    radial-gradient(circle at ${glowX}% ${glowY}%, rgba(255,255,255,0.08) 0%, transparent 50%),
-                    rgba(25, 25, 30, 0.2)
-                `;
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
             });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => io.observe(el));
 
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                card.style.background = `rgba(25, 25, 30, 0.2)`;
+        window.addEventListener('DOMContentLoaded', () => {
+            const hero = document.getElementById('hero-content');
+            const heroImg = document.getElementById('hero-image');
+            [hero, heroImg].forEach((el, i) => {
+                if (!el) return;
+                el.style.opacity = '0'; el.style.transform = 'translateY(16px)';
+                el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+                setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 100 + i * 120);
             });
         });
 
-        // 7. Project Filtering
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const projectItems = document.querySelectorAll('.project-item');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-white/10', 'active');
-                    b.classList.add('hover:bg-white/5');
-                });
-                btn.classList.remove('hover:bg-white/5');
-                btn.classList.add('bg-white/10', 'active');
-
-                const filter = btn.getAttribute('data-filter');
-
-                projectItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        gsap.to(item, { scale: 1, opacity: 1, display: 'block', duration: 0.4, ease: "power2.out" });
-                    } else {
-                        gsap.to(item, { scale: 0.8, opacity: 0, display: 'none', duration: 0.4, ease: "power2.out" });
-                    }
-                });
-
-                setTimeout(() => ScrollTrigger.refresh(), 500);
-            });
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600) backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+            else backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
         });
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // 8. Show More / Show Less Projects
         const showMoreBtn = document.getElementById('show-more-btn');
         const showMoreText = document.getElementById('show-more-text');
         const hiddenProjects = document.querySelectorAll('.hidden-project');
         let expanded = false;
-
         if (showMoreBtn) {
             showMoreBtn.addEventListener('click', function () {
                 expanded = !expanded;
-                hiddenProjects.forEach(el => {
-                    el.classList.toggle('hidden', !expanded);
-                });
+                hiddenProjects.forEach(el => el.classList.toggle('hidden', !expanded));
                 showMoreText.textContent = expanded ? 'Show Less' : 'Show More Projects';
-
-                // Re-apply the active filter so newly revealed cards respect it
-                const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
-                projectItems.forEach(item => {
-                    const matches = activeFilter === 'all' || item.getAttribute('data-category') === activeFilter;
-                    if (item.classList.contains('hidden-project') && !expanded) return; // stays hidden, handled above
-                    item.style.display = matches ? 'block' : 'none';
-                });
-
-                if (expanded && hiddenProjects.length > 0) {
-                    hiddenProjects[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-
-                setTimeout(() => ScrollTrigger.refresh(), 500);
+                if (expanded && hiddenProjects.length > 0) hiddenProjects[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                lucide.createIcons();
             });
         }
 
-        // 9. Project Preview Modal
         const PROJECT_DETAILS = {
-            "ai-resume": {
-                tags: ["AI", "React", "Resume Builder"],
-                title: "AI Resum Pro",
-                description: "منصة ذكية لبناء السيرة الذاتية باستخدام الذكاء الاصطناعي، بتساعد المستخدم يبني بروفايل احترافي في دقايق.",
-                gallery: [
-                    { img: "ai-resum.png", caption: "الصفحة الرئيسية: بتعرض للمستخدم خيارات إنشاء سيرة ذاتية جديدة أو تعديل واحدة موجودة." }
-                ]
-            },
-            "gess": {
-                tags: ["Next.js", "Three.js", "Firebase"],
-                title: "GESS EDU",
-                description: "منصة تعليمية تفاعلية لطلاب هندسة الجيوماتكس بجامعة الخرطوم، بتقدم تجربة ثلاثية الأبعاد غامرة للمحتوى الدراسي.",
-                gallery: [
-                    { img: "gess.jpeg", caption: "الواجهة الرئيسية للمنصة بتصميم Glassmorphism الداكن." }
-                ]
-            },
-            "clinic": {
-                tags: ["Full Stack", "Clinic Management"],
-                title: "Clinic System",
-                description: "نظام متكامل لإدارة العيادات، بيسهّل تسجيل بيانات المرضى، المواعيد، والمهام الإدارية.",
-                gallery: [
-                    { img: "clinic.png", caption: "لوحة التحكم الرئيسية لإدارة المواعيد والمرضى." }
-                ]
-            },
-            "gizmo": {
-                tags: ["Next.js / React", "E-Commerce"],
-                title: "Gizmo Store",
-                description: "متجر إلكتروني حديث للأجهزة التقنية، بواجهة عالية الأداء وسلة شراء ديناميكية.",
-                gallery: [
-                    { img: "gizmo.png", caption: "صفحة عرض المنتجات مع تصميم متجاوب." }
-                ]
-            },
-            "wishly": {
-                tags: ["Next.js / React", "Gift Store"],
-                title: "Wishly Store",
-                description: "متجر إلكتروني متخصص في الهدايا، بيقدّم هدايا فاخرة، بوكسات هدايا مخصصة، ورد، ومجموعات احتفالات بتجربة تسوق سلسة وعصرية.",
-                gallery: [
-                    { img: "wishly.png", caption: "واجهة المتجر الرئيسية بتصميم عصري يبرز منتجات الهدايا." }
-                ]
-            },
-            "interior": {
-                tags: ["Design", "Portfolio"],
-                title: "Interior Design Portfolio",
-                description: "بورتفوليو رقمي أنيق لعرض أعمال التصميم الداخلي والمعماري.",
-                gallery: [
-                    { img: "architectuer.png", caption: "معرض الأعمال الرئيسي للمصمم." }
-                ]
-            }
+            "ai-resume": { tags: ["AI", "React", "Resume Builder"], title: "AI Resum Pro", description: "منصة ذكية لبناء السيرة الذاتية باستخدام الذكاء الاصطناعي، بتساعد المستخدم يبني بروفايل احترافي في دقايق.", gallery: [{ img: "ai-resum.png", caption: "الصفحة الرئيسية: بتعرض للمستخدم خيارات إنشاء سيرة ذاتية جديدة أو تعديل واحدة موجودة." }] },
+            "gess": { tags: ["Next.js", "Three.js", "Firebase"], title: "GESS EDU", description: "منصة تعليمية تفاعلية لطلاب هندسة الجيوماتكس بجامعة الخرطوم، بتقدم تجربة ثلاثية الأبعاد غامرة للمحتوى الدراسي.", gallery: [{ img: "gess.jpeg", caption: "الواجهة الرئيسية للمنصة." }] },
+            "clinic": { tags: ["Full Stack", "Clinic Management"], title: "Clinic System", description: "نظام متكامل لإدارة العيادات، بيسهّل تسجيل بيانات المرضى، المواعيد، والمهام الإدارية.", gallery: [{ img: "clinic.png", caption: "لوحة التحكم الرئيسية لإدارة المواعيد والمرضى." }] },
+            "gizmo": { tags: ["Next.js / React", "E-Commerce"], title: "Gizmo Store", description: "متجر إلكتروني حديث للأجهزة التقنية، بواجهة عالية الأداء وسلة شراء ديناميكية.", gallery: [{ img: "gizmo.png", caption: "صفحة عرض المنتجات مع تصميم متجاوب." }] },
+            "wishly": { tags: ["Next.js / React", "Gift Store"], title: "Wishly Store", description: "متجر إلكتروني متخصص في الهدايا، بيقدّم هدايا فاخرة، بوكسات هدايا مخصصة، ورد، ومجموعات احتفالات بتجربة تسوق سلسة وعصرية.", gallery: [{ img: "wishly.png", caption: "واجهة المتجر الرئيسية." }] },
+            "eduhub": { tags: ["Next.js / React", "E-Learning"], title: "EduHub Platform", description: "منصة تعليمية تفاعلية بتوفر مسارات تعلم، مصادر دراسية، جلسات مباشرة، وأدوات أكاديمية للطلاب والمدرّسين.", gallery: [{ img: "eduhub.png", caption: "الواجهة الرئيسية لمنصة EduHub." }] },
+            "pharmacy": { tags: ["React / Node.js", "Management System"], title: "Pharmacy System", description: "نظام إدارة شامل للصيدليات، بيغطي المخزون، الوصفات الطبية، الفواتير، وتحليلات المبيعات.", gallery: [{ img: "pharmacy.png", caption: "لوحة التحكم الرئيسية لنظام الصيدلية." }] },
+            "interior": { tags: ["Design", "Portfolio"], title: "Interior Design Portfolio", description: "بورتفوليو رقمي أنيق لعرض أعمال التصميم الداخلي والمعماري.", gallery: [{ img: "architectuer.png", caption: "معرض الأعمال الرئيسي للمصمم." }] }
         };
 
         const overlay = document.getElementById('project-modal-overlay');
@@ -1501,50 +697,33 @@
         function openProjectModal(key) {
             const data = PROJECT_DETAILS[key];
             if (!data) return;
-
-            modalTags.innerHTML = data.tags.map(t =>
-                `<span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">${t}</span>`
-            ).join('');
-
+            modalTags.innerHTML = data.tags.map(t => `<span class="px-3 py-1 border border-line text-xs text-mute">${t}</span>`).join('');
             modalTitle.textContent = data.title;
             modalDesc.textContent = data.description;
-
             modalGallery.innerHTML = data.gallery.map(item => `
                 <div class="modal-gallery-item">
                     <img src="${item.img}" alt="${data.title}">
-                    <div class="modal-gallery-caption">
-                        <p class="text-gray-300 text-sm leading-relaxed">${item.caption}</p>
-                    </div>
-                </div>
-            `).join('');
-
-            overlay.classList.add('active');
-            document.body.classList.add('modal-open');
-            lucide.createIcons();
+                    <div class="modal-gallery-caption"><p class="text-mute text-sm leading-relaxed">${item.caption}</p></div>
+                </div>`).join('');
+            overlay.classList.add('active'); document.body.classList.add('modal-open'); lucide.createIcons();
         }
+        function closeProjectModal() { overlay.classList.remove('active'); document.body.classList.remove('modal-open'); }
+        document.querySelectorAll('.preview-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); openProjectModal(btn.getAttribute('data-project')); }));
+        closeBtn.addEventListener('click', closeProjectModal);
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeProjectModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProjectModal(); });
 
-        function closeProjectModal() {
-            overlay.classList.remove('active');
-            document.body.classList.remove('modal-open');
-        }
-
-        document.querySelectorAll('.preview-btn').forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                openProjectModal(btn.getAttribute('data-project'));
+        document.querySelectorAll('.faq-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-icon');
+                const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+                document.querySelectorAll('.faq-answer').forEach(a => { a.style.maxHeight = '0px'; });
+                document.querySelectorAll('.faq-icon').forEach(i => { i.style.transform = 'rotate(0deg)'; });
+                if (!isOpen) { answer.style.maxHeight = answer.scrollHeight + 'px'; icon.style.transform = 'rotate(45deg)'; }
             });
         });
-
-        closeBtn.addEventListener('click', closeProjectModal);
-        overlay.addEventListener('click', function (e) {
-            if (e.target === overlay) closeProjectModal();
-        });
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') closeProjectModal();
-        });
-
-        // 10. Form Handling (Firebase + Telegram)
-        // NOTE: see security note below the code block.
     </script>
 
     <script type="module">
@@ -1580,19 +759,13 @@
             const originalBtnHTML = submitBtn.innerHTML;
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<div class="w-5 h-5 border-2 border-dark border-t-transparent rounded-full animate-spin mx-auto"></div>';
+            submitBtn.innerHTML = '<div class="w-5 h-5 border-2 border-light border-t-transparent rounded-full animate-spin mx-auto"></div>';
             formStatus.classList.remove('hidden');
             formStatus.innerText = 'Sending your message...';
-            formStatus.style.color = '#FFFFFF';
+            formStatus.style.color = '#0B0B0B';
 
             try {
-                await addDoc(collection(db, "contacts"), {
-                    name: name,
-                    email: email,
-                    subject: subject,
-                    message: message,
-                    timestamp: new Date()
-                });
+                await addDoc(collection(db, "contacts"), { name, email, subject, message, timestamp: new Date() });
 
                 const telegramText = `
 🚀 New Message from Portfolio!
@@ -1602,97 +775,32 @@
 📝 Message: ${message}
                 `.trim();
 
-                // NOTE: parse_mode 'Markdown' was removed on purpose.
-                // Telegram's Markdown parser throws a 400 error whenever the
-                // text contains unescaped special characters (_, *, [, ], `,
-                // dots after numbers, etc.) which are extremely common in
-                // names, emails and free-text messages. When that happened,
-                // this fetch() call still "succeeded" from the browser's
-                // point of view (no network error), so the form showed
-                // "sent successfully" even though Telegram silently rejected
-                // the message and it never showed up in the chat.
                 const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
                 const telegramResponse = await fetch(telegramUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
-                        text: telegramText
-                    })
+                    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: telegramText })
                 });
-
                 const telegramResult = await telegramResponse.json();
-
                 if (!telegramResponse.ok || !telegramResult.ok) {
-                    // The message was saved to Firebase, but Telegram itself
-                    // rejected it. Log the real reason instead of pretending
-                    // it worked.
                     console.error('Telegram API rejected the message:', telegramResult);
                     throw new Error(telegramResult.description || 'Telegram delivery failed');
                 }
 
                 formStatus.innerText = 'Thank you! Your message has been sent successfully.';
-                formStatus.style.color = '#10B981';
+                formStatus.style.color = '#166534';
                 this.reset();
-
             } catch (error) {
                 console.error('Error handling form submission:', error);
-                // Show the real reason on-screen so the issue can be
-                // diagnosed without opening DevTools. Common causes:
-                // - Firestore permission-denied (security rules block writes)
-                // - Telegram "Unauthorized" (bad/revoked bot token)
-                // - Telegram "chat not found" (wrong chat_id, or the bot was
-                //   never started in a DM with that chat_id)
                 formStatus.innerText = 'Oops! ' + (error.message || 'Something went wrong. Please try again.');
-                formStatus.style.color = '#EF4444';
+                formStatus.style.color = '#B91C1C';
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnHTML;
                 lucide.createIcons();
-                setTimeout(() => {
-                    formStatus.classList.add('hidden');
-                }, 5000);
+                setTimeout(() => { formStatus.classList.add('hidden'); }, 5000);
             }
         });
-    </script>
-
-    <!-- FAQ Accordion + Back to Top -->
-    <script>
-        // FAQ Accordion
-        document.querySelectorAll('.faq-toggle').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.closest('.faq-item');
-                const answer = item.querySelector('.faq-answer');
-                const icon = item.querySelector('.faq-icon');
-                const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
-
-                // Close all other open items
-                document.querySelectorAll('.faq-answer').forEach(a => { a.style.maxHeight = '0px'; });
-                document.querySelectorAll('.faq-icon').forEach(i => { i.style.transform = 'rotate(0deg)'; });
-
-                if (!isOpen) {
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
-                    icon.style.transform = 'rotate(180deg)';
-                }
-            });
-        });
-
-        // Back to Top Button
-        const backToTopBtn = document.getElementById('back-to-top');
-        if (backToTopBtn) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 600) {
-                    backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-                    backToTopBtn.classList.add('opacity-100');
-                } else {
-                    backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-                    backToTopBtn.classList.remove('opacity-100');
-                }
-            });
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
     </script>
 </body>
 </html>
