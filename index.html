@@ -37,42 +37,78 @@
             --text: #ECEAE5; --muted: #9C9A93;
         }
         html, body { max-width: 100%; overflow-x: hidden; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        :root { --ease: cubic-bezier(0.65, 0, 0.35, 1); --ease-out: cubic-bezier(0.16, 1, 0.3, 1); }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; opacity: 0; }
+        body.is-ready { opacity: 1; transition: opacity 0.5s var(--ease-out); }
         h1, h2, h3, .font-serif { font-family: 'Lora', serif; }
         html[dir="rtl"] body, html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-serif { font-family: 'Cairo', sans-serif; font-style: normal !important; }
 
         ::selection { background: var(--text); color: var(--bg); }
         a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
 
-        .reveal { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
         .reveal.is-visible { opacity: 1; transform: translateY(0); }
         @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+        /* Heading wipe reveal — a clip-path curtain, not a glow or slide */
+        .reveal-heading { clip-path: inset(0 100% 0 0); opacity: 0; transition: clip-path 0.8s var(--ease-out), opacity 0.1s linear; }
+        html[dir="rtl"] .reveal-heading { clip-path: inset(0 0 0 100%); }
+        .reveal-heading.is-visible { clip-path: inset(0 0 0 0); opacity: 1; }
+        @media (prefers-reduced-motion: reduce) { .reveal-heading { clip-path: none; opacity: 1; } }
+
+        /* Image curtain reveal — used on hero photo + project thumbnails */
+        .img-reveal { position: relative; overflow: hidden; }
+        .img-reveal::after {
+            content: ''; position: absolute; inset: 0; background: var(--bg-panel);
+            transform: scaleX(1); transform-origin: right; transition: transform 0.9s var(--ease-out);
+            z-index: 2; pointer-events: none;
+        }
+        html[dir="rtl"] .img-reveal::after { transform-origin: left; }
+        .img-reveal.is-visible::after { transform: scaleX(0); }
+        .img-reveal img { transform: scale(1.08); transition: transform 1s var(--ease-out); }
+        .img-reveal.is-visible img { transform: scale(1); }
+        @media (prefers-reduced-motion: reduce) { .img-reveal::after { display: none; } .img-reveal img { transform: none; transition: none; } }
 
         .btn-primary {
             display: inline-flex; align-items: center; gap: 0.5rem; background: var(--text); color: var(--bg);
             padding: 0.85rem 1.5rem; font-weight: 500; font-size: 0.9375rem; border: 1px solid var(--text);
-            transition: opacity 0.15s ease;
+            transition: opacity 0.3s var(--ease), transform 0.2s var(--ease);
         }
         .btn-primary:hover { opacity: 0.82; }
+        .btn-primary:active { transform: scale(0.97); }
 
         .btn-secondary {
             display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--text);
             padding: 0.85rem 1.5rem; font-weight: 500; font-size: 0.9375rem; border: 1px solid var(--border);
-            transition: border-color 0.15s ease, background 0.15s ease;
+            transition: border-color 0.3s var(--ease), background 0.3s var(--ease), transform 0.2s var(--ease);
         }
         .btn-secondary:hover { border-color: var(--text); background: var(--bg-panel); }
+        .btn-secondary:active { transform: scale(0.97); }
 
-        .text-link { display: inline-flex; align-items: center; gap: 0.35rem; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: border-color 0.15s ease, color 0.15s ease; }
-        .text-link:hover { border-color: var(--text); }
+        .text-link { display: inline-flex; align-items: center; gap: 0.35rem; position: relative; padding-bottom: 2px; }
+        .text-link::after {
+            content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--text);
+            transition: right 0.35s var(--ease-out);
+        }
+        .text-link:hover::after { right: 0; }
 
-        .navlink { transition: opacity 0.15s ease; }
-        .navlink:hover { opacity: 0.6; }
+        .navlink { position: relative; padding-bottom: 2px; transition: opacity 0.2s ease; }
+        .navlink::after {
+            content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--text);
+            transition: right 0.3s var(--ease-out);
+        }
+        .navlink:hover::after { right: 0; }
+        .navlink:hover { opacity: 0.85; }
+
+        #navbar { transition: box-shadow 0.3s ease, border-color 0.3s ease; }
+        #navbar.scrolled { box-shadow: 0 1px 0 var(--border); }
 
         .icon-btn {
             display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px;
-            border: 1px solid var(--border); color: var(--text); transition: border-color 0.15s ease, background 0.15s ease;
+            border: 1px solid var(--border); color: var(--text); transition: border-color 0.25s var(--ease), background 0.25s var(--ease), transform 0.2s var(--ease);
         }
         .icon-btn:hover { border-color: var(--text); background: var(--bg-panel); }
+        .icon-btn:active { transform: scale(0.92); }
 
         .lang-switch { display: inline-flex; align-items: center; border: 1px solid var(--border); font-size: 0.75rem; overflow: hidden; }
         .lang-switch button { padding: 0.5rem 0.65rem; color: var(--muted); transition: background 0.15s ease, color 0.15s ease; }
@@ -81,10 +117,11 @@
         .service-item { border-top: 1px solid var(--border); padding: 1.75rem 0; }
         .service-item:last-child { border-bottom: 1px solid var(--border); }
 
-        .project-card { border: 1px solid var(--border); }
+        .project-card { border: 1px solid var(--border); transition: border-color 0.3s var(--ease), transform 0.4s var(--ease); }
+        .project-card:hover { border-color: var(--muted); transform: translateY(-3px); }
         .project-card .thumb { aspect-ratio: 4/3; overflow: hidden; border-bottom: 1px solid var(--border); }
-        .project-card .thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.15); transition: filter 0.3s ease; }
-        .project-card:hover .thumb img { filter: grayscale(0); }
+        .project-card .thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.15); transition: filter 0.4s var(--ease), transform 0.6s var(--ease); }
+        .project-card:hover .thumb img { filter: grayscale(0); transform: scale(1.045); }
 
         .underline-field { background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 0.7rem 0.2rem; color: var(--text); width: 100%; }
         .underline-field:focus { outline: none; border-bottom-color: var(--text); }
@@ -95,16 +132,18 @@
         #project-modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 10000;
             display: none; align-items: flex-start; justify-content: center; padding: 64px 20px; overflow-y: auto;
+            opacity: 0; transition: opacity 0.25s var(--ease);
         }
-        #project-modal-overlay.active { display: flex; }
-        #project-modal-box { background: var(--bg); border: 1px solid var(--border); max-width: 760px; width: 100%; padding: 36px; position: relative; }
+        #project-modal-overlay.active { opacity: 1; }
+        #project-modal-box { background: var(--bg); border: 1px solid var(--border); max-width: 760px; width: 100%; padding: 36px; position: relative; transform: translateY(14px) scale(0.98); transition: transform 0.3s var(--ease-out); }
+        #project-modal-overlay.active #project-modal-box { transform: translateY(0) scale(1); }
         @media (max-width: 640px) { #project-modal-overlay { padding: 80px 12px 24px; } #project-modal-box { padding: 22px; } }
         #modal-close-btn {
             position: absolute; top: 18px; inset-inline-end: 18px; width: 36px; height: 36px;
             background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-            cursor: pointer; color: var(--text);
+            cursor: pointer; color: var(--text); transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
         }
-        #modal-close-btn:hover { border-color: var(--text); }
+        #modal-close-btn:hover { border-color: var(--text); transform: rotate(90deg); }
         .modal-gallery-item { margin-top: 20px; border: 1px solid var(--border); }
         .modal-gallery-item img { width: 100%; display: block; max-height: 400px; object-fit: cover; }
         .modal-gallery-caption { padding: 14px 18px; background: var(--bg-panel); }
@@ -161,7 +200,7 @@
                 <button id="mobile-menu-btn" class="icon-btn" aria-label="Open menu"><i data-lucide="menu" class="w-4 h-4"></i></button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden flex-col px-6 pb-5 border-t" style="border-color:var(--border)">
+        <div id="mobile-menu" class="hidden md:hidden flex-col px-6 border-t overflow-hidden" style="border-color:var(--border); max-height:0; transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);">
             <a href="#about" data-i18n="nav.about" class="block py-2.5 text-sm">About</a>
             <a href="#services" data-i18n="nav.services" class="block py-2.5 text-sm">Services</a>
             <a href="#projects" data-i18n="nav.projects" class="block py-2.5 text-sm">Projects</a>
@@ -193,7 +232,7 @@
                     </div>
                 </div>
                 <div class="reveal">
-                    <div class="border" style="border-color:var(--border)">
+                    <div class="border img-reveal" style="border-color:var(--border)">
                         <img src="mazin.jpg" alt="Mazin Mohamed" class="w-full aspect-[3/4] object-cover" style="filter:grayscale(0.2)">
                     </div>
                 </div>
@@ -203,9 +242,9 @@
         <!-- What I Do -->
         <section id="services" class="py-16 md:py-20 border-t" style="border-color:var(--border)">
             <div class="max-w-5xl mx-auto px-6">
-                <h2 class="text-2xl md:text-3xl mb-10 reveal" data-i18n="services.title">What I Do</h2>
+                <h2 class="text-2xl md:text-3xl mb-10 reveal-heading" data-i18n="services.title">What I Do</h2>
 
-                <div class="reveal">
+                <div>
                     <div class="service-item flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8">
                         <h3 class="font-medium sm:w-52 flex-shrink-0" data-i18n="services.1.title">Web Development</h3>
                         <p style="color:var(--muted)" data-i18n="services.1.desc">Modern, responsive websites built for businesses and brands — fast, clean, and easy to maintain.</p>
@@ -229,12 +268,12 @@
         <!-- Projects -->
         <section id="projects" class="py-16 md:py-20 border-t" style="border-color:var(--border)">
             <div class="max-w-5xl mx-auto px-6">
-                <h2 class="text-2xl md:text-3xl mb-10 reveal" data-i18n="projects.title">Projects</h2>
+                <h2 class="text-2xl md:text-3xl mb-10 reveal-heading" data-i18n="projects.title">Projects</h2>
 
                 <div class="grid sm:grid-cols-2 gap-6" id="project-grid">
 
                     <div class="project-card project-item reveal">
-                        <div class="thumb"><img src="ai-resum.png" alt="AI Resum Pro" loading="lazy"></div>
+                        <div class="thumb img-reveal"><img src="ai-resum.png" alt="AI Resum Pro" loading="lazy"></div>
                         <div class="p-5">
                             <h3 class="font-medium text-lg mb-2">AI Resum Pro</h3>
                             <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.ai-resume.desc">An AI-powered resume builder that helps people put together a professional profile in minutes.</p>
@@ -247,7 +286,7 @@
                     </div>
 
                     <div class="project-card project-item reveal">
-                        <div class="thumb"><img src="gess.jpeg" alt="GESS EDU" loading="lazy"></div>
+                        <div class="thumb img-reveal"><img src="gess.jpeg" alt="GESS EDU" loading="lazy"></div>
                         <div class="p-5">
                             <h3 class="font-medium text-lg mb-2">GESS EDU</h3>
                             <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.gess.desc">An interactive learning platform for university students, with an immersive 3D take on course content.</p>
@@ -260,7 +299,7 @@
                     </div>
 
                     <div class="project-card project-item reveal">
-                        <div class="thumb"><img src="clinic.png" alt="Clinic System" loading="lazy"></div>
+                        <div class="thumb img-reveal"><img src="clinic.png" alt="Clinic System" loading="lazy"></div>
                         <div class="p-5">
                             <h3 class="font-medium text-lg mb-2">Clinic System</h3>
                             <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.clinic.desc">A clinic management system that streamlines patient records, appointments, and admin work.</p>
@@ -273,7 +312,7 @@
                     </div>
 
                     <div class="project-card project-item reveal">
-                        <div class="thumb"><img src="gizmo.png" alt="Gizmo Store" loading="lazy"></div>
+                        <div class="thumb img-reveal"><img src="gizmo.png" alt="Gizmo Store" loading="lazy"></div>
                         <div class="p-5">
                             <h3 class="font-medium text-lg mb-2">Gizmo Store</h3>
                             <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.gizmo.desc">A modern tech e-commerce storefront with a fast, high-performance UI and a dynamic cart.</p>
@@ -286,7 +325,7 @@
                     </div>
 
                     <div class="project-card project-item hidden-project hidden reveal">
-                        <div class="thumb"><img src="wishly.png" alt="Wishly Store" loading="lazy"></div>
+                        <div class="thumb img-reveal"><img src="wishly.png" alt="Wishly Store" loading="lazy"></div>
                         <div class="p-5">
                             <h3 class="font-medium text-lg mb-2">Wishly Store</h3>
                             <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.wishly.desc">An online gift store — personalized gift boxes, flowers, and celebration collections.</p>
@@ -298,7 +337,7 @@
                     </div>
 
                     <div class="project-card project-item hidden-project hidden reveal">
-                        <div class="thumb"><img src="eduhub.png" alt="EduHub" loading="lazy"></div>
+                        <div class="thumb img-reveal"><img src="eduhub.png" alt="EduHub" loading="lazy"></div>
                         <div class="p-5">
                             <h3 class="font-medium text-lg mb-2">EduHub Platform</h3>
                             <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.eduhub.desc">Learning paths, course resources, live sessions, and academic tools for students and tutors.</p>
@@ -309,7 +348,7 @@
                     </div>
 
                     <div class="project-card project-item hidden-project hidden reveal">
-                        <div class="thumb"><img src="pharmacy.png" alt="Pharmacy System" loading="lazy"></div>
+                        <div class="thumb img-reveal"><img src="pharmacy.png" alt="Pharmacy System" loading="lazy"></div>
                         <div class="p-5">
                             <h3 class="font-medium text-lg mb-2">Pharmacy System</h3>
                             <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.pharmacy.desc">Inventory, prescriptions, billing, and sales analytics for pharmacies.</p>
@@ -321,7 +360,7 @@
                     </div>
 
                     <div class="project-card project-item hidden-project hidden reveal">
-                        <div class="thumb"><img src="architectuer.png" alt="Interior Design Portfolio" loading="lazy"></div>
+                        <div class="thumb img-reveal"><img src="architectuer.png" alt="Interior Design Portfolio" loading="lazy"></div>
                         <div class="p-5">
                             <h3 class="font-medium text-lg mb-2">Interior Design Portfolio</h3>
                             <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.interior.desc">A digital portfolio showcasing architectural and interior design work.</p>
@@ -371,8 +410,8 @@
         <!-- Skills -->
         <section id="skills" class="py-16 md:py-20 border-t" style="border-color:var(--border)">
             <div class="max-w-5xl mx-auto px-6">
-                <h2 class="text-2xl md:text-3xl mb-10 reveal" data-i18n="skills.title">Skills &amp; Technologies</h2>
-                <div class="grid sm:grid-cols-3 gap-10 reveal">
+                <h2 class="text-2xl md:text-3xl mb-10 reveal-heading" data-i18n="skills.title">Skills &amp; Technologies</h2>
+                <div class="grid sm:grid-cols-3 gap-10">
                     <div>
                         <h3 class="text-sm font-medium mb-4" data-i18n="skills.group1">Frontend Development</h3>
                         <ul class="space-y-2 text-sm" style="color:var(--muted)">
@@ -398,8 +437,8 @@
         <!-- How I Work -->
         <section id="process" class="py-16 md:py-20 border-t" style="border-color:var(--border); background:var(--bg-panel)">
             <div class="max-w-5xl mx-auto px-6">
-                <h2 class="text-2xl md:text-3xl mb-10 reveal" data-i18n="process.title">How I Work</h2>
-                <ol class="grid sm:grid-cols-2 gap-x-10 gap-y-6 reveal">
+                <h2 class="text-2xl md:text-3xl mb-10 reveal-heading" data-i18n="process.title">How I Work</h2>
+                <ol class="grid sm:grid-cols-2 gap-x-10 gap-y-6">
                     <li>
                         <h3 class="font-medium mb-1" data-i18n="process.1.title">1. Discover</h3>
                         <p class="text-sm leading-relaxed" style="color:var(--muted)" data-i18n="process.1.desc">Understand what you actually need — the problem, the users, and what success looks like.</p>
@@ -424,7 +463,7 @@
         <!-- FAQ -->
         <section id="faq" class="py-16 md:py-20 border-t" style="border-color:var(--border)">
             <div class="max-w-3xl mx-auto px-6">
-                <h2 class="text-2xl md:text-3xl mb-10 reveal" data-i18n="faq.title">Frequently Asked Questions</h2>
+                <h2 class="text-2xl md:text-3xl mb-10 reveal-heading" data-i18n="faq.title">Frequently Asked Questions</h2>
                 <div class="border-t" style="border-color:var(--border)" id="faq-container">
                     <div class="faq-item border-b" style="border-color:var(--border)">
                         <button class="faq-toggle w-full flex justify-between items-center text-left py-5">
@@ -622,8 +661,21 @@
         /* Mobile menu */
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); mobileMenu.classList.toggle('flex'); });
-        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex'); }));
+        let menuOpen = false;
+        function setMenu(open) {
+            menuOpen = open;
+            if (open) {
+                mobileMenu.classList.remove('hidden'); mobileMenu.classList.add('flex');
+                mobileMenu.style.paddingBottom = '1.25rem';
+                requestAnimationFrame(() => { mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px'; });
+            } else {
+                mobileMenu.style.maxHeight = '0px';
+                mobileMenu.style.paddingBottom = '0px';
+                setTimeout(() => { mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex'); }, 350);
+            }
+        }
+        mobileMenuBtn.addEventListener('click', () => setMenu(!menuOpen));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
 
         /* Socials */
         const socialContainer = document.getElementById('social-container');
@@ -639,12 +691,36 @@
             socialContainer.innerHTML += `<a href="${url}" target="_blank" rel="noopener noreferrer" class="icon-btn">${socialIcons[key] || ''}</a>`;
         });
 
-        /* Reveal on scroll — the one, single, subtle motion effect */
-        const revealEls = document.querySelectorAll('.reveal');
+        /* Page-load fade-in */
+        window.addEventListener('DOMContentLoaded', () => {
+            requestAnimationFrame(() => document.body.classList.add('is-ready'));
+        });
+
+        /* Nav elevation on scroll */
+        const navbarEl = document.getElementById('navbar');
+        window.addEventListener('scroll', () => { navbarEl.classList.toggle('scrolled', window.scrollY > 8); });
+
+        /* Reveal on scroll — refined easing, with light stagger inside each group */
+        const revealEls = document.querySelectorAll('.reveal, .reveal-heading, .img-reveal');
         const io = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); } });
         }, { threshold: 0.12 });
         revealEls.forEach(el => io.observe(el));
+
+        const staggerGroups = [
+            document.querySelectorAll('#services .service-item'),
+            document.querySelectorAll('#project-grid .project-item'),
+            document.querySelectorAll('#skills .grid > div'),
+            document.querySelectorAll('#process ol > li'),
+            document.querySelectorAll('#faq-container .faq-item'),
+        ];
+        staggerGroups.forEach(group => {
+            group.forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.transitionDelay = Math.min(i, 7) * 60 + 'ms';
+                io.observe(el);
+            });
+        });
 
         /* Show more projects */
         const showMoreBtn = document.getElementById('show-more-btn');
@@ -654,7 +730,13 @@
         if (showMoreBtn) {
             showMoreBtn.addEventListener('click', function () {
                 expanded = !expanded;
-                hiddenProjects.forEach(el => el.classList.toggle('hidden', !expanded));
+                hiddenProjects.forEach(el => {
+                    el.classList.toggle('hidden', !expanded);
+                    if (expanded) {
+                        el.classList.add('is-visible');
+                        el.querySelectorAll('.img-reveal').forEach(t => t.classList.add('is-visible'));
+                    }
+                });
                 const lang = document.documentElement.getAttribute('lang');
                 showMoreText.textContent = expanded ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? (translations.ar['projects.showMore']) : 'Show more projects');
                 if (expanded && hiddenProjects.length > 0) hiddenProjects[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -684,9 +766,14 @@
             modalTitle.textContent = data.title;
             modalDesc.textContent = data.description;
             modalGallery.innerHTML = data.gallery.map(item => `<div class="modal-gallery-item"><img src="${item.img}" alt="${data.title}"><div class="modal-gallery-caption"><p class="text-sm leading-relaxed" style="color:var(--muted)">${item.caption}</p></div></div>`).join('');
-            overlay.classList.add('active'); document.body.classList.add('modal-open'); lucide.createIcons();
+            overlay.style.display = 'flex';
+            requestAnimationFrame(() => { overlay.classList.add('active'); });
+            document.body.classList.add('modal-open'); lucide.createIcons();
         }
-        function closeProjectModal() { overlay.classList.remove('active'); document.body.classList.remove('modal-open'); }
+        function closeProjectModal() {
+            overlay.classList.remove('active');
+            setTimeout(() => { overlay.style.display = 'none'; document.body.classList.remove('modal-open'); }, 250);
+        }
         document.querySelectorAll('.preview-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); openProjectModal(btn.getAttribute('data-project')); }));
         closeBtn.addEventListener('click', closeProjectModal);
         overlay.addEventListener('click', (e) => { if (e.target === overlay) closeProjectModal(); });
