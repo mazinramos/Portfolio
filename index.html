@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="light" class="scroll-smooth splash-active">
+<html lang="en" dir="ltr" data-theme="light" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,40 +20,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Splash screen (critical CSS: sits before the blocking Tailwind script so it paints first) -->
-    <style id="splash-style">
-        html.splash-active { background: #111820; overflow: hidden; }
-        #splash {
-            position: fixed; inset: 0; z-index: 100000; display: grid; place-items: center; direction: ltr;
-            background: #111820; opacity: 1; visibility: visible;
-            transition: opacity 0.6s cubic-bezier(0.65, 0, 0.35, 1), visibility 0s linear 0.6s;
-            animation: sp-failsafe 0.01s linear 8s forwards; /* last-resort: never trap the visitor */
-        }
-        #splash.is-hiding { opacity: 0; visibility: hidden; pointer-events: none; }
-        #splash::before {
-            content: ''; position: absolute; width: min(90vmin, 640px); aspect-ratio: 1; pointer-events: none;
-            background: radial-gradient(closest-side, rgba(255,255,255,0.055), rgba(255,255,255,0));
-        }
-        .sp-logo { position: relative; display: block; width: clamp(150px, 36vmin, 300px); height: auto; opacity: 0; animation: sp-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards; }
-        #splash circle { transform-box: fill-box; transform-origin: center; animation: sp-pop 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards, sp-wave 2.6s infinite; animation-delay: var(--d, 0s), calc(var(--d, 0s) + 1s); }
-        #splash .b0{--d:0.000s}#splash .b1{--d:0.042s}#splash .b2{--d:0.084s}#splash .b3{--d:0.126s}#splash .b4{--d:0.168s}#splash .b5{--d:0.210s}#splash .b6{--d:0.252s}#splash .b7{--d:0.294s}#splash .b8{--d:0.335s}#splash .b9{--d:0.377s}#splash .b10{--d:0.419s}#splash .b11{--d:0.461s}#splash .b12{--d:0.503s}#splash .b13{--d:0.545s}#splash .b14{--d:0.587s}#splash .b15{--d:0.629s}#splash .b16{--d:0.671s}#splash .b17{--d:0.713s}#splash .b18{--d:0.755s}#splash .b19{--d:0.797s}#splash .b20{--d:0.839s}#splash .b21{--d:0.881s}#splash .b22{--d:0.923s}#splash .b23{--d:0.965s}#splash .b24{--d:1.006s}#splash .b25{--d:1.048s}#splash .b26{--d:1.090s}#splash .b27{--d:1.132s}#splash .b28{--d:1.174s}#splash .b29{--d:1.216s}#splash .b30{--d:1.258s}#splash .b31{--d:1.300s}
-        @keyframes sp-in { to { opacity: 1; } }
-        @keyframes sp-pop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        @keyframes sp-wave {
-            0%   { transform: scale(1);    opacity: 1;    animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1); }
-            14%  { transform: scale(1.35); opacity: 1;    animation-timing-function: cubic-bezier(0.5, 0, 0.3, 1); }
-            32%  { transform: scale(0.2);  opacity: 0.12; animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1); }
-            50%, 100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes sp-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
-        @media (prefers-reduced-motion: reduce) {
-            #splash { transition-duration: 0.2s, 0s; transition-delay: 0s, 0.2s; }
-            #splash circle { animation: none; }
-            .sp-logo { animation-duration: 0.01s; animation-delay: 0s; }
-        }
-    </style>
-    <noscript><style>#splash { display: none; } html.splash-active { overflow: auto; background: none; }</style></noscript>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { theme: { extend: {
@@ -72,7 +38,7 @@
         }
         html, body { max-width: 100%; overflow-x: hidden; }
         :root { --ease: cubic-bezier(0.65, 0, 0.35, 1); --ease-out: cubic-bezier(0.16, 1, 0.3, 1); }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; opacity: 0; }
         body.is-ready { opacity: 1; transition: opacity 0.5s var(--ease-out); }
         h1, h2, h3, .font-serif { font-family: 'Lora', serif; }
         html[dir="rtl"] body, html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-serif { font-family: 'Cairo', sans-serif; font-style: normal !important; }
@@ -102,6 +68,17 @@
         .img-reveal img { transform: scale(1.08); transition: transform 1s var(--ease-out); }
         .img-reveal.is-visible img { transform: scale(1); }
         @media (prefers-reduced-motion: reduce) { .img-reveal::after { display: none; } .img-reveal img { transform: none; transition: none; } }
+
+        /* Word-mask reveal — for the hero headline: each word rises from behind a hidden line */
+        .split-outer { display: inline-block; overflow: hidden; vertical-align: top; }
+        .split-inner { display: inline-block; transform: translateY(115%); transition: transform 0.7s var(--ease-out); }
+        .split-target.is-visible .split-inner { transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .split-inner { transform: none; transition: none; } }
+
+        /* Word-fade reveal — for key paragraphs: text materializes word by word */
+        .word-fade { display: inline-block; opacity: 0; transform: translateY(6px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
+        .word-fade-target.is-visible .word-fade { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .word-fade { opacity: 1; transform: none; transition: none; } }
 
         .btn-primary {
             display: inline-flex; align-items: center; gap: 0.5rem; background: var(--text); color: var(--bg);
@@ -133,6 +110,13 @@
         }
         .navlink:hover::after { right: 0; }
         .navlink:hover { opacity: 0.85; }
+        .navlink.active-link::after { right: 0; }
+        .navlink.active-link { opacity: 1; }
+
+        #back-to-top { transition: opacity 0.3s var(--ease), transform 0.2s var(--ease); }
+        #back-to-top:hover { transform: translateY(-2px); }
+        #back-to-top:active { transform: scale(0.94); }
+        #back-to-top-ring { transition: stroke-dashoffset 0.1s linear; }
 
         #navbar { transition: box-shadow 0.3s ease, border-color 0.3s ease; }
         #navbar.scrolled { box-shadow: 0 1px 0 var(--border); }
@@ -156,6 +140,13 @@
         .project-card .thumb { aspect-ratio: 4/3; overflow: hidden; border-bottom: 1px solid var(--border); }
         .project-card .thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.15); transition: filter 0.4s var(--ease), transform 0.6s var(--ease); }
         .project-card:hover .thumb img { filter: grayscale(0); transform: scale(1.045); }
+
+        .filter-pill {
+            padding: 0.45rem 0.95rem; font-size: 0.8125rem; border: 1px solid var(--border); color: var(--muted);
+            transition: border-color 0.2s var(--ease), color 0.2s var(--ease), background 0.2s var(--ease);
+        }
+        .filter-pill:hover { border-color: var(--muted); color: var(--text); }
+        .filter-pill.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
         .underline-field { background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 0.7rem 0.2rem; color: var(--text); width: 100%; }
         .underline-field:focus { outline: none; border-bottom-color: var(--text); }
@@ -182,6 +173,31 @@
         .modal-gallery-item img { width: 100%; display: block; max-height: 400px; object-fit: cover; }
         .modal-gallery-caption { padding: 14px 18px; background: var(--bg-panel); }
         body.modal-open { overflow: hidden; }
+
+        /* ============ SPLASH SCREEN (logo loader) ============ */
+        #splash-screen {
+            position: fixed; inset: 0; z-index: 100000;
+            background: #111820;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 1; visibility: visible;
+            transition: opacity 0.6s var(--ease-out), visibility 0.6s var(--ease-out);
+        }
+        #splash-screen.splash-hide { opacity: 0; visibility: hidden; pointer-events: none; }
+        #splash-logo-wrap { width: min(34vw, 200px); max-width: 240px; min-width: 120px; }
+        #splash-logo-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
+        #splash-logo-wrap circle {
+            fill: #FFFFFF;
+            transform-box: fill-box; transform-origin: center;
+            animation: splashDotWave 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+        @keyframes splashDotWave {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.58); opacity: 0.5; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #splash-logo-wrap circle { animation: none; }
+            #splash-screen { transition: opacity 0.3s linear; }
+        }
     </style>
 
     <script type="application/ld+json">
@@ -198,27 +214,269 @@
 </head>
 <body>
 
-    <!-- Splash screen: the logo itself is the loader -->
-    <div id="splash" role="status" aria-label="Loading">
-        <svg class="sp-logo" viewBox="162 182 315 276" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g fill="#fff"><circle class="b5" cx="172.2" cy="438.3" r="5.61"/><circle class="b3" cx="172.3" cy="326.7" r="5.58"/><circle class="b3" cx="172.4" cy="348.8" r="5.58"/><circle class="b1" cx="172.6" cy="258.4" r="5.56"/><circle class="b4" cx="172.8" cy="416.2" r="5.59"/><circle class="b4" cx="172.9" cy="371.9" r="5.58"/><circle class="b0" cx="173" cy="192.4" r="5.61"/><circle class="b4" cx="173" cy="393.9" r="5.56"/><circle class="b2" cx="173.1" cy="281.8" r="5.56"/><circle class="b0" cx="173.2" cy="213.9" r="5.62"/><circle class="b2" cx="173.3" cy="304.4" r="5.62"/><circle class="b1" cx="173.6" cy="236.9" r="5.58"/><circle class="b4" cx="181.9" cy="358.1" r="4.85"/><circle class="b4" cx="182.1" cy="336.4" r="4.93"/><circle class="b5" cx="182.1" cy="380.8" r="4.79"/><circle class="b2" cx="182.7" cy="268.4" r="5.3"/><circle class="b1" cx="182.9" cy="223.5" r="5.35"/><circle class="b3" cx="183" cy="291.7" r="5.3"/><circle class="b2" cx="183.2" cy="246.5" r="5.34"/><circle class="b3" cx="183.2" cy="314.1" r="5.31"/><circle class="b1" cx="183.4" cy="202.1" r="5.38"/><circle class="b6" cx="183.7" cy="427" r="3.73"/><circle class="b5" cx="183.9" cy="404.6" r="4.23"/><circle class="b6" cx="184" cy="449.7" r="2.84"/><circle class="b6" cx="191.3" cy="389.8" r="3.99"/><circle class="b5" cx="191.5" cy="367.4" r="4.15"/><circle class="b5" cx="192" cy="346" r="4.37"/><circle class="b3" cx="192.7" cy="233.2" r="5.12"/><circle class="b3" cx="192.7" cy="278.4" r="5.03"/><circle class="b3" cx="192.9" cy="256" r="5.14"/><circle class="b4" cx="193" cy="301.6" r="5"/><circle class="b2" cx="193.1" cy="211.8" r="5.15"/><circle class="b4" cx="193.1" cy="324" r="4.97"/><circle class="b6" cx="194.8" cy="415.3" r="2.83"/><circle class="b7" cx="195.4" cy="439.2" r="1.93"/><circle class="b7" cx="200.5" cy="398.9" r="3.24"/><circle class="b6" cx="201" cy="376.8" r="3.53"/><circle class="b6" cx="201.8" cy="355.6" r="3.75"/><circle class="b4" cx="202.3" cy="242.7" r="4.88"/><circle class="b4" cx="202.5" cy="265.6" r="4.88"/><circle class="b5" cx="202.7" cy="288.4" r="4.75"/><circle class="b3" cx="202.8" cy="221.4" r="4.92"/><circle class="b5" cx="202.9" cy="333.8" r="4.69"/><circle class="b5" cx="203" cy="311.5" r="4.73"/><circle class="b8" cx="206.9" cy="427.5" r="1.73"/><circle class="b8" cx="209.7" cy="407.9" r="2.47"/><circle class="b7" cx="210.5" cy="386.2" r="2.84"/><circle class="b7" cx="211.6" cy="365.2" r="3.12"/><circle class="b5" cx="212" cy="252.4" r="4.69"/><circle class="b5" cx="212.1" cy="275.1" r="4.61"/><circle class="b4" cx="212.6" cy="231.1" r="4.7"/><circle class="b6" cx="212.8" cy="298.4" r="4.49"/><circle class="b7" cx="212.9" cy="343.6" r="4.37"/><circle class="b6" cx="213" cy="321.4" r="4.42"/><circle class="b8" cx="218.7" cy="416.9" r="1.7"/><circle class="b8" cx="220" cy="395.5" r="2.18"/><circle class="b8" cx="221.5" cy="374.9" r="2.54"/><circle class="b6" cx="221.7" cy="262" r="4.43"/><circle class="b6" cx="221.7" cy="284.7" r="4.37"/><circle class="b5" cx="222.3" cy="240.7" r="4.46"/><circle class="b8" cx="222.7" cy="353.4" r="4.09"/><circle class="b7" cx="222.9" cy="308.4" r="4.24"/><circle class="b7" cx="223" cy="331.3" r="4.13"/><circle class="b9" cx="229.5" cy="404.8" r="1.47"/><circle class="b7" cx="231.3" cy="294.3" r="4.17"/><circle class="b7" cx="231.4" cy="271.7" r="4.21"/><circle class="b9" cx="231.4" cy="384.5" r="1.93"/><circle class="b6" cx="232" cy="250.4" r="4.27"/><circle class="b9" cx="232.6" cy="363.2" r="3.76"/><circle class="b8" cx="232.9" cy="318.4" r="3.95"/><circle class="b8" cx="233" cy="341.2" r="3.83"/><circle class="b8" cx="240.9" cy="303.8" r="3.88"/><circle class="b8" cx="241" cy="281.4" r="3.98"/><circle class="b10" cx="241.2" cy="394.2" r="1.35"/><circle class="b7" cx="241.7" cy="260.1" r="4.05"/><circle class="b10" cx="242.5" cy="373" r="3.47"/><circle class="b9" cx="243" cy="328.4" r="3.66"/><circle class="b9" cx="243" cy="351.2" r="3.56"/><circle class="b9" cx="250.5" cy="313.4" r="3.69"/><circle class="b9" cx="250.7" cy="290.9" r="3.74"/><circle class="b9" cx="251.5" cy="269.8" r="3.83"/><circle class="b11" cx="252.4" cy="382.9" r="3.14"/><circle class="b10" cx="253" cy="361" r="3.29"/><circle class="b10" cx="253.1" cy="338.3" r="3.4"/><circle class="b10" cx="260.1" cy="323" r="3.43"/><circle class="b10" cx="260.4" cy="300.6" r="3.53"/><circle class="b10" cx="261.2" cy="279.4" r="3.59"/><circle class="b12" cx="262.9" cy="370.9" r="2.98"/><circle class="b11" cx="263.2" cy="348.4" r="3.09"/><circle class="b12" cx="263.3" cy="393.7" r="2.82"/><circle class="b11" cx="269.7" cy="332.5" r="3.2"/><circle class="b11" cx="270.1" cy="310.2" r="3.32"/><circle class="b11" cx="270.9" cy="289.1" r="3.39"/><circle class="b13" cx="272.1" cy="402.5" r="2.56"/><circle class="b13" cx="274" cy="381.9" r="2.68"/><circle class="b12" cx="274.3" cy="359.4" r="2.83"/><circle class="b12" cx="279.4" cy="342.1" r="2.98"/><circle class="b12" cx="279.8" cy="319.9" r="3.06"/><circle class="b12" cx="280.7" cy="298.7" r="3.15"/><circle class="b14" cx="282" cy="412.3" r="2.26"/><circle class="b14" cx="282.9" cy="390.8" r="2.42"/><circle class="b14" cx="285.8" cy="370.8" r="2.56"/><circle class="b14" cx="289" cy="351.7" r="2.69"/><circle class="b13" cx="289.5" cy="329.5" r="2.86"/><circle class="b13" cx="290.4" cy="308.4" r="2.97"/><circle class="b15" cx="291.9" cy="422.1" r="1.95"/><circle class="b15" cx="292.9" cy="400.8" r="2.12"/><circle class="b14" cx="293.3" cy="378.3" r="2.3"/><circle class="b14" cx="297.5" cy="360.2" r="2.48"/><circle class="b14" cx="299.1" cy="339.2" r="2.6"/><circle class="b14" cx="300.1" cy="318.1" r="2.71"/><circle class="b16" cx="301.7" cy="432" r="1.65"/><circle class="b16" cx="302.9" cy="410.6" r="1.83"/><circle class="b16" cx="303.5" cy="388.4" r="2.07"/><circle class="b16" cx="308.1" cy="370.8" r="2.3"/><circle class="b15" cx="308.9" cy="348.8" r="2.42"/><circle class="b15" cx="309.8" cy="327.8" r="2.55"/><circle class="b17" cx="311.6" cy="441.8" r="1.34"/><circle class="b17" cx="312.9" cy="420.6" r="1.57"/><circle class="b17" cx="313.5" cy="398.3" r="1.78"/><circle class="b17" cx="317.8" cy="380.5" r="2.05"/><circle class="b16" cx="318.5" cy="358.5" r="2.16"/><circle class="b16" cx="319.5" cy="337.4" r="2.3"/><circle class="b18" cx="321.5" cy="451.5" r="0.9"/><circle class="b18" cx="322.9" cy="430.4" r="1.31"/><circle class="b18" cx="323.5" cy="408.4" r="1.45"/><circle class="b18" cx="327.4" cy="390" r="1.72"/><circle class="b17" cx="328.2" cy="368.2" r="1.94"/><circle class="b17" cx="329.4" cy="347.1" r="2.13"/><circle class="b17" cx="331.4" cy="326.7" r="1.5"/><circle class="b19" cx="332.7" cy="440.3" r="0.85"/><circle class="b19" cx="333.6" cy="418.3" r="1.2"/><circle class="b19" cx="337" cy="399.5" r="1.5"/><circle class="b18" cx="337.8" cy="377.7" r="1.66"/><circle class="b18" cx="339.1" cy="356.7" r="1.81"/><circle class="b18" cx="341.5" cy="336.7" r="1.88"/><circle class="b17" cx="341.6" cy="314.3" r="0.98"/><circle class="b20" cx="343.7" cy="428.3" r="0.88"/><circle class="b20" cx="346.6" cy="409.1" r="1.38"/><circle class="b19" cx="347.6" cy="387.3" r="1.51"/><circle class="b19" cx="348.8" cy="366.4" r="1.67"/><circle class="b19" cx="351.1" cy="323.8" r="1.49"/><circle class="b19" cx="351.6" cy="346.9" r="2.19"/><circle class="b18" cx="354.1" cy="304.7" r="1.28"/><circle class="b21" cx="356.2" cy="418.7" r="0.97"/><circle class="b21" cx="357.4" cy="397" r="1.22"/><circle class="b20" cx="358.3" cy="376.1" r="1.4"/><circle class="b20" cx="360.8" cy="333.3" r="1.8"/><circle class="b20" cx="361.8" cy="356.8" r="2.48"/><circle class="b19" cx="364.1" cy="314.8" r="1.68"/><circle class="b19" cx="364.5" cy="292.5" r="0.83"/><circle class="b22" cx="367" cy="406.7" r="0.89"/><circle class="b21" cx="368.2" cy="385.8" r="1.28"/><circle class="b21" cx="370.3" cy="342.8" r="2.18"/><circle class="b21" cx="371.8" cy="366.9" r="2.83"/><circle class="b21" cx="374.4" cy="325" r="2.04"/><circle class="b20" cx="374.7" cy="302.6" r="1.49"/><circle class="b20" cx="375.8" cy="280.6" r="0.93"/><circle class="b22" cx="377.7" cy="395.5" r="0.88"/><circle class="b22" cx="379.9" cy="352.2" r="2.55"/><circle class="b22" cx="381.9" cy="376.9" r="3.19"/><circle class="b22" cx="384.6" cy="335" r="2.47"/><circle class="b21" cx="384.8" cy="312.5" r="1.97"/><circle class="b21" cx="385.7" cy="290.8" r="1.58"/><circle class="b21" cx="386.9" cy="269.8" r="1.25"/><circle class="b23" cx="389.4" cy="361.7" r="2.82"/><circle class="b23" cx="392.1" cy="386.9" r="3.5"/><circle class="b23" cx="394.6" cy="345.1" r="2.87"/><circle class="b22" cx="395" cy="322.5" r="2.41"/><circle class="b22" cx="395.7" cy="300.7" r="2.09"/><circle class="b22" cx="396.8" cy="279.5" r="1.76"/><circle class="b21" cx="398.2" cy="258.5" r="1.27"/><circle class="b24" cx="399" cy="371.2" r="3.16"/><circle class="b25" cx="402.3" cy="396.9" r="3.83"/><circle class="b24" cx="404.8" cy="355.1" r="3.22"/><circle class="b24" cx="405.1" cy="332.6" r="2.83"/><circle class="b23" cx="405.8" cy="310.8" r="2.58"/><circle class="b23" cx="406.6" cy="289.3" r="2.28"/><circle class="b22" cx="407.9" cy="268" r="1.92"/><circle class="b25" cx="408.6" cy="380.7" r="3.54"/><circle class="b22" cx="409.9" cy="247" r="1.52"/><circle class="b26" cx="412.3" cy="407" r="4.19"/><circle class="b25" cx="415" cy="365.2" r="3.6"/><circle class="b25" cx="415.2" cy="342.5" r="3.31"/><circle class="b24" cx="415.9" cy="320.7" r="3.09"/><circle class="b24" cx="416.5" cy="299.1" r="2.84"/><circle class="b24" cx="417.6" cy="277.6" r="2.55"/><circle class="b26" cx="418.2" cy="390.2" r="3.85"/><circle class="b23" cx="419.2" cy="256.3" r="2.13"/><circle class="b23" cx="421" cy="236.2" r="0.87"/><circle class="b27" cx="422.5" cy="417.1" r="4.54"/><circle class="b26" cx="425.2" cy="375.3" r="4.01"/><circle class="b26" cx="425.4" cy="352.6" r="3.76"/><circle class="b25" cx="425.9" cy="330.8" r="3.57"/><circle class="b25" cx="426.3" cy="308.8" r="3.35"/><circle class="b25" cx="427.3" cy="287.1" r="3.16"/><circle class="b27" cx="427.7" cy="399.7" r="4.2"/><circle class="b24" cx="428.5" cy="265.5" r="2.83"/><circle class="b24" cx="430.1" cy="245.1" r="1.96"/><circle class="b28" cx="432.6" cy="427.1" r="4.91"/><circle class="b24" cx="432.7" cy="225.3" r="1.48"/><circle class="b27" cx="435.3" cy="385.4" r="4.41"/><circle class="b27" cx="435.6" cy="362.5" r="4.21"/><circle class="b26" cx="436" cy="340.8" r="4.07"/><circle class="b26" cx="436.1" cy="318.5" r="3.94"/><circle class="b26" cx="437" cy="296.7" r="3.75"/><circle class="b28" cx="437.2" cy="409.1" r="4.56"/><circle class="b25" cx="437.9" cy="274.9" r="3.51"/><circle class="b25" cx="439.3" cy="254.1" r="2.84"/><circle class="b29" cx="442.8" cy="437.2" r="5.26"/><circle class="b25" cx="443.7" cy="236" r="2.86"/><circle class="b25" cx="443.8" cy="213.8" r="1.85"/><circle class="b28" cx="445.5" cy="395.5" r="4.81"/><circle class="b28" cx="445.7" cy="372.5" r="4.67"/><circle class="b27" cx="446" cy="328.3" r="4.48"/><circle class="b28" cx="446.1" cy="350.8" r="4.58"/><circle class="b27" cx="446.6" cy="306.3" r="4.34"/><circle class="b29" cx="446.7" cy="418.6" r="4.9"/><circle class="b26" cx="447.2" cy="284.1" r="4.21"/><circle class="b26" cx="448.5" cy="263" r="3.76"/><circle class="b30" cx="452.9" cy="447.2" r="5.58"/><circle class="b25" cx="454.4" cy="201.9" r="2.85"/><circle class="b26" cx="454.8" cy="246.8" r="4.18"/><circle class="b26" cx="454.9" cy="224.9" r="3.77"/><circle class="b29" cx="455.7" cy="405.5" r="5.19"/><circle class="b28" cx="455.9" cy="338" r="5.04"/><circle class="b29" cx="455.9" cy="382.5" r="5.12"/><circle class="b29" cx="456.2" cy="360.8" r="5.07"/><circle class="b28" cx="456.3" cy="315.8" r="4.98"/><circle class="b30" cx="456.3" cy="428.2" r="5.25"/><circle class="b27" cx="456.5" cy="293.4" r="4.91"/><circle class="b27" cx="457.6" cy="272.1" r="4.68"/><circle class="b29" cx="465.7" cy="347.8" r="5.64"/><circle class="b28" cx="465.8" cy="302.7" r="5.59"/><circle class="b31" cx="465.8" cy="415.6" r="5.57"/><circle class="b27" cx="465.9" cy="257.6" r="5.6"/><circle class="b31" cx="465.9" cy="437.6" r="5.59"/><circle class="b29" cx="466" cy="325.4" r="5.57"/><circle class="b30" cx="466" cy="392.5" r="5.55"/><circle class="b27" cx="466.1" cy="235.9" r="5.6"/><circle class="b30" cx="466.2" cy="370.8" r="5.59"/><circle class="b27" cx="466.3" cy="213.5" r="5.55"/><circle class="b28" cx="466.8" cy="281" r="5.61"/><circle class="b26" cx="467" cy="191.3" r="4.53"/></g></svg>
+    <div id="splash-screen" role="status" aria-label="Loading">
+        <div id="splash-logo-wrap">
+            <svg viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="173.0" cy="192.4" r="5.81" style="animation-delay:0.23s"/>
+                    <circle cx="467.1" cy="191.3" r="4.79" style="animation-delay:0.62s"/>
+                    <circle cx="183.3" cy="202.1" r="5.61" style="animation-delay:0.243s"/>
+                    <circle cx="454.4" cy="201.9" r="3.04" style="animation-delay:0.604s"/>
+                    <circle cx="193.0" cy="211.8" r="5.44" style="animation-delay:0.256s"/>
+                    <circle cx="466.3" cy="213.5" r="5.86" style="animation-delay:0.619s"/>
+                    <circle cx="173.2" cy="213.9" r="5.84" style="animation-delay:0.23s"/>
+                    <circle cx="443.8" cy="213.7" r="1.95" style="animation-delay:0.589s"/>
+                    <circle cx="202.8" cy="221.5" r="5.11" style="animation-delay:0.269s"/>
+                    <circle cx="183.0" cy="223.5" r="5.59" style="animation-delay:0.243s"/>
+                    <circle cx="454.9" cy="225.0" r="3.83" style="animation-delay:0.604s"/>
+                    <circle cx="432.9" cy="225.1" r="1.60" style="animation-delay:0.575s"/>
+                    <circle cx="212.6" cy="231.1" r="4.92" style="animation-delay:0.282s"/>
+                    <circle cx="192.6" cy="233.2" r="5.38" style="animation-delay:0.256s"/>
+                    <circle cx="466.1" cy="235.9" r="5.75" style="animation-delay:0.619s"/>
+                    <circle cx="173.6" cy="237.0" r="5.84" style="animation-delay:0.231s"/>
+                    <circle cx="443.7" cy="235.9" r="3.04" style="animation-delay:0.589s"/>
+                    <circle cx="420.7" cy="236.3" r="0.98" style="animation-delay:0.559s"/>
+                    <circle cx="222.2" cy="240.7" r="4.69" style="animation-delay:0.295s"/>
+                    <circle cx="202.3" cy="242.7" r="5.11" style="animation-delay:0.269s"/>
+                    <circle cx="183.1" cy="246.4" r="5.56" style="animation-delay:0.243s"/>
+                    <circle cx="454.8" cy="246.8" r="4.48" style="animation-delay:0.604s"/>
+                    <circle cx="430.3" cy="245.5" r="2.11" style="animation-delay:0.571s"/>
+                    <circle cx="232.1" cy="250.4" r="4.44" style="animation-delay:0.308s"/>
+                    <circle cx="410.0" cy="247.0" r="1.69" style="animation-delay:0.545s"/>
+                    <circle cx="212.0" cy="252.4" r="4.92" style="animation-delay:0.282s"/>
+                    <circle cx="192.9" cy="256.1" r="5.41" style="animation-delay:0.256s"/>
+                    <circle cx="439.3" cy="254.1" r="3.04" style="animation-delay:0.583s"/>
+                    <circle cx="465.9" cy="257.5" r="5.84" style="animation-delay:0.619s"/>
+                    <circle cx="172.6" cy="258.4" r="5.86" style="animation-delay:0.229s"/>
+                    <circle cx="419.1" cy="256.5" r="2.19" style="animation-delay:0.557s"/>
+                    <circle cx="241.8" cy="260.1" r="4.30" style="animation-delay:0.321s"/>
+                    <circle cx="221.7" cy="262.1" r="4.65" style="animation-delay:0.294s"/>
+                    <circle cx="398.0" cy="258.5" r="1.38" style="animation-delay:0.529s"/>
+                    <circle cx="448.4" cy="263.0" r="3.99" style="animation-delay:0.595s"/>
+                    <circle cx="202.4" cy="265.6" r="5.14" style="animation-delay:0.269s"/>
+                    <circle cx="182.7" cy="268.4" r="5.44" style="animation-delay:0.243s"/>
+                    <circle cx="428.5" cy="265.7" r="3.09" style="animation-delay:0.569s"/>
+                    <circle cx="251.5" cy="269.7" r="4.11" style="animation-delay:0.334s"/>
+                    <circle cx="407.5" cy="268.1" r="2.03" style="animation-delay:0.541s"/>
+                    <circle cx="231.4" cy="271.6" r="4.41" style="animation-delay:0.307s"/>
+                    <circle cx="457.6" cy="272.0" r="4.92" style="animation-delay:0.608s"/>
+                    <circle cx="386.8" cy="269.8" r="1.38" style="animation-delay:0.514s"/>
+                    <circle cx="212.0" cy="275.1" r="4.72" style="animation-delay:0.282s"/>
+                    <circle cx="437.9" cy="274.9" r="3.70" style="animation-delay:0.582s"/>
+                    <circle cx="192.6" cy="278.4" r="5.29" style="animation-delay:0.256s"/>
+                    <circle cx="261.1" cy="279.3" r="3.78" style="animation-delay:0.347s"/>
+                    <circle cx="417.5" cy="277.7" r="2.65" style="animation-delay:0.554s"/>
+                    <circle cx="466.8" cy="280.9" r="5.75" style="animation-delay:0.62s"/>
+                    <circle cx="173.0" cy="281.9" r="5.78" style="animation-delay:0.23s"/>
+                    <circle cx="241.0" cy="281.4" r="4.18" style="animation-delay:0.32s"/>
+                    <circle cx="396.9" cy="279.5" r="2.03" style="animation-delay:0.527s"/>
+                    <circle cx="375.7" cy="280.7" r="0.98" style="animation-delay:0.499s"/>
+                    <circle cx="447.2" cy="284.1" r="4.51" style="animation-delay:0.594s"/>
+                    <circle cx="221.7" cy="284.7" r="4.55" style="animation-delay:0.294s"/>
+                    <circle cx="202.8" cy="288.4" r="5.01" style="animation-delay:0.269s"/>
+                    <circle cx="427.4" cy="287.2" r="3.43" style="animation-delay:0.568s"/>
+                    <circle cx="270.9" cy="289.1" r="3.61" style="animation-delay:0.36s"/>
+                    <circle cx="183.0" cy="291.7" r="5.56" style="animation-delay:0.243s"/>
+                    <circle cx="406.5" cy="289.4" r="2.33" style="animation-delay:0.54s"/>
+                    <circle cx="250.8" cy="291.0" r="3.91" style="animation-delay:0.333s"/>
+                    <circle cx="456.5" cy="293.4" r="5.20" style="animation-delay:0.606s"/>
+                    <circle cx="231.3" cy="294.3" r="4.44" style="animation-delay:0.307s"/>
+                    <circle cx="385.9" cy="290.9" r="1.60" style="animation-delay:0.512s"/>
+                    <circle cx="364.5" cy="292.5" r="1.13" style="animation-delay:0.484s"/>
+                    <circle cx="436.9" cy="296.7" r="3.95" style="animation-delay:0.58s"/>
+                    <circle cx="212.8" cy="298.2" r="4.65" style="animation-delay:0.283s"/>
+                    <circle cx="280.5" cy="298.6" r="3.29" style="animation-delay:0.373s"/>
+                    <circle cx="193.1" cy="301.6" r="5.26" style="animation-delay:0.256s"/>
+                    <circle cx="260.3" cy="300.6" r="3.70" style="animation-delay:0.346s"/>
+                    <circle cx="416.5" cy="299.2" r="2.99" style="animation-delay:0.553s"/>
+                    <circle cx="465.9" cy="302.7" r="5.81" style="animation-delay:0.619s"/>
+                    <circle cx="173.2" cy="304.2" r="5.86" style="animation-delay:0.23s"/>
+                    <circle cx="395.6" cy="300.6" r="2.19" style="animation-delay:0.525s"/>
+                    <circle cx="240.8" cy="303.7" r="4.11" style="animation-delay:0.32s"/>
+                    <circle cx="374.9" cy="302.9" r="1.60" style="animation-delay:0.498s"/>
+                    <circle cx="446.6" cy="306.4" r="4.51" style="animation-delay:0.593s"/>
+                    <circle cx="223.0" cy="308.3" r="4.48" style="animation-delay:0.296s"/>
+                    <circle cx="354.0" cy="304.7" r="1.49" style="animation-delay:0.47s"/>
+                    <circle cx="290.5" cy="308.5" r="3.19" style="animation-delay:0.386s"/>
+                    <circle cx="426.2" cy="308.8" r="3.57" style="animation-delay:0.566s"/>
+                    <circle cx="203.0" cy="311.4" r="4.95" style="animation-delay:0.27s"/>
+                    <circle cx="270.1" cy="310.2" r="3.57" style="animation-delay:0.359s"/>
+                    <circle cx="183.2" cy="314.2" r="5.59" style="animation-delay:0.243s"/>
+                    <circle cx="405.9" cy="310.9" r="2.65" style="animation-delay:0.539s"/>
+                    <circle cx="250.6" cy="313.5" r="4.03" style="animation-delay:0.333s"/>
+                    <circle cx="384.7" cy="312.5" r="2.11" style="animation-delay:0.511s"/>
+                    <circle cx="456.4" cy="315.7" r="5.14" style="animation-delay:0.606s"/>
+                    <circle cx="341.5" cy="314.5" r="1.13" style="animation-delay:0.454s"/>
+                    <circle cx="364.0" cy="315.0" r="1.69" style="animation-delay:0.483s"/>
+                    <circle cx="232.9" cy="318.5" r="4.26" style="animation-delay:0.309s"/>
+                    <circle cx="436.1" cy="318.5" r="4.15" style="animation-delay:0.579s"/>
+                    <circle cx="300.0" cy="318.0" r="2.82" style="animation-delay:0.398s"/>
+                    <circle cx="213.0" cy="321.3" r="4.55" style="animation-delay:0.283s"/>
+                    <circle cx="279.7" cy="319.9" r="3.24" style="animation-delay:0.371s"/>
+                    <circle cx="415.9" cy="320.7" r="3.24" style="animation-delay:0.552s"/>
+                    <circle cx="193.1" cy="323.9" r="5.29" style="animation-delay:0.256s"/>
+                    <circle cx="260.1" cy="323.0" r="3.70" style="animation-delay:0.345s"/>
+                    <circle cx="466.0" cy="325.4" r="5.78" style="animation-delay:0.619s"/>
+                    <circle cx="395.0" cy="322.6" r="2.59" style="animation-delay:0.525s"/>
+                    <circle cx="172.2" cy="326.9" r="5.75" style="animation-delay:0.229s"/>
+                    <circle cx="351.1" cy="323.9" r="1.60" style="animation-delay:0.466s"/>
+                    <circle cx="374.5" cy="324.9" r="2.19" style="animation-delay:0.497s"/>
+                    <circle cx="445.9" cy="328.2" r="4.65" style="animation-delay:0.592s"/>
+                    <circle cx="243.0" cy="328.4" r="3.91" style="animation-delay:0.323s"/>
+                    <circle cx="309.9" cy="327.9" r="2.65" style="animation-delay:0.412s"/>
+                    <circle cx="331.1" cy="326.9" r="1.60" style="animation-delay:0.44s"/>
+                    <circle cx="289.5" cy="329.5" r="3.19" style="animation-delay:0.384s"/>
+                    <circle cx="223.1" cy="331.5" r="4.33" style="animation-delay:0.296s"/>
+                    <circle cx="425.9" cy="330.9" r="3.74" style="animation-delay:0.566s"/>
+                    <circle cx="203.0" cy="333.7" r="4.89" style="animation-delay:0.27s"/>
+                    <circle cx="269.6" cy="332.6" r="3.24" style="animation-delay:0.358s"/>
+                    <circle cx="405.0" cy="332.5" r="2.88" style="animation-delay:0.538s"/>
+                    <circle cx="182.3" cy="336.4" r="5.20" style="animation-delay:0.242s"/>
+                    <circle cx="360.8" cy="333.3" r="1.95" style="animation-delay:0.479s"/>
+                    <circle cx="384.7" cy="334.9" r="2.65" style="animation-delay:0.511s"/>
+                    <circle cx="455.9" cy="338.0" r="5.38" style="animation-delay:0.605s"/>
+                    <circle cx="253.0" cy="338.2" r="3.61" style="animation-delay:0.336s"/>
+                    <circle cx="341.5" cy="336.7" r="2.11" style="animation-delay:0.454s"/>
+                    <circle cx="319.5" cy="337.5" r="2.26" style="animation-delay:0.424s"/>
+                    <circle cx="299.1" cy="339.1" r="2.76" style="animation-delay:0.397s"/>
+                    <circle cx="436.1" cy="340.6" r="4.22" style="animation-delay:0.579s"/>
+                    <circle cx="233.0" cy="341.2" r="3.99" style="animation-delay:0.309s"/>
+                    <circle cx="212.8" cy="343.7" r="4.62" style="animation-delay:0.283s"/>
+                    <circle cx="279.3" cy="342.3" r="3.24" style="animation-delay:0.371s"/>
+                    <circle cx="415.2" cy="342.5" r="3.39" style="animation-delay:0.551s"/>
+                    <circle cx="370.5" cy="342.6" r="2.33" style="animation-delay:0.492s"/>
+                    <circle cx="192.0" cy="346.0" r="4.69" style="animation-delay:0.255s"/>
+                    <circle cx="394.6" cy="345.3" r="3.04" style="animation-delay:0.524s"/>
+                    <circle cx="465.8" cy="347.9" r="5.81" style="animation-delay:0.619s"/>
+                    <circle cx="172.4" cy="348.9" r="5.86" style="animation-delay:0.229s"/>
+                    <circle cx="329.4" cy="347.1" r="2.33" style="animation-delay:0.437s"/>
+                    <circle cx="351.6" cy="346.9" r="2.33" style="animation-delay:0.467s"/>
+                    <circle cx="263.4" cy="348.5" r="3.29" style="animation-delay:0.35s"/>
+                    <circle cx="308.9" cy="348.9" r="2.65" style="animation-delay:0.41s"/>
+                    <circle cx="446.0" cy="350.9" r="4.72" style="animation-delay:0.592s"/>
+                    <circle cx="243.0" cy="351.0" r="3.78" style="animation-delay:0.323s"/>
+                    <circle cx="289.0" cy="351.6" r="2.82" style="animation-delay:0.384s"/>
+                    <circle cx="425.5" cy="352.5" r="4.07" style="animation-delay:0.565s"/>
+                    <circle cx="222.7" cy="353.4" r="4.26" style="animation-delay:0.296s"/>
+                    <circle cx="380.0" cy="352.2" r="2.71" style="animation-delay:0.505s"/>
+                    <circle cx="201.7" cy="355.6" r="3.99" style="animation-delay:0.268s"/>
+                    <circle cx="404.8" cy="355.1" r="3.48" style="animation-delay:0.538s"/>
+                    <circle cx="181.9" cy="358.2" r="5.11" style="animation-delay:0.242s"/>
+                    <circle cx="339.0" cy="356.5" r="1.95" style="animation-delay:0.45s"/>
+                    <circle cx="361.9" cy="356.9" r="2.65" style="animation-delay:0.481s"/>
+                    <circle cx="456.1" cy="360.7" r="5.41" style="animation-delay:0.606s"/>
+                    <circle cx="274.3" cy="359.4" r="3.04" style="animation-delay:0.364s"/>
+                    <circle cx="318.5" cy="358.5" r="2.26" style="animation-delay:0.423s"/>
+                    <circle cx="253.0" cy="361.0" r="3.43" style="animation-delay:0.336s"/>
+                    <circle cx="297.6" cy="360.0" r="2.71" style="animation-delay:0.395s"/>
+                    <circle cx="389.4" cy="361.7" r="3.04" style="animation-delay:0.517s"/>
+                    <circle cx="435.5" cy="362.5" r="4.37" style="animation-delay:0.578s"/>
+                    <circle cx="232.6" cy="363.3" r="3.99" style="animation-delay:0.309s"/>
+                    <circle cx="211.6" cy="365.2" r="3.34" style="animation-delay:0.281s"/>
+                    <circle cx="415.0" cy="365.0" r="3.78" style="animation-delay:0.551s"/>
+                    <circle cx="191.5" cy="367.5" r="4.37" style="animation-delay:0.254s"/>
+                    <circle cx="371.9" cy="366.8" r="2.99" style="animation-delay:0.494s"/>
+                    <circle cx="348.9" cy="366.4" r="1.87" style="animation-delay:0.463s"/>
+                    <circle cx="466.1" cy="370.9" r="5.78" style="animation-delay:0.619s"/>
+                    <circle cx="173.0" cy="371.8" r="5.78" style="animation-delay:0.23s"/>
+                    <circle cx="328.5" cy="368.1" r="2.03" style="animation-delay:0.436s"/>
+                    <circle cx="262.9" cy="371.0" r="3.09" style="animation-delay:0.349s"/>
+                    <circle cx="399.0" cy="371.3" r="3.43" style="animation-delay:0.53s"/>
+                    <circle cx="445.7" cy="372.5" r="4.98" style="animation-delay:0.592s"/>
+                    <circle cx="285.8" cy="371.0" r="2.71" style="animation-delay:0.38s"/>
+                    <circle cx="308.1" cy="370.9" r="2.52" style="animation-delay:0.409s"/>
+                    <circle cx="242.4" cy="373.0" r="3.70" style="animation-delay:0.322s"/>
+                    <circle cx="425.3" cy="375.4" r="4.18" style="animation-delay:0.565s"/>
+                    <circle cx="221.5" cy="374.9" r="2.76" style="animation-delay:0.294s"/>
+                    <circle cx="201.0" cy="377.0" r="3.78" style="animation-delay:0.267s"/>
+                    <circle cx="382.0" cy="377.0" r="3.43" style="animation-delay:0.507s"/>
+                    <circle cx="358.3" cy="376.0" r="1.49" style="animation-delay:0.476s"/>
+                    <circle cx="182.0" cy="380.7" r="4.95" style="animation-delay:0.242s"/>
+                    <circle cx="293.4" cy="378.2" r="2.46" style="animation-delay:0.39s"/>
+                    <circle cx="338.0" cy="377.8" r="1.78" style="animation-delay:0.449s"/>
+                    <circle cx="408.6" cy="380.7" r="3.87" style="animation-delay:0.543s"/>
+                    <circle cx="455.8" cy="382.6" r="5.38" style="animation-delay:0.605s"/>
+                    <circle cx="317.6" cy="380.4" r="2.19" style="animation-delay:0.422s"/>
+                    <circle cx="252.4" cy="382.8" r="3.34" style="animation-delay:0.335s"/>
+                    <circle cx="273.9" cy="381.9" r="2.76" style="animation-delay:0.364s"/>
+                    <circle cx="435.2" cy="385.3" r="4.58" style="animation-delay:0.578s"/>
+                    <circle cx="231.3" cy="384.5" r="2.11" style="animation-delay:0.307s"/>
+                    <circle cx="210.4" cy="386.3" r="3.04" style="animation-delay:0.279s"/>
+                    <circle cx="392.0" cy="387.0" r="3.78" style="animation-delay:0.521s"/>
+                    <circle cx="368.2" cy="385.8" r="1.38" style="animation-delay:0.489s"/>
+                    <circle cx="191.4" cy="389.8" r="4.18" style="animation-delay:0.254s"/>
+                    <circle cx="347.9" cy="387.1" r="1.60" style="animation-delay:0.462s"/>
+                    <circle cx="303.5" cy="388.5" r="2.26" style="animation-delay:0.403s"/>
+                    <circle cx="418.3" cy="390.3" r="4.07" style="animation-delay:0.556s"/>
+                    <circle cx="466.0" cy="392.4" r="5.78" style="animation-delay:0.619s"/>
+                    <circle cx="173.0" cy="393.9" r="5.78" style="animation-delay:0.23s"/>
+                    <circle cx="283.0" cy="390.8" r="2.71" style="animation-delay:0.376s"/>
+                    <circle cx="327.5" cy="390.0" r="1.95" style="animation-delay:0.435s"/>
+                    <circle cx="263.4" cy="393.7" r="3.04" style="animation-delay:0.35s"/>
+                    <circle cx="445.5" cy="395.5" r="5.05" style="animation-delay:0.592s"/>
+                    <circle cx="241.1" cy="394.1" r="1.60" style="animation-delay:0.32s"/>
+                    <circle cx="402.3" cy="396.8" r="4.03" style="animation-delay:0.534s"/>
+                    <circle cx="220.0" cy="395.5" r="2.26" style="animation-delay:0.292s"/>
+                    <circle cx="378.0" cy="395.5" r="0.80" style="animation-delay:0.502s"/>
+                    <circle cx="200.5" cy="398.8" r="3.39" style="animation-delay:0.266s"/>
+                    <circle cx="357.5" cy="397.0" r="1.38" style="animation-delay:0.475s"/>
+                    <circle cx="427.7" cy="399.6" r="4.41" style="animation-delay:0.568s"/>
+                    <circle cx="313.4" cy="398.4" r="2.03" style="animation-delay:0.416s"/>
+                    <circle cx="292.9" cy="400.6" r="2.33" style="animation-delay:0.389s"/>
+                    <circle cx="337.0" cy="399.7" r="1.49" style="animation-delay:0.448s"/>
+                    <circle cx="272.0" cy="402.5" r="2.65" style="animation-delay:0.361s"/>
+                    <circle cx="184.0" cy="404.6" r="4.41" style="animation-delay:0.244s"/>
+                    <circle cx="455.6" cy="405.5" r="5.35" style="animation-delay:0.605s"/>
+                    <circle cx="412.3" cy="407.0" r="4.48" style="animation-delay:0.548s"/>
+                    <circle cx="229.7" cy="405.0" r="1.49" style="animation-delay:0.305s"/>
+                    <circle cx="437.2" cy="409.1" r="4.72" style="animation-delay:0.581s"/>
+                    <circle cx="209.8" cy="408.0" r="2.71" style="animation-delay:0.279s"/>
+                    <circle cx="367.0" cy="406.5" r="0.80" style="animation-delay:0.487s"/>
+                    <circle cx="323.9" cy="408.1" r="1.60" style="animation-delay:0.43s"/>
+                    <circle cx="346.7" cy="409.0" r="1.49" style="animation-delay:0.46s"/>
+                    <circle cx="303.0" cy="410.5" r="1.95" style="animation-delay:0.402s"/>
+                    <circle cx="465.9" cy="415.6" r="5.84" style="animation-delay:0.619s"/>
+                    <circle cx="172.8" cy="416.1" r="5.81" style="animation-delay:0.23s"/>
+                    <circle cx="282.0" cy="412.3" r="2.39" style="animation-delay:0.375s"/>
+                    <circle cx="194.7" cy="415.4" r="3.04" style="animation-delay:0.259s"/>
+                    <circle cx="422.5" cy="417.1" r="4.82" style="animation-delay:0.561s"/>
+                    <circle cx="446.7" cy="418.6" r="5.14" style="animation-delay:0.593s"/>
+                    <circle cx="219.0" cy="417.0" r="1.69" style="animation-delay:0.291s"/>
+                    <circle cx="333.5" cy="418.5" r="1.13" style="animation-delay:0.443s"/>
+                    <circle cx="356.3" cy="418.7" r="0.98" style="animation-delay:0.473s"/>
+                    <circle cx="312.9" cy="420.7" r="1.69" style="animation-delay:0.416s"/>
+                    <circle cx="291.7" cy="422.2" r="1.95" style="animation-delay:0.387s"/>
+                    <circle cx="432.5" cy="427.1" r="5.11" style="animation-delay:0.574s"/>
+                    <circle cx="456.3" cy="428.1" r="5.59" style="animation-delay:0.606s"/>
+                    <circle cx="183.7" cy="427.1" r="3.95" style="animation-delay:0.244s"/>
+                    <circle cx="207.0" cy="427.5" r="1.95" style="animation-delay:0.275s"/>
+                    <circle cx="343.7" cy="428.3" r="0.98" style="animation-delay:0.456s"/>
+                    <circle cx="323.0" cy="430.5" r="1.38" style="animation-delay:0.429s"/>
+                    <circle cx="301.8" cy="432.0" r="1.78" style="animation-delay:0.401s"/>
+                    <circle cx="442.9" cy="437.1" r="5.47" style="animation-delay:0.588s"/>
+                    <circle cx="466.0" cy="437.6" r="5.78" style="animation-delay:0.619s"/>
+                    <circle cx="172.2" cy="438.1" r="5.81" style="animation-delay:0.229s"/>
+                    <circle cx="195.5" cy="439.3" r="2.11" style="animation-delay:0.26s"/>
+                    <circle cx="332.7" cy="440.3" r="0.98" style="animation-delay:0.442s"/>
+                    <circle cx="311.7" cy="442.0" r="1.49" style="animation-delay:0.414s"/>
+                    <circle cx="452.9" cy="447.2" r="5.78" style="animation-delay:0.602s"/>
+                    <circle cx="184.0" cy="449.7" r="2.99" style="animation-delay:0.244s"/>
+                    <circle cx="321.5" cy="451.5" r="1.13" style="animation-delay:0.427s"/>
+            </svg>
+        </div>
     </div>
     <script>
-        /* Splash controller — hides shortly after window.load, with a hard fallback */
         (function () {
-            var root = document.documentElement, splash = document.getElementById('splash');
-            if (!splash) { root.classList.remove('splash-active'); return; }
-            var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-            var start = Date.now(), MIN_SHOW = reduce ? 300 : 2400, HOLD = reduce ? 0 : 400, MAX_WAIT = 5500, done = false;
-            function finish() {
-                if (done) return; done = true;
-                splash.classList.add('is-hiding');
-                root.classList.remove('splash-active');
-                document.dispatchEvent(new Event('splash:done'));
-                setTimeout(function () { if (splash.parentNode) splash.parentNode.removeChild(splash); }, 900);
+            var splash = document.getElementById('splash-screen');
+            if (!splash) return;
+            var hidden = false;
+            function hideSplash() {
+                if (hidden) return;
+                hidden = true;
+                splash.classList.add('splash-hide');
+                setTimeout(function () { if (splash.parentNode) splash.parentNode.removeChild(splash); }, 650);
             }
-            function onLoaded() { setTimeout(finish, Math.max(HOLD, MIN_SHOW - (Date.now() - start))); }
-            if (document.readyState === 'complete') onLoaded(); else window.addEventListener('load', onLoaded);
-            setTimeout(finish, MAX_WAIT);
+            window.addEventListener('load', function () { setTimeout(hideSplash, 350); });
+            setTimeout(hideSplash, 4500); // fallback — never let the user get stuck on the loader
         })();
     </script>
 
@@ -279,10 +537,10 @@
             <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
                 <div class="reveal">
                     <p class="text-sm mb-4" style="color:var(--muted)" data-i18n="hero.eyebrow">Available for new projects</p>
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl leading-tight mb-6" data-i18n="hero.heading">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl leading-tight mb-6 split-target" data-i18n="hero.heading">
                         Web developer building websites, apps, and digital tools for businesses.
                     </h1>
-                    <p class="text-base leading-relaxed mb-8 max-w-lg" style="color:var(--muted)" data-i18n="hero.desc">
+                    <p class="text-base leading-relaxed mb-8 max-w-lg word-fade-target" style="color:var(--muted)" data-i18n="hero.desc">
                         I design and build modern websites, web applications, dashboards, and custom digital solutions — turning what you need into something people can actually use.
                     </p>
                     <div class="flex flex-wrap gap-4">
@@ -327,135 +585,15 @@
         <!-- Projects -->
         <section id="projects" class="py-16 md:py-20 border-t" style="border-color:var(--border)">
             <div class="max-w-5xl mx-auto px-6">
-                <h2 class="text-2xl md:text-3xl mb-10 reveal-heading" data-i18n="projects.title">Projects</h2>
+                <h2 class="text-2xl md:text-3xl mb-8 reveal-heading" data-i18n="projects.title">Projects</h2>
 
-                <div class="grid sm:grid-cols-2 gap-6" id="project-grid">
+                <div id="project-filters" class="flex flex-wrap gap-2 mb-8"></div>
 
-                  <div class="project-card project-item reveal">
-    <div class="thumb img-reveal">
-        <img src="lavender.png" alt="Lavender Edu" loading="lazy">
-    </div>
-    <div class="p-5">
-        <h3 class="font-medium text-lg mb-2">Lavender Edu</h3>
-        <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.lavender.desc">
-            An educational platform designed to help students access courses, learning resources, and academic content in one place.
-        </p>
-        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-            <a href="https://lavender-edu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="proj.viewLive">
-                View live site
-            </a>
-            <a href="https://github.com/mazinramos/Lavender-Edu" target="_blank" rel="noopener noreferrer" class="text-link">
-                GitHub
-            </a>
-            <button class="preview-btn text-link" data-project="lavender" data-i18n="proj.details">
-                Case study
-            </button>
-        </div>
-    </div>
-</div>
+                <div id="project-loading" class="text-sm" style="color:var(--muted)" data-i18n="projects.loading">Loading projects…</div>
 
-                    <div class="project-card project-item reveal">
-                        <div class="thumb img-reveal"><img src="ai-resum.png" alt="AI Resum Pro" loading="lazy"></div>
-                        <div class="p-5">
-                            <h3 class="font-medium text-lg mb-2">AI Resum Pro</h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.ai-resume.desc">An AI-powered resume builder that helps people put together a professional profile in minutes.</p>
-                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                                <a href="https://ai-resum-pro.vercel.app" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="proj.viewLive">View live site</a>
-                                <a href="https://github.com/mazinramos/Ai-Resum-Pro.git" target="_blank" rel="noopener noreferrer" class="text-link">GitHub</a>
-                                <button class="preview-btn text-link" data-project="ai-resume" data-i18n="proj.details">Case study</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="grid sm:grid-cols-2 gap-6" id="project-grid"></div>
 
-                    <div class="project-card project-item reveal">
-                        <div class="thumb img-reveal"><img src="gess.jpeg" alt="GESS EDU" loading="lazy"></div>
-                        <div class="p-5">
-                            <h3 class="font-medium text-lg mb-2">GESS EDU</h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.gess.desc">An interactive learning platform for university students, with an immersive 3D take on course content.</p>
-                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                                <a href="https://gess-platform.vercel.app" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="proj.viewLive">View live site</a>
-                                <a href="https://github.com/mazinflwo/GESS-Platform.git" target="_blank" rel="noopener noreferrer" class="text-link">GitHub</a>
-                                <button class="preview-btn text-link" data-project="gess" data-i18n="proj.details">Case study</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card project-item reveal">
-                        <div class="thumb img-reveal"><img src="clinic.png" alt="Clinic System" loading="lazy"></div>
-                        <div class="p-5">
-                            <h3 class="font-medium text-lg mb-2">Clinic System</h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.clinic.desc">A clinic management system that streamlines patient records, appointments, and admin work.</p>
-                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                                <a href="https://clinic-system-flame.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="proj.viewLive">View live site</a>
-                                <a href="https://github.com/mazinramos/Clinic-System.git" target="_blank" rel="noopener noreferrer" class="text-link">GitHub</a>
-                                <button class="preview-btn text-link" data-project="clinic" data-i18n="proj.details">Case study</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card project-item reveal">
-                        <div class="thumb img-reveal"><img src="gizmo.png" alt="Gizmo Store" loading="lazy"></div>
-                        <div class="p-5">
-                            <h3 class="font-medium text-lg mb-2">Gizmo Store</h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.gizmo.desc">A modern tech e-commerce storefront with a fast, high-performance UI and a dynamic cart.</p>
-                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                                <a href="https://gizmo-store.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="proj.viewLive">View live site</a>
-                                <a href="https://github.com/mazinramos/Gizmo-Store.git" target="_blank" rel="noopener noreferrer" class="text-link">GitHub</a>
-                                <button class="preview-btn text-link" data-project="gizmo" data-i18n="proj.details">Case study</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card project-item hidden-project hidden reveal">
-                        <div class="thumb img-reveal"><img src="wishly.png" alt="Wishly Store" loading="lazy"></div>
-                        <div class="p-5">
-                            <h3 class="font-medium text-lg mb-2">Wishly Store</h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.wishly.desc">An online gift store — personalized gift boxes, flowers, and celebration collections.</p>
-                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                                <a href="https://wishly-store.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="proj.viewLive">View live site</a>
-                                <button class="preview-btn text-link" data-project="wishly" data-i18n="proj.details">Case study</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card project-item hidden-project hidden reveal">
-                        <div class="thumb img-reveal"><img src="eduhub.png" alt="EduHub" loading="lazy"></div>
-                        <div class="p-5">
-                            <h3 class="font-medium text-lg mb-2">EduHub Platform</h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.eduhub.desc">Learning paths, course resources, live sessions, and academic tools for students and tutors.</p>
-                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                                <button class="preview-btn text-link" data-project="eduhub" data-i18n="proj.details">Case study</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card project-item hidden-project hidden reveal">
-                        <div class="thumb img-reveal"><img src="pharmacy.png" alt="Pharmacy System" loading="lazy"></div>
-                        <div class="p-5">
-                            <h3 class="font-medium text-lg mb-2">Pharmacy System</h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.pharmacy.desc">Inventory, prescriptions, billing, and sales analytics for pharmacies.</p>
-                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                                <a href="https://pharmacy-henna.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="proj.viewLive">View live site</a>
-                                <button class="preview-btn text-link" data-project="pharmacy" data-i18n="proj.details">Case study</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card project-item hidden-project hidden reveal">
-                        <div class="thumb img-reveal"><img src="architectuer.png" alt="Interior Design Portfolio" loading="lazy"></div>
-                        <div class="p-5">
-                            <h3 class="font-medium text-lg mb-2">Interior Design Portfolio</h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)" data-i18n="proj.interior.desc">A digital portfolio showcasing architectural and interior design work.</p>
-                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                                <a href="https://fatah-magdi-designer.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="proj.viewLive">View live site</a>
-                                <button class="preview-btn text-link" data-project="interior" data-i18n="proj.details">Case study</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="mt-10">
+                <div class="mt-10" id="show-more-wrap" style="display:none;">
                     <button id="show-more-btn" class="text-link text-sm">
                         <span id="show-more-text" data-i18n="projects.showMore">Show more projects</span>
                     </button>
@@ -477,10 +615,10 @@
                 </div>
                 <div class="reveal flex flex-col justify-center gap-5 text-sm">
                     <div class="flex justify-between border-b pb-3" style="border-color:var(--border)">
-                        <span style="color:var(--muted)" data-i18n="about.stat1">Projects built</span><span class="font-medium">8</span>
+                        <span style="color:var(--muted)" data-i18n="about.stat1">Projects built</span><span class="font-medium" id="stat-projects-count">—</span>
                     </div>
                     <div class="flex justify-between border-b pb-3" style="border-color:var(--border)">
-                        <span style="color:var(--muted)" data-i18n="about.stat2">Core technologies</span><span class="font-medium">6+</span>
+                        <span style="color:var(--muted)" data-i18n="about.stat2">Core technologies</span><span class="font-medium" id="stat-tech-count">—</span>
                     </div>
                     <div class="flex justify-between border-b pb-3" style="border-color:var(--border)">
                         <span style="color:var(--muted)" data-i18n="about.stat3">Currently</span><span class="font-medium" data-i18n="about.stat3val">CS student</span>
@@ -584,7 +722,7 @@
             <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-14">
                 <div class="reveal">
                     <h2 class="text-2xl md:text-3xl mb-4" data-i18n="contact.title">Have a project in mind?</h2>
-                    <p class="leading-relaxed mb-8" style="color:var(--muted)" data-i18n="contact.desc">Let's turn your idea into something real. Whether it's a new website, a business system, or something in between — my inbox is open.</p>
+                    <p class="leading-relaxed mb-8 word-fade-target" style="color:var(--muted)" data-i18n="contact.desc">Let's turn your idea into something real. Whether it's a new website, a business system, or something in between — my inbox is open.</p>
                     <div class="flex gap-3" id="social-container"></div>
                     <p class="text-sm mt-8" style="color:var(--muted)" data-i18n="contact.emailPrefix">Prefer email? Reach me directly at
                         <a href="mailto:mazinflwo.dev@gmail.com" class="text-link" style="color:var(--text)">mazinflwo.dev@gmail.com</a>
@@ -631,6 +769,17 @@
         </footer>
 
     </main>
+
+    <!-- Back to top, with a ring that fills as you scroll down the page -->
+    <button id="back-to-top" aria-label="Back to top" class="fixed z-40" style="bottom:22px; inset-inline-end:22px; width:46px; height:46px; opacity:0; pointer-events:none; transition: opacity 0.3s var(--ease);">
+        <svg width="46" height="46" viewBox="0 0 46 46" style="position:absolute; inset:0; transform:rotate(-90deg);">
+            <circle cx="23" cy="23" r="20" fill="var(--bg)" stroke="var(--border)" stroke-width="1.5"></circle>
+            <circle id="back-to-top-ring" cx="23" cy="23" r="20" fill="none" stroke="var(--text)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="125.6" stroke-dashoffset="125.6"></circle>
+        </svg>
+        <span style="position:relative; display:flex; align-items:center; justify-content:center; width:100%; height:100%; color:var(--text);">
+            <i data-lucide="arrow-up" class="w-4 h-4"></i>
+        </span>
+    </button>
 
     <!-- Project Case Study Modal -->
     <div id="project-modal-overlay">
@@ -691,6 +840,8 @@
                 "proj.interior.desc": "معرض أعمال رقمي أنيق لعرض أعمال التصميم الداخلي والمعماري.",
                 "proj.viewLive": "زيارة الموقع", "proj.details": "تفاصيل أكثر",
                 "projects.showMore": "عرض مزيد من المشاريع",
+                "projects.showLess": "عرض أقل", "projects.loading": "جارٍ تحميل المشاريع…", "projects.empty": "المشاريع قيد الإضافة قريباً.", "projects.allFilter": "الكل",
+                "proj.github": "GitHub",
                 "about.title": "نبذة عني",
                 "about.p1": "أنا طالب علوم حاسوب ومطوّر مواقع. أحوّل مشاريع الدراسة والأفكار الجانبية إلى منتجات حقيقية وعاملة فعلياً، من مواقع بسيطة للشركات الصغيرة إلى أنظمة متكاملة تحتوي على لوحات تحكم وقواعد بيانات.",
                 "about.p2": "أحب المشكلات التي لها قبل وبعد واضحان: عيادة كانت تسجّل بيانات المرضى على الورق، متجر يحتاج إلى خطوة دفع حقيقية، طالب يحتاج إلى سيرة ذاتية خلال عشر دقائق بدلاً من ساعتين. طريقتي بسيطة: أفهم ما تحتاجه فعلياً، وأبنيه بشكل صحيح، وأجعله سهل الصيانة لاحقاً.",
@@ -716,6 +867,23 @@
         function initI18n() {
             document.querySelectorAll('[data-i18n]').forEach(el => { el.dataset.i18nEnOriginal = el.innerHTML; });
         }
+
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        function splitWordsMask(el) {
+            if (reducedMotion) return;
+            const words = el.textContent.trim().split(/\s+/);
+            el.innerHTML = words.map((w, i) => `<span class="split-outer"><span class="split-inner" style="transition-delay:${i * 45}ms">${w}</span></span>`).join(' ');
+        }
+        function splitWordsFade(el) {
+            if (reducedMotion) return;
+            const words = el.textContent.trim().split(/\s+/);
+            el.innerHTML = words.map((w, i) => `<span class="word-fade" style="transition-delay:${Math.min(i, 24) * 14}ms">${w}</span>`).join(' ');
+        }
+        function applyTextSplits() {
+            document.querySelectorAll('.split-target').forEach(splitWordsMask);
+            document.querySelectorAll('.word-fade-target').forEach(splitWordsFade);
+        }
+
         function setLanguage(lang) {
             const root = document.documentElement;
             document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -727,12 +895,14 @@
             document.querySelectorAll('#lang-ar-btn, #lang-ar-btn-m').forEach(b => b.classList.toggle('active', lang === 'ar'));
             localStorage.setItem('lang', lang);
             const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+            applyTextSplits();
+            if (typeof window.renderProjectsUI === 'function') window.renderProjectsUI();
             if (window.lucide) lucide.createIcons();
         }
         window.addEventListener('DOMContentLoaded', () => {
             initI18n();
             const savedLang = localStorage.getItem('lang') || 'en';
-            if (savedLang === 'ar') setLanguage('ar');
+            setLanguage(savedLang);
             ['lang-en-btn', 'lang-en-btn-m'].forEach(id => document.getElementById(id).addEventListener('click', () => setLanguage('en')));
             ['lang-ar-btn', 'lang-ar-btn-m'].forEach(id => document.getElementById(id).addEventListener('click', () => setLanguage('ar')));
         });
@@ -782,10 +952,60 @@
         const navbarEl = document.getElementById('navbar');
         window.addEventListener('scroll', () => { navbarEl.classList.toggle('scrolled', window.scrollY > 8); });
 
+        /* Back to top — button + circular scroll-progress ring */
+        (function () {
+            const btn = document.getElementById('back-to-top');
+            const ring = document.getElementById('back-to-top-ring');
+            const circumference = 125.6;
+            let ticking = false;
+            function update() {
+                const doc = document.documentElement;
+                const scrollTop = doc.scrollTop || document.body.scrollTop;
+                const scrollHeight = (doc.scrollHeight - doc.clientHeight) || 1;
+                const progress = Math.min(Math.max(scrollTop / scrollHeight, 0), 1);
+                if (ring) ring.style.strokeDashoffset = String(circumference * (1 - progress));
+                if (btn) {
+                    const show = scrollTop > 480;
+                    btn.style.opacity = show ? '1' : '0';
+                    btn.style.pointerEvents = show ? 'auto' : 'none';
+                }
+                ticking = false;
+            }
+            window.addEventListener('scroll', () => {
+                if (!ticking) { requestAnimationFrame(update); ticking = true; }
+            });
+            if (btn) btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            update();
+        })();
+
+        /* Scrollspy — highlight the nav link for the section currently in view */
+        (function () {
+            const sections = ['about', 'services', 'projects', 'skills', 'contact']
+                .map(id => document.getElementById(id)).filter(Boolean);
+            if (!sections.length) return;
+            const spyIo = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        document.querySelectorAll('.navlink').forEach(a => {
+                            a.classList.toggle('active-link', a.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+            sections.forEach(s => spyIo.observe(s));
+        })();
+
+        /* Dynamic stat: core technologies, counted from the actual Skills list */
+        (function () {
+            const el = document.getElementById('stat-tech-count');
+            if (el) el.textContent = String(document.querySelectorAll('#skills li').length);
+        })();
+
         /* Reveal on scroll — refined easing, with light stagger inside each group */
-        const revealEls = document.querySelectorAll('.reveal, .reveal-heading, .img-reveal');
+        const revealEls = document.querySelectorAll('.reveal, .reveal-heading, .img-reveal, .split-target, .word-fade-target');
         const io = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting && !document.documentElement.classList.contains('splash-active')) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); } });
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); } });
         }, { threshold: 0.12 });
         revealEls.forEach(el => io.observe(el));
 
@@ -804,70 +1024,6 @@
             });
         });
 
-        /* Re-run the reveal observers once the splash screen lifts, so entrance animations play on screen */
-        document.addEventListener('splash:done', () => {
-            document.querySelectorAll('.reveal, .reveal-heading, .img-reveal').forEach(el => {
-                if (!el.classList.contains('is-visible')) { io.unobserve(el); io.observe(el); }
-            });
-        });
-
-        /* Show more projects */
-        const showMoreBtn = document.getElementById('show-more-btn');
-        const showMoreText = document.getElementById('show-more-text');
-        const hiddenProjects = document.querySelectorAll('.hidden-project');
-        let expanded = false;
-        if (showMoreBtn) {
-            showMoreBtn.addEventListener('click', function () {
-                expanded = !expanded;
-                hiddenProjects.forEach(el => {
-                    el.classList.toggle('hidden', !expanded);
-                    if (expanded) {
-                        el.classList.add('is-visible');
-                        el.querySelectorAll('.img-reveal').forEach(t => t.classList.add('is-visible'));
-                    }
-                });
-                const lang = document.documentElement.getAttribute('lang');
-                showMoreText.textContent = expanded ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? (translations.ar['projects.showMore']) : 'Show more projects');
-                if (expanded && hiddenProjects.length > 0) hiddenProjects[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-            });
-        }
-
-        /* Project modal */
-        const PROJECT_DETAILS = {
-            "ai-resume": { tags: ["AI", "React"], title: "AI Resum Pro", description: "منصة ذكية لبناء السيرة الذاتية باستخدام الذكاء الاصطناعي، تساعد المستخدم على إعداد ملف تعريف احترافي خلال دقائق.", gallery: [{ img: "ai-resum.png", caption: "الصفحة الرئيسية: تعرض للمستخدم خيارات إنشاء سيرة ذاتية جديدة أو تعديل سيرة موجودة." }] },
-            "gess": { tags: ["Next.js", "Firebase"], title: "GESS EDU", description: "منصة تعليمية تفاعلية لطلاب هندسة الجيوماتكس بجامعة الخرطوم، تقدّم تجربة ثلاثية الأبعاد غامرة للمحتوى الدراسي.", gallery: [{ img: "gess.jpeg", caption: "الواجهة الرئيسية للمنصة." }] },
-            "clinic": { tags: ["Full Stack"], title: "Clinic System", description: "نظام متكامل لإدارة العيادات، يسهّل تسجيل بيانات المرضى والمواعيد والمهام الإدارية.", gallery: [{ img: "clinic.png", caption: "لوحة التحكم الرئيسية لإدارة المواعيد والمرضى." }] },
-            "gizmo": { tags: ["Next.js", "E-Commerce"], title: "Gizmo Store", description: "متجر إلكتروني حديث للأجهزة التقنية، بواجهة عالية الأداء وسلة شراء ديناميكية.", gallery: [{ img: "gizmo.png", caption: "صفحة عرض المنتجات مع تصميم متجاوب." }] },
-            "wishly": { tags: ["Next.js", "Gift Store"], title: "Wishly Store", description: "متجر إلكتروني متخصص في الهدايا، يقدّم هدايا فاخرة وصناديق هدايا مخصصة وورداً ومجموعات احتفالات بتجربة تسوق سلسة وعصرية.", gallery: [{ img: "wishly.png", caption: "واجهة المتجر الرئيسية." }] },
-            "eduhub": { tags: ["Next.js", "E-Learning"], title: "EduHub Platform", description: "منصة تعليمية تفاعلية توفّر مسارات تعلّم ومصادر دراسية وجلسات مباشرة وأدوات أكاديمية للطلاب والمدرّسين.", gallery: [{ img: "eduhub.png", caption: "الواجهة الرئيسية لمنصة EduHub." }] },
-            "pharmacy": { tags: ["React", "Node.js"], title: "Pharmacy System", description: "نظام إدارة شامل للصيدليات، يغطي المخزون والوصفات الطبية والفواتير وتحليلات المبيعات.", gallery: [{ img: "pharmacy.png", caption: "لوحة التحكم الرئيسية لنظام الصيدلية." }] },
-            "interior": { tags: ["Design", "Portfolio"], title: "Interior Design Portfolio", description: "معرض أعمال رقمي أنيق لعرض أعمال التصميم الداخلي والمعماري.", gallery: [{ img: "architectuer.png", caption: "معرض الأعمال الرئيسي للمصمم." }] }
-        };
-        const overlay = document.getElementById('project-modal-overlay');
-        const closeBtn = document.getElementById('modal-close-btn');
-        const modalTags = document.getElementById('modal-tags');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDesc = document.getElementById('modal-description');
-        const modalGallery = document.getElementById('modal-gallery');
-        function openProjectModal(key) {
-            const data = PROJECT_DETAILS[key]; if (!data) return;
-            modalTags.innerHTML = data.tags.map(t => `<span class="px-2.5 py-1 text-xs" style="border:1px solid var(--border); color:var(--muted)">${t}</span>`).join('');
-            modalTitle.textContent = data.title;
-            modalDesc.textContent = data.description;
-            modalGallery.innerHTML = data.gallery.map(item => `<div class="modal-gallery-item"><img src="${item.img}" alt="${data.title}"><div class="modal-gallery-caption"><p class="text-sm leading-relaxed" style="color:var(--muted)">${item.caption}</p></div></div>`).join('');
-            overlay.style.display = 'flex';
-            requestAnimationFrame(() => { overlay.classList.add('active'); });
-            document.body.classList.add('modal-open'); lucide.createIcons();
-        }
-        function closeProjectModal() {
-            overlay.classList.remove('active');
-            setTimeout(() => { overlay.style.display = 'none'; document.body.classList.remove('modal-open'); }, 250);
-        }
-        document.querySelectorAll('.preview-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); openProjectModal(btn.getAttribute('data-project')); }));
-        closeBtn.addEventListener('click', closeProjectModal);
-        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeProjectModal(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProjectModal(); });
-
         /* FAQ accordion */
         document.querySelectorAll('.faq-toggle').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -884,7 +1040,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAJKIlMy-EuitvZ2H_NeSri9XL9NiVYTY4",
@@ -897,6 +1053,171 @@
         };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        /* ============ PUBLIC PROJECTS: fetch, filter, render, case-study modal ============ */
+        let PROJECTS = [];
+        let currentFilter = 'all';
+        let projectsExpanded = false;
+
+        function currentLang() { return document.documentElement.getAttribute('lang') || 'en'; }
+        function categoryLabel(p) {
+            return currentLang() === 'ar' ? (p.categoryAr || p.categoryEn || p.category || '') : (p.categoryEn || p.category || '');
+        }
+        function projDesc(p) {
+            return currentLang() === 'ar' ? (p.descriptionAr || p.descriptionEn || '') : (p.descriptionEn || '');
+        }
+        function projCaseStudy(p) {
+            const lang = currentLang();
+            const cs = lang === 'ar' ? (p.caseStudyAr || p.caseStudyEn) : p.caseStudyEn;
+            return cs || projDesc(p);
+        }
+        function escapeHtml(str) {
+            return String(str || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+
+        function renderFilters() {
+            const wrap = document.getElementById('project-filters');
+            if (!wrap) return;
+            const cats = [];
+            const seen = new Set();
+            PROJECTS.forEach(p => { if (p.category && !seen.has(p.category)) { seen.add(p.category); cats.push(p); } });
+            const lang = currentLang();
+            const allLabel = lang === 'ar' ? (translations.ar['projects.allFilter'] || 'الكل') : 'All';
+            let html = `<button class="filter-pill${currentFilter === 'all' ? ' active' : ''}" data-filter="all">${allLabel} <span style="opacity:0.6">(${PROJECTS.length})</span></button>`;
+            cats.forEach(p => {
+                const count = PROJECTS.filter(x => x.category === p.category).length;
+                html += `<button class="filter-pill${currentFilter === p.category ? ' active' : ''}" data-filter="${escapeHtml(p.category)}">${escapeHtml(categoryLabel(p))} <span style="opacity:0.6">(${count})</span></button>`;
+            });
+            wrap.innerHTML = html;
+            wrap.querySelectorAll('.filter-pill').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentFilter = btn.getAttribute('data-filter');
+                    projectsExpanded = false;
+                    renderProjects();
+                });
+            });
+        }
+
+        function cardHTML(p) {
+            const lang = currentLang();
+            const viewLiveLabel = lang === 'ar' ? translations.ar['proj.viewLive'] : 'View live site';
+            const githubLabel = lang === 'ar' ? (translations.ar['proj.github'] || 'GitHub') : 'GitHub';
+            const detailsLabel = lang === 'ar' ? translations.ar['proj.details'] : 'Case study';
+            let links = '';
+            if (p.liveUrl) links += `<a href="${escapeHtml(p.liveUrl)}" target="_blank" rel="noopener noreferrer" class="text-link">${viewLiveLabel}</a>`;
+            if (p.githubUrl) links += `<a href="${escapeHtml(p.githubUrl)}" target="_blank" rel="noopener noreferrer" class="text-link">${githubLabel}</a>`;
+            links += `<button class="preview-btn text-link" data-id="${p.id}">${detailsLabel}</button>`;
+            return `
+                    <div class="project-card project-item reveal" data-id="${p.id}">
+                        <div class="thumb img-reveal"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy"></div>
+                        <div class="p-5">
+                            <h3 class="font-medium text-lg mb-2">${escapeHtml(p.title)}</h3>
+                            <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)">${escapeHtml(projDesc(p))}</p>
+                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">${links}</div>
+                        </div>
+                    </div>`;
+        }
+
+        function renderProjects() {
+            const grid = document.getElementById('project-grid');
+            const showMoreWrap = document.getElementById('show-more-wrap');
+            const showMoreText = document.getElementById('show-more-text');
+            if (!grid) return;
+
+            renderFilters();
+
+            const filtered = currentFilter === 'all' ? PROJECTS : PROJECTS.filter(p => p.category === currentFilter);
+            const capped = (currentFilter === 'all' && !projectsExpanded) ? filtered.slice(0, 4) : filtered;
+
+            grid.innerHTML = capped.map(cardHTML).join('');
+
+            const lang = currentLang();
+            if (currentFilter === 'all' && filtered.length > 4) {
+                showMoreWrap.style.display = '';
+                showMoreText.textContent = projectsExpanded
+                    ? (lang === 'ar' ? (translations.ar['projects.showLess'] || 'عرض أقل') : 'Show less')
+                    : (lang === 'ar' ? translations.ar['projects.showMore'] : 'Show more projects');
+            } else {
+                showMoreWrap.style.display = 'none';
+            }
+
+            grid.querySelectorAll('.preview-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const proj = PROJECTS.find(p => p.id === btn.getAttribute('data-id'));
+                    if (proj) openProjectModal(proj);
+                });
+            });
+
+            grid.querySelectorAll('.reveal, .img-reveal').forEach(el => { if (typeof io !== 'undefined') io.observe(el); });
+            grid.querySelectorAll('.project-item').forEach((el, i) => { el.style.transitionDelay = Math.min(i, 5) * 60 + 'ms'; });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        const showMoreBtnEl = document.getElementById('show-more-btn');
+        if (showMoreBtnEl) {
+            showMoreBtnEl.addEventListener('click', () => {
+                projectsExpanded = !projectsExpanded;
+                renderProjects();
+                if (projectsExpanded) {
+                    const firstNew = document.querySelectorAll('#project-grid .project-item')[4];
+                    if (firstNew) firstNew.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }
+
+        const pOverlay = document.getElementById('project-modal-overlay');
+        const pCloseBtn = document.getElementById('modal-close-btn');
+        const pModalTags = document.getElementById('modal-tags');
+        const pModalTitle = document.getElementById('modal-title');
+        const pModalDesc = document.getElementById('modal-description');
+        const pModalGallery = document.getElementById('modal-gallery');
+
+        function openProjectModal(p) {
+            pModalTags.innerHTML = `<span class="px-2.5 py-1 text-xs" style="border:1px solid var(--border); color:var(--muted)">${escapeHtml(categoryLabel(p))}</span>`;
+            pModalTitle.textContent = p.title || '';
+            pModalDesc.textContent = projCaseStudy(p);
+            pModalGallery.innerHTML = p.image ? `<div class="modal-gallery-item"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}"></div>` : '';
+            pOverlay.style.display = 'flex';
+            requestAnimationFrame(() => { pOverlay.classList.add('active'); });
+            document.body.classList.add('modal-open');
+            if (window.lucide) lucide.createIcons();
+        }
+        function closeProjectModal() {
+            pOverlay.classList.remove('active');
+            setTimeout(() => { pOverlay.style.display = 'none'; document.body.classList.remove('modal-open'); }, 250);
+        }
+        pCloseBtn.addEventListener('click', closeProjectModal);
+        pOverlay.addEventListener('click', (e) => { if (e.target === pOverlay) closeProjectModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProjectModal(); });
+
+        window.renderProjectsUI = renderProjects;
+
+        async function loadProjects() {
+            const loadingEl = document.getElementById('project-loading');
+            try {
+                const q = query(collection(db, 'projects'), orderBy('order', 'asc'));
+                const snap = await getDocs(q);
+                PROJECTS = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            } catch (err) {
+                console.error('Failed to load projects:', err);
+                PROJECTS = [];
+            }
+            if (loadingEl) loadingEl.style.display = 'none';
+
+            const statEl = document.getElementById('stat-projects-count');
+            if (statEl) statEl.textContent = String(PROJECTS.length);
+
+            if (PROJECTS.length === 0) {
+                const grid = document.getElementById('project-grid');
+                const lang = currentLang();
+                grid.innerHTML = `<p class="text-sm sm:col-span-2" style="color:var(--muted)">${lang === 'ar' ? (translations.ar['projects.empty'] || 'المشاريع قيد الإضافة قريباً.') : 'Projects are being added soon.'}</p>`;
+                renderFilters();
+                return;
+            }
+            renderProjects();
+        }
+        loadProjects();
 
         document.getElementById('form-loaded-at').value = Date.now();
 
