@@ -132,116 +132,21 @@
         .lang-switch button { padding: 0.5rem 0.65rem; color: var(--muted); transition: background 0.15s ease, color 0.15s ease; }
         .lang-switch button.active { background: var(--text); color: var(--bg); }
 
-        .service-item {
-            border: 1px solid var(--border); padding: 1.75rem; position: relative; overflow: hidden;
-            transition: border-color 0.35s var(--ease), transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-        }
-        .service-item:hover { border-color: var(--text); transform: translateY(-5px); box-shadow: 0 18px 34px -24px rgba(0,0,0,0.3); }
-        .service-icon {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            border: 1px solid var(--border); flex-shrink: 0;
-            transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
-        }
-        .service-item:hover .service-icon { background: var(--text); color: var(--bg); border-color: var(--text); }
+        .service-item { border-top: 1px solid var(--border); padding: 1.75rem 0; }
+        .service-item:last-child { border-bottom: 1px solid var(--border); }
 
-        .skill-chip {
-            display: inline-flex; align-items: center; padding: 0.5rem 0.9rem; border: 1px solid var(--border);
-            font-size: 0.8125rem; color: var(--muted); transition: border-color 0.25s var(--ease), color 0.25s var(--ease), background 0.25s var(--ease), transform 0.25s var(--ease);
-        }
-        .skill-chip:hover { border-color: var(--text); color: var(--text); background: var(--bg-panel); transform: translateY(-2px); }
-
-        /* FAQ v2: icon badge, chevron, accent state, staggered content fade */
-        .faq-icon-badge {
-            width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center; color: var(--muted);
-            transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
-        }
-        .faq-item { transition: background 0.35s var(--ease); }
-        .faq-item.is-open { background: var(--bg-panel); }
-        .faq-item.is-open .faq-icon-badge { background: var(--text); color: var(--bg); border-color: var(--text); }
-        .faq-chevron { transition: transform 0.35s var(--ease-out); }
-        .faq-item.is-open .faq-chevron { transform: rotate(180deg); }
-        .faq-answer p { opacity: 0; transform: translateY(-6px); transition: opacity 0.3s var(--ease-out) 0.05s, transform 0.3s var(--ease-out) 0.05s; }
-        .faq-item.is-open .faq-answer p { opacity: 1; transform: translateY(0); }
-        .faq-toggle { cursor: pointer; }
-
-        /* Hero: subtle breathing underline on the highlighted word + available-dot pulse */
-        .text-grad { position: relative; display: inline-block; }
-        .text-grad::after {
-            content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--text);
-            transform-origin: left; animation: heroUnderline 3.4s var(--ease) infinite;
-        }
-        html[dir="rtl"] .text-grad::after { transform-origin: right; }
-        @keyframes heroUnderline { 0%, 100% { transform: scaleX(0.18); opacity: 0.35; } 50% { transform: scaleX(1); opacity: 0.9; } }
-        @media (prefers-reduced-motion: reduce) { .text-grad::after { animation: none; transform: scaleX(1); opacity: 0.7; } }
-
-        .hero-blob {
-            position: absolute; border-radius: 50%; filter: blur(50px); background: var(--muted); opacity: 0.18;
-            pointer-events: none; animation: heroFloat 7s ease-in-out infinite;
-        }
-        @keyframes heroFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-16px) scale(1.06); } }
-        @media (prefers-reduced-motion: reduce) { .hero-blob { animation: none; } }
-
-        .project-card { border: 1px solid var(--border); background: var(--bg); transition: border-color 0.35s var(--ease), transform 0.45s var(--ease), box-shadow 0.45s var(--ease); }
-        .project-card:hover { border-color: var(--muted); transform: translateY(-6px); box-shadow: 0 24px 40px -28px rgba(0,0,0,0.35); }
-        .project-card .thumb { position: relative; aspect-ratio: 4/3; overflow: hidden; border-bottom: 1px solid var(--border); }
+        .project-card { border: 1px solid var(--border); transition: border-color 0.3s var(--ease), transform 0.4s var(--ease); }
+        .project-card:hover { border-color: var(--muted); transform: translateY(-3px); }
+        .project-card .thumb { aspect-ratio: 4/3; overflow: hidden; border-bottom: 1px solid var(--border); }
         .project-card .thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.15); transition: filter 0.4s var(--ease), transform 0.6s var(--ease); }
-        .project-card:hover .thumb img { filter: grayscale(0); transform: scale(1.06); }
-
-        .proj-badge {
-            position: absolute; top: 12px; inset-inline-start: 12px; z-index: 3; background: var(--bg); color: var(--text);
-            font-size: 0.6875rem; font-weight: 500; padding: 0.3rem 0.65rem; border: 1px solid var(--border);
-            text-transform: uppercase; letter-spacing: 0.04em;
-        }
-        .proj-num {
-            position: absolute; bottom: 12px; inset-inline-start: 14px; z-index: 3; font-family: 'Lora', serif;
-            font-size: 0.8rem; color: #fff; opacity: 0.9; text-shadow: 0 1px 6px rgba(0,0,0,0.55);
-        }
-        .proj-view-btn {
-            position: absolute; bottom: 10px; inset-inline-end: 10px; z-index: 3; width: 38px; height: 38px; border-radius: 50%;
-            background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-            opacity: 0; transform: translateY(10px) scale(0.85); cursor: pointer; color: var(--text);
-            transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out), background 0.25s var(--ease), color 0.25s var(--ease);
-        }
-        .project-card:hover .proj-view-btn { opacity: 1; transform: translateY(0) scale(1); }
-        .proj-view-btn:hover { background: var(--text); color: var(--bg); }
-        .proj-link { display: inline-flex; align-items: center; gap: 0.3rem; }
-
-        /* Mobile: projects become a snap-scrolling horizontal strip; desktop: grid */
-        #project-grid {
-            display: flex; gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 6px;
-            margin-inline: -1.5rem; padding-inline: 1.5rem;
-        }
-        #project-grid::-webkit-scrollbar { display: none; }
-        #project-grid .project-item { scroll-snap-align: start; flex: 0 0 80%; }
-        @media (min-width: 480px) { #project-grid .project-item { flex: 0 0 58%; } }
-        @media (min-width: 640px) {
-            #project-grid { display: grid; grid-template-columns: repeat(2, 1fr); overflow-x: visible; margin-inline: 0; padding-inline: 0; }
-            #project-grid .project-item { flex: initial; }
-        }
+        .project-card:hover .thumb img { filter: grayscale(0); transform: scale(1.045); }
 
         .filter-pill {
-            padding: 0.5rem 1rem; font-size: 0.8125rem; border: 1px solid var(--border); color: var(--muted);
-            display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; scroll-snap-align: start;
-            transition: border-color 0.2s var(--ease), color 0.2s var(--ease), background 0.2s var(--ease), transform 0.2s var(--ease);
+            padding: 0.45rem 0.95rem; font-size: 0.8125rem; border: 1px solid var(--border); color: var(--muted);
+            transition: border-color 0.2s var(--ease), color 0.2s var(--ease), background 0.2s var(--ease);
         }
         .filter-pill:hover { border-color: var(--muted); color: var(--text); }
-        .filter-pill.active { background: var(--text); color: var(--bg); border-color: var(--text); transform: scale(1.03); }
-        .filter-pill:active { transform: scale(0.94); }
-        .filter-pill i { opacity: 0.75; }
-        .filter-pill.active i { opacity: 1; }
-
-        #project-filters {
-            flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
-            margin-inline: -1.5rem; padding-inline: 1.5rem; padding-bottom: 4px;
-            mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
-            -webkit-mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
-        }
-        #project-filters::-webkit-scrollbar { display: none; }
-        @media (min-width: 640px) {
-            #project-filters { flex-wrap: wrap; overflow-x: visible; margin-inline: 0; padding-inline: 0; mask-image: none; -webkit-mask-image: none; }
-        }
+        .filter-pill.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
         .underline-field { background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 0.7rem 0.2rem; color: var(--text); width: 100%; }
         .underline-field:focus { outline: none; border-bottom-color: var(--text); }
@@ -631,14 +536,8 @@
         <section class="py-16 md:py-24">
             <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
                 <div class="reveal">
-                    <p class="text-sm mb-4 inline-flex items-center gap-2" style="color:var(--muted)">
-                        <span class="relative flex h-2 w-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background:#22c55e"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2" style="background:#22c55e"></span>
-                        </span>
-                        <span data-i18n="hero.eyebrow">Available for new projects</span>
-                    </p>
-                    <h1 id="hero-heading" class="text-3xl sm:text-4xl md:text-5xl leading-tight mb-6 split-target" data-i18n="hero.heading">
+                    <p class="text-sm mb-4" style="color:var(--muted)" data-i18n="hero.eyebrow">Available for new projects</p>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl leading-tight mb-6 split-target" data-i18n="hero.heading">
                         Web developer building websites, apps, and digital tools for businesses.
                     </h1>
                     <p class="text-base leading-relaxed mb-8 max-w-lg word-fade-target" style="color:var(--muted)" data-i18n="hero.desc">
@@ -649,10 +548,8 @@
                         <a href="#contact" class="btn-secondary" data-i18n="hero.cta2">Get in Touch</a>
                     </div>
                 </div>
-                <div class="reveal relative">
-                    <div class="hero-blob" style="width:200px; height:200px; top:-24px; inset-inline-end:-20px; animation-delay:0s"></div>
-                    <div class="hero-blob" style="width:130px; height:130px; bottom:-16px; inset-inline-start:-16px; animation-delay:2.2s"></div>
-                    <div class="border img-reveal relative" style="border-color:var(--border)">
+                <div class="reveal">
+                    <div class="border img-reveal" style="border-color:var(--border)">
                         <img src="mazin.jpg" alt="Mazin Mohamed" class="w-full aspect-[3/4] object-cover" style="filter:grayscale(0.2)">
                     </div>
                 </div>
@@ -664,38 +561,22 @@
             <div class="max-w-5xl mx-auto px-6">
                 <h2 class="text-2xl md:text-3xl mb-10 reveal-heading" data-i18n="services.title">What I Do</h2>
 
-                <div class="grid sm:grid-cols-2 gap-5">
-                    <div class="service-item">
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="service-icon"><i data-lucide="code-2" class="w-5 h-5"></i></div>
-                            <span class="text-xs font-serif" style="color:var(--muted)">01</span>
-                        </div>
-                        <h3 class="font-medium mb-2" data-i18n="services.1.title">Web Development</h3>
-                        <p class="text-sm leading-relaxed" style="color:var(--muted)" data-i18n="services.1.desc">Modern, responsive websites built for businesses and brands — fast, clean, and easy to maintain.</p>
+                <div>
+                    <div class="service-item flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8">
+                        <h3 class="font-medium sm:w-52 flex-shrink-0" data-i18n="services.1.title">Web Development</h3>
+                        <p style="color:var(--muted)" data-i18n="services.1.desc">Modern, responsive websites built for businesses and brands — fast, clean, and easy to maintain.</p>
                     </div>
-                    <div class="service-item">
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="service-icon"><i data-lucide="app-window" class="w-5 h-5"></i></div>
-                            <span class="text-xs font-serif" style="color:var(--muted)">02</span>
-                        </div>
-                        <h3 class="font-medium mb-2" data-i18n="services.2.title">Web Applications</h3>
-                        <p class="text-sm leading-relaxed" style="color:var(--muted)" data-i18n="services.2.desc">Custom systems and platforms designed to solve real, specific problems — not generic templates.</p>
+                    <div class="service-item flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8">
+                        <h3 class="font-medium sm:w-52 flex-shrink-0" data-i18n="services.2.title">Web Applications</h3>
+                        <p style="color:var(--muted)" data-i18n="services.2.desc">Custom systems and platforms designed to solve real, specific problems — not generic templates.</p>
                     </div>
-                    <div class="service-item">
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="service-icon"><i data-lucide="layout-dashboard" class="w-5 h-5"></i></div>
-                            <span class="text-xs font-serif" style="color:var(--muted)">03</span>
-                        </div>
-                        <h3 class="font-medium mb-2" data-i18n="services.3.title">Dashboards &amp; Systems</h3>
-                        <p class="text-sm leading-relaxed" style="color:var(--muted)" data-i18n="services.3.desc">Admin dashboards, management systems, and internal tools that make running a business easier.</p>
+                    <div class="service-item flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8">
+                        <h3 class="font-medium sm:w-52 flex-shrink-0" data-i18n="services.3.title">Dashboards &amp; Systems</h3>
+                        <p style="color:var(--muted)" data-i18n="services.3.desc">Admin dashboards, management systems, and internal tools that make running a business easier.</p>
                     </div>
-                    <div class="service-item">
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="service-icon"><i data-lucide="database" class="w-5 h-5"></i></div>
-                            <span class="text-xs font-serif" style="color:var(--muted)">04</span>
-                        </div>
-                        <h3 class="font-medium mb-2" data-i18n="services.4.title">Data &amp; Digital Solutions</h3>
-                        <p class="text-sm leading-relaxed" style="color:var(--muted)" data-i18n="services.4.desc">Turning business ideas and raw data into digital tools people actually want to use.</p>
+                    <div class="service-item flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8">
+                        <h3 class="font-medium sm:w-52 flex-shrink-0" data-i18n="services.4.title">Data &amp; Digital Solutions</h3>
+                        <p style="color:var(--muted)" data-i18n="services.4.desc">Turning business ideas and raw data into digital tools people actually want to use.</p>
                     </div>
                 </div>
             </div>
@@ -752,31 +633,22 @@
                 <h2 class="text-2xl md:text-3xl mb-10 reveal-heading" data-i18n="skills.title">Skills &amp; Technologies</h2>
                 <div class="grid sm:grid-cols-3 gap-10">
                     <div>
-                        <div class="flex items-center gap-2.5 mb-4">
-                            <div class="service-icon" style="width:34px;height:34px"><i data-lucide="monitor" class="w-4 h-4"></i></div>
-                            <h3 class="text-sm font-medium" data-i18n="skills.group1">Frontend Development</h3>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-chip">React &amp; Next.js</span><span class="skill-chip">TypeScript &amp; JavaScript</span><span class="skill-chip">Tailwind CSS</span><span class="skill-chip">HTML &amp; CSS</span>
-                        </div>
+                        <h3 class="text-sm font-medium mb-4" data-i18n="skills.group1">Frontend Development</h3>
+                        <ul class="space-y-2 text-sm" style="color:var(--muted)">
+                            <li>React &amp; Next.js</li><li>TypeScript &amp; JavaScript</li><li>Tailwind CSS</li><li>HTML &amp; CSS</li>
+                        </ul>
                     </div>
                     <div>
-                        <div class="flex items-center gap-2.5 mb-4">
-                            <div class="service-icon" style="width:34px;height:34px"><i data-lucide="server" class="w-4 h-4"></i></div>
-                            <h3 class="text-sm font-medium" data-i18n="skills.group2">Backend &amp; Data</h3>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-chip">Node.js &amp; Express</span><span class="skill-chip">Firebase (Auth, Firestore)</span><span class="skill-chip">REST APIs</span>
-                        </div>
+                        <h3 class="text-sm font-medium mb-4" data-i18n="skills.group2">Backend &amp; Data</h3>
+                        <ul class="space-y-2 text-sm" style="color:var(--muted)">
+                            <li>Node.js &amp; Express</li><li>Firebase (Auth, Firestore)</li><li>REST APIs</li>
+                        </ul>
                     </div>
                     <div>
-                        <div class="flex items-center gap-2.5 mb-4">
-                            <div class="service-icon" style="width:34px;height:34px"><i data-lucide="wrench" class="w-4 h-4"></i></div>
-                            <h3 class="text-sm font-medium" data-i18n="skills.group3">Tools &amp; Mobile</h3>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-chip">Git &amp; GitHub</span><span class="skill-chip">Figma</span><span class="skill-chip">Flutter / React Native</span>
-                        </div>
+                        <h3 class="text-sm font-medium mb-4" data-i18n="skills.group3">Tools &amp; Mobile</h3>
+                        <ul class="space-y-2 text-sm" style="color:var(--muted)">
+                            <li>Git &amp; GitHub</li><li>Figma</li><li>Flutter / React Native</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -814,65 +686,33 @@
                 <h2 class="text-2xl md:text-3xl mb-10 reveal-heading" data-i18n="faq.title">Frequently Asked Questions</h2>
                 <div class="border-t" style="border-color:var(--border)" id="faq-container">
                     <div class="faq-item border-b" style="border-color:var(--border)">
-                        <button class="faq-toggle w-full flex items-center gap-4 text-left py-5" aria-expanded="false">
-                            <span class="faq-icon-badge"><i data-lucide="clock" class="w-4 h-4"></i></span>
-                            <span class="font-medium flex-1" data-i18n="faq.1.q">How long does a typical project take?</span>
-                            <i data-lucide="chevron-down" class="w-4 h-4 faq-chevron flex-shrink-0"></i>
+                        <button class="faq-toggle w-full flex justify-between items-center text-left py-5">
+                            <span class="font-medium" data-i18n="faq.1.q">How long does a typical project take?</span>
+                            <i data-lucide="plus" class="w-4 h-4 faq-icon transition-transform flex-shrink-0"></i>
                         </button>
                         <div class="faq-answer overflow-hidden" style="max-height:0;">
-                            <p class="text-sm leading-relaxed pb-5 ps-12" style="color:var(--muted)" data-i18n="faq.1.a">It depends on scope — a simple landing page can take a few days, while a full platform (like an e-commerce or admin system) usually takes a few weeks. I'll give you a clear timeline before we start.</p>
+                            <p class="text-sm leading-relaxed pb-5" style="color:var(--muted)" data-i18n="faq.1.a">It depends on scope — a simple landing page can take a few days, while a full platform (like an e-commerce or admin system) usually takes a few weeks. I'll give you a clear timeline before we start.</p>
                         </div>
                     </div>
                     <div class="faq-item border-b" style="border-color:var(--border)">
-                        <button class="faq-toggle w-full flex items-center gap-4 text-left py-5" aria-expanded="false">
-                            <span class="faq-icon-badge"><i data-lucide="code" class="w-4 h-4"></i></span>
-                            <span class="font-medium flex-1" data-i18n="faq.2.q">What technologies do you work with?</span>
-                            <i data-lucide="chevron-down" class="w-4 h-4 faq-chevron flex-shrink-0"></i>
+                        <button class="faq-toggle w-full flex justify-between items-center text-left py-5">
+                            <span class="font-medium" data-i18n="faq.2.q">What technologies do you work with?</span>
+                            <i data-lucide="plus" class="w-4 h-4 faq-icon transition-transform flex-shrink-0"></i>
                         </button>
                         <div class="faq-answer overflow-hidden" style="max-height:0;">
-                            <p class="text-sm leading-relaxed pb-5 ps-12" style="color:var(--muted)" data-i18n="faq.2.a">Mainly React / Next.js, Tailwind CSS, and Firebase (Firestore, Auth, Cloud Functions) for full-stack web apps, plus Flutter / React Native for mobile when needed.</p>
+                            <p class="text-sm leading-relaxed pb-5" style="color:var(--muted)" data-i18n="faq.2.a">Mainly React / Next.js, Tailwind CSS, and Firebase (Firestore, Auth, Cloud Functions) for full-stack web apps, plus Flutter / React Native for mobile when needed.</p>
                         </div>
                     </div>
                     <div class="faq-item border-b" style="border-color:var(--border)">
-                        <button class="faq-toggle w-full flex items-center gap-4 text-left py-5" aria-expanded="false">
-                            <span class="faq-icon-badge"><i data-lucide="git-merge" class="w-4 h-4"></i></span>
-                            <span class="font-medium flex-1" data-i18n="faq.3.q">Can you work with an existing codebase?</span>
-                            <i data-lucide="chevron-down" class="w-4 h-4 faq-chevron flex-shrink-0"></i>
+                        <button class="faq-toggle w-full flex justify-between items-center text-left py-5">
+                            <span class="font-medium" data-i18n="faq.3.q">Can you work with an existing codebase?</span>
+                            <i data-lucide="plus" class="w-4 h-4 faq-icon transition-transform flex-shrink-0"></i>
                         </button>
                         <div class="faq-answer overflow-hidden" style="max-height:0;">
-                            <p class="text-sm leading-relaxed pb-5 ps-12" style="color:var(--muted)" data-i18n="faq.3.a">Yes — I regularly audit, debug, and extend existing React/Firebase projects, not just build from scratch.</p>
+                            <p class="text-sm leading-relaxed pb-5" style="color:var(--muted)" data-i18n="faq.3.a">Yes — I regularly audit, debug, and extend existing React/Firebase projects, not just build from scratch.</p>
                         </div>
                     </div>
-                    <div class="faq-item border-b" style="border-color:var(--border)">
-                        <button class="faq-toggle w-full flex items-center gap-4 text-left py-5" aria-expanded="false">
-                            <span class="faq-icon-badge"><i data-lucide="credit-card" class="w-4 h-4"></i></span>
-                            <span class="font-medium flex-1" data-i18n="faq.4.q">How does payment work?</span>
-                            <i data-lucide="chevron-down" class="w-4 h-4 faq-chevron flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-answer overflow-hidden" style="max-height:0;">
-                            <p class="text-sm leading-relaxed pb-5 ps-12" style="color:var(--muted)" data-i18n="faq.4.a">I usually ask for a deposit before starting, with the remaining balance due on delivery. For longer projects, we can agree on milestone-based payments instead.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item border-b" style="border-color:var(--border)">
-                        <button class="faq-toggle w-full flex items-center gap-4 text-left py-5" aria-expanded="false">
-                            <span class="faq-icon-badge"><i data-lucide="life-buoy" class="w-4 h-4"></i></span>
-                            <span class="font-medium flex-1" data-i18n="faq.5.q">Do you offer support after delivery?</span>
-                            <i data-lucide="chevron-down" class="w-4 h-4 faq-chevron flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-answer overflow-hidden" style="max-height:0;">
-                            <p class="text-sm leading-relaxed pb-5 ps-12" style="color:var(--muted)" data-i18n="faq.5.a">Yes — every project comes with a short free support window for bug fixes, and I'm always available afterward for updates or new features at an hourly or project rate.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item border-b" style="border-color:var(--border)">
-                        <button class="faq-toggle w-full flex items-center gap-4 text-left py-5" aria-expanded="false">
-                            <span class="faq-icon-badge"><i data-lucide="file-signature" class="w-4 h-4"></i></span>
-                            <span class="font-medium flex-1" data-i18n="faq.6.q">Do you sign contracts or NDAs?</span>
-                            <i data-lucide="chevron-down" class="w-4 h-4 faq-chevron flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-answer overflow-hidden" style="max-height:0;">
-                            <p class="text-sm leading-relaxed pb-5 ps-12" style="color:var(--muted)" data-i18n="faq.6.a">Absolutely. I'm happy to sign an NDA before we discuss sensitive details, and I provide a simple written agreement outlining scope, timeline, and payment for every project.</p>
-                        </div>
-                    </div>
+                    <!-- EDIT ME: add "How does payment work?" and "Do you offer support after delivery?" once you have real answers. -->
                 </div>
             </div>
         </section>
@@ -1017,9 +857,6 @@
                 "faq.1.q": "كم يستغرق المشروع عادةً؟", "faq.1.a": "يعتمد ذلك على حجم المشروع؛ فصفحة هبوط بسيطة قد تستغرق بضعة أيام، بينما منصة متكاملة تستغرق عادةً بضعة أسابيع. سأقدّم لك جدولاً زمنياً واضحاً قبل البدء.",
                 "faq.2.q": "ما التقنيات التي تعمل بها؟", "faq.2.a": "أعمل أساساً بـ React وNext.js، وTailwind CSS، وFirebase لتطبيقات الويب المتكاملة، بالإضافة إلى Flutter وReact Native لتطبيقات الهاتف عند الحاجة.",
                 "faq.3.q": "هل يمكنك العمل على كود موجود مسبقاً؟", "faq.3.a": "نعم، أعمل بانتظام على مراجعة وإصلاح وتطوير مشاريع React وFirebase قائمة، ولا أقتصر على البناء من الصفر.",
-                "faq.4.q": "كيف تتم عملية الدفع؟", "faq.4.a": "عادةً أطلب دفعة مقدّمة قبل البدء، والباقي عند التسليم. أما للمشاريع الأطول، يمكننا الاتفاق على دفعات مرحلية بدلاً من ذلك.",
-                "faq.5.q": "هل تقدّم دعماً بعد التسليم؟", "faq.5.a": "نعم، كل مشروع يأتي مع فترة دعم مجانية قصيرة لإصلاح أي أخطاء، وأنا متاح دائماً بعدها للتحديثات أو الميزات الجديدة بأجر بالساعة أو بالمشروع.",
-                "faq.6.q": "هل توقّع عقوداً أو اتفاقيات سرية؟", "faq.6.a": "بالتأكيد. يسعدني توقيع اتفاقية سرية (NDA) قبل مناقشة أي تفاصيل حساسة، كما أقدّم اتفاقاً مكتوباً بسيطاً يوضّح نطاق العمل والمدة الزمنية والدفع لكل مشروع.",
                 "contact.title": "هل لديك فكرة مشروع؟", "contact.desc": "لنحوّل فكرتك إلى شيء حقيقي. سواء كان موقعاً جديداً، أو نظاماً لشركتك، أو أي شيء بينهما، صندوق الرسائل لديّ مفتوح دائماً.",
                 "contact.emailPrefix": "تفضّل التواصل عبر البريد الإلكتروني؟ راسلني مباشرة على",
                 "contact.name": "الاسم", "contact.email": "البريد الإلكتروني", "contact.subject": "الموضوع", "contact.message": "الرسالة", "contact.send": "إرسال الرسالة",
@@ -1035,13 +872,7 @@
         function splitWordsMask(el) {
             if (reducedMotion) return;
             const words = el.textContent.trim().split(/\s+/);
-            const isAr = document.documentElement.getAttribute('lang') === 'ar';
-            const highlightWords = el.id === 'hero-heading' ? (isAr ? ['وأدوات', 'رقمية'] : ['digital', 'tools']) : [];
-            el.innerHTML = words.map((w, i) => {
-                const clean = w.replace(/[.,،؛:!؟?]/g, '').toLowerCase();
-                const hi = highlightWords.some(hw => clean === hw.toLowerCase());
-                return `<span class="split-outer"><span class="split-inner${hi ? ' text-grad' : ''}" style="transition-delay:${i * 45}ms">${w}</span></span>`;
-            }).join(' ');
+            el.innerHTML = words.map((w, i) => `<span class="split-outer"><span class="split-inner" style="transition-delay:${i * 45}ms">${w}</span></span>`).join(' ');
         }
         function splitWordsFade(el) {
             if (reducedMotion) return;
@@ -1067,7 +898,6 @@
             applyTextSplits();
             if (typeof window.renderProjectsUI === 'function') window.renderProjectsUI();
             if (window.lucide) lucide.createIcons();
-            document.querySelectorAll('.faq-item.is-open .faq-answer').forEach(a => { a.style.maxHeight = a.scrollHeight + 'px'; });
         }
         window.addEventListener('DOMContentLoaded', () => {
             initI18n();
@@ -1166,26 +996,10 @@
             sections.forEach(s => spyIo.observe(s));
         })();
 
-        /* Reusable count-up animation for stat numbers — a bit of life on scroll-in */
-        window.animateCount = function (el, target, duration) {
-            duration = duration || 900;
-            if (!el) return;
-            target = parseInt(target, 10) || 0;
-            const start = performance.now();
-            function tick(now) {
-                const p = Math.min((now - start) / duration, 1);
-                const eased = 1 - Math.pow(1 - p, 3);
-                el.textContent = String(Math.round(eased * target));
-                if (p < 1) requestAnimationFrame(tick); else el.textContent = String(target);
-            }
-            if (reducedMotion) { el.textContent = String(target); return; }
-            requestAnimationFrame(tick);
-        };
-
-        /* Dynamic stat: core technologies, counted from the actual Skills chips */
+        /* Dynamic stat: core technologies, counted from the actual Skills list */
         (function () {
             const el = document.getElementById('stat-tech-count');
-            if (el) window.animateCount(el, document.querySelectorAll('#skills .skill-chip').length);
+            if (el) el.textContent = String(document.querySelectorAll('#skills li').length);
         })();
 
         /* Reveal on scroll — refined easing, with light stagger inside each group */
@@ -1210,31 +1024,17 @@
             });
         });
 
-        /* FAQ accordion — one open at a time, keyboard-accessible, animated content fade */
-        function closeAllFaq() {
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('is-open');
-                item.querySelector('.faq-answer').style.maxHeight = '0px';
-                item.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
-            });
-        }
-        function openFaq(item) {
-            item.classList.add('is-open');
-            const answer = item.querySelector('.faq-answer');
-            answer.style.maxHeight = answer.scrollHeight + 'px';
-            item.querySelector('.faq-toggle').setAttribute('aria-expanded', 'true');
-        }
+        /* FAQ accordion */
         document.querySelectorAll('.faq-toggle').forEach(btn => {
             btn.addEventListener('click', () => {
                 const item = btn.closest('.faq-item');
-                const wasOpen = item.classList.contains('is-open');
-                closeAllFaq();
-                if (!wasOpen) openFaq(item);
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-icon');
+                const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+                document.querySelectorAll('.faq-answer').forEach(a => { a.style.maxHeight = '0px'; });
+                document.querySelectorAll('.faq-icon').forEach(i => { i.style.transform = 'rotate(0deg)'; });
+                if (!isOpen) { answer.style.maxHeight = answer.scrollHeight + 'px'; icon.style.transform = 'rotate(45deg)'; }
             });
-        });
-        window.addEventListener('load', () => {
-            const firstFaq = document.querySelector('.faq-item');
-            if (firstFaq) openFaq(firstFaq);
         });
     </script>
 
@@ -1275,15 +1075,6 @@
             return String(str || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
         }
 
-        function filterIcon(catText) {
-            const t = (catText || '').toLowerCase();
-            if (t.includes('web app') || t.includes('تطبيق')) return 'layout-grid';
-            if (t.includes('educat') || t.includes('تعليم') || t.includes('أكاديم')) return 'graduation-cap';
-            if (t.includes('store') || t.includes('shop') || t.includes('متجر')) return 'shopping-bag';
-            if (t.includes('design') || t.includes('تصميم')) return 'palette';
-            return 'folder';
-        }
-
         function renderFilters() {
             const wrap = document.getElementById('project-filters');
             if (!wrap) return;
@@ -1292,11 +1083,10 @@
             PROJECTS.forEach(p => { if (p.category && !seen.has(p.category)) { seen.add(p.category); cats.push(p); } });
             const lang = currentLang();
             const allLabel = lang === 'ar' ? (translations.ar['projects.allFilter'] || 'الكل') : 'All';
-            let html = `<button class="filter-pill${currentFilter === 'all' ? ' active' : ''}" data-filter="all"><i data-lucide="layout-panel-top" class="w-3.5 h-3.5"></i>${allLabel} <span style="opacity:0.6">(${PROJECTS.length})</span></button>`;
+            let html = `<button class="filter-pill${currentFilter === 'all' ? ' active' : ''}" data-filter="all">${allLabel} <span style="opacity:0.6">(${PROJECTS.length})</span></button>`;
             cats.forEach(p => {
                 const count = PROJECTS.filter(x => x.category === p.category).length;
-                const label = categoryLabel(p);
-                html += `<button class="filter-pill${currentFilter === p.category ? ' active' : ''}" data-filter="${escapeHtml(p.category)}"><i data-lucide="${filterIcon(label)}" class="w-3.5 h-3.5"></i>${escapeHtml(label)} <span style="opacity:0.6">(${count})</span></button>`;
+                html += `<button class="filter-pill${currentFilter === p.category ? ' active' : ''}" data-filter="${escapeHtml(p.category)}">${escapeHtml(categoryLabel(p))} <span style="opacity:0.6">(${count})</span></button>`;
             });
             wrap.innerHTML = html;
             wrap.querySelectorAll('.filter-pill').forEach(btn => {
@@ -1304,31 +1094,22 @@
                     currentFilter = btn.getAttribute('data-filter');
                     projectsExpanded = false;
                     renderProjects();
-                    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 });
             });
-            if (window.lucide) lucide.createIcons();
         }
 
-        function cardHTML(p, idx) {
+        function cardHTML(p) {
             const lang = currentLang();
             const viewLiveLabel = lang === 'ar' ? translations.ar['proj.viewLive'] : 'View live site';
             const githubLabel = lang === 'ar' ? (translations.ar['proj.github'] || 'GitHub') : 'GitHub';
             const detailsLabel = lang === 'ar' ? translations.ar['proj.details'] : 'Case study';
             let links = '';
-            if (p.liveUrl) links += `<a href="${escapeHtml(p.liveUrl)}" target="_blank" rel="noopener noreferrer" class="text-link proj-link"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>${viewLiveLabel}</a>`;
-            if (p.githubUrl) links += `<a href="${escapeHtml(p.githubUrl)}" target="_blank" rel="noopener noreferrer" class="text-link proj-link"><i data-lucide="github" class="w-3.5 h-3.5"></i>${githubLabel}</a>`;
-            links += `<button class="preview-btn text-link proj-link" data-id="${p.id}"><i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>${detailsLabel}</button>`;
-            const num = String((idx || 0) + 1).padStart(2, '0');
-            const cat = categoryLabel(p);
+            if (p.liveUrl) links += `<a href="${escapeHtml(p.liveUrl)}" target="_blank" rel="noopener noreferrer" class="text-link">${viewLiveLabel}</a>`;
+            if (p.githubUrl) links += `<a href="${escapeHtml(p.githubUrl)}" target="_blank" rel="noopener noreferrer" class="text-link">${githubLabel}</a>`;
+            links += `<button class="preview-btn text-link" data-id="${p.id}">${detailsLabel}</button>`;
             return `
                     <div class="project-card project-item reveal" data-id="${p.id}">
-                        <div class="thumb img-reveal">
-                            <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy">
-                            ${cat ? `<span class="proj-badge">${escapeHtml(cat)}</span>` : ''}
-                            <span class="proj-num">${num}</span>
-                            <button class="preview-btn proj-view-btn" data-id="${p.id}" aria-label="${detailsLabel}"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></button>
-                        </div>
+                        <div class="thumb img-reveal"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy"></div>
                         <div class="p-5">
                             <h3 class="font-medium text-lg mb-2">${escapeHtml(p.title)}</h3>
                             <p class="text-sm leading-relaxed mb-4" style="color:var(--muted)">${escapeHtml(projDesc(p))}</p>
@@ -1348,7 +1129,7 @@
             const filtered = currentFilter === 'all' ? PROJECTS : PROJECTS.filter(p => p.category === currentFilter);
             const capped = (currentFilter === 'all' && !projectsExpanded) ? filtered.slice(0, 4) : filtered;
 
-            grid.innerHTML = capped.map((p, i) => cardHTML(p, i)).join('');
+            grid.innerHTML = capped.map(cardHTML).join('');
 
             const lang = currentLang();
             if (currentFilter === 'all' && filtered.length > 4) {
@@ -1425,8 +1206,7 @@
             if (loadingEl) loadingEl.style.display = 'none';
 
             const statEl = document.getElementById('stat-projects-count');
-            if (statEl && typeof window.animateCount === 'function') window.animateCount(statEl, PROJECTS.length);
-            else if (statEl) statEl.textContent = String(PROJECTS.length);
+            if (statEl) statEl.textContent = String(PROJECTS.length);
 
             if (PROJECTS.length === 0) {
                 const grid = document.getElementById('project-grid');
